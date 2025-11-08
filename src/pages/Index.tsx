@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import ValueProposition from "@/components/ValueProposition";
 import Services from "@/components/Services";
 import Portfolio from "@/components/Portfolio";
 import Process from "@/components/Process";
@@ -16,7 +15,6 @@ const Index = () => {
       <Navbar />
       <Hero />
         <main className="site-sections">
-          <ValueProposition />
           <Services />
           <Portfolio />
           <Process />
