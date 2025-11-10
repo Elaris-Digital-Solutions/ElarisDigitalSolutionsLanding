@@ -42,8 +42,8 @@ export default function DemoOne() {
     <section id="power-speed-control" className="py-16 md:py-32">
       <div className="mx-auto w-full max-w-5xl space-y-8 px-4">
         <AnimatedContainer className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-bold tracking-wide text-balance md:text-4xl lg:text-5xl xl:font-extrabold" style={{ color: '#2F64FF' }}>
-            Innovación. Velocidad. Excelencia.
+          <h2 className="text-3xl font-extrabold tracking-tight drop-shadow-lg text-balance md:text-4xl lg:text-5xl xl:font-extrabold">
+            <span className="text-slate-900">Innovación. Velocidad. </span><span style={{ color: '#2F64FF' }}>Excelencia.</span>
           </h2>
           <p className="text-muted-foreground mt-4 text-sm tracking-wide text-balance md:text-base">
             Todo lo que necesitas para construir aplicaciones rápidas, seguras y escalables.

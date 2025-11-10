@@ -77,8 +77,8 @@ export default function TechnologiesCarousel() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
   <div className="text-center mb-4 lg:mb-6">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-black">
-            <span style={{ color: '#2F64FF' }}> Tecnologías que Dominamos</span>
+          <h2 className="text-3xl font-extrabold tracking-tight drop-shadow-lg sm:text-4xl lg:text-5xl mb-4">
+            <span className="text-slate-900">Tecnologías que </span><span style={{ color: '#2F64FF' }}>Dominamos</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Utilizamos las tecnologías más avanzadas y confiables del mercado para construir soluciones robustas, escalables y futuro-compatibles.

@@ -5,7 +5,9 @@ export default function Contact() {
   <section id="contacto" className="py-20 sm:py-32 site-dark-section text-white" style={{ backgroundColor: '#030E2C' }}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Comencemos una Conversación</h2>
+          <h2 className="text-3xl font-extrabold tracking-tight drop-shadow-lg sm:text-4xl lg:text-5xl">
+            <span className="text-white">Comencemos una </span><span style={{ color: '#2F64FF' }}>Conversación</span>
+          </h2>
           <p className="text-lg text-white/80 max-w-3xl mx-auto mt-4">
             ¿Listo para transformar su práctica legal? Contáctenos hoy para una demostración personalizada.
           </p>

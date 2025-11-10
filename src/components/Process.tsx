@@ -130,7 +130,9 @@ export default function Process() {
     <section id="proceso" className="py-12 sm:py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold" style={{ color: '#2F64FF' }}>Nuestro Proceso</h2>
+          <h2 className="text-3xl font-extrabold tracking-tight drop-shadow-lg sm:text-4xl lg:text-5xl">
+            <span className="text-slate-900">Nuestro </span><span style={{ color: '#2F64FF' }}>Proceso</span>
+          </h2>
           <p className="text-lg text-black max-w-2xl mx-auto mt-4">
             Un flujo probado desde la idea hasta la producción, combinando metodología ágil y modelos de IA.
           </p>

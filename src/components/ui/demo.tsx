@@ -1,7 +1,11 @@
-import { PremiumContact } from "@/components/ui/premium-contact";
+import InteractiveSelector from "@/components/ui/interactive-selector";
 
 const DemoOne = () => {
-  return <PremiumContact />;
+  return (
+    <div className="flex min-h-screen w-full items-center justify-center bg-neutral-950">
+      <InteractiveSelector />
+    </div>
+  );
 };
 
 export { DemoOne };

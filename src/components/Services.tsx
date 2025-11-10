@@ -80,8 +80,8 @@ export default function Services() {
     <section id="servicios" className="py-20 sm:py-32 relative bg-background text-foreground" style={lightTheme}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl mb-4" style={{ color: '#2F64FF' }}>
-            Nuestros <span className="">Servicios</span>
+          <h2 className="text-3xl font-extrabold tracking-tight drop-shadow-lg sm:text-4xl lg:text-5xl mb-4">
+            <span className="text-slate-900">Nuestros </span><span style={{ color: '#2F64FF' }}>Servicios</span>
           </h2>
           <p className="text-lg text-black max-w-2xl mx-auto">
             Soluciones digitales integrales diseñadas para impulsar tu transformación tecnológica

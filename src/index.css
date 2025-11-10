@@ -88,7 +88,7 @@ All colors MUST be HSL.
   }
 
   .site-sections > section:nth-of-type(2n) {
-    background-color: #F2F3F5; /* light gray (visible) */
+    background-color: #F0F4FF; /* very light blue (visible) */
   }
 
   /* Opt-out: sections that need a dark background (e.g. Contact) */

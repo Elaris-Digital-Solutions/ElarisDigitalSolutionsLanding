@@ -75,8 +75,15 @@ export const TeamSection = React.forwardRef<HTMLDivElement, TeamSectionProps>(
           {/* Header Section */}
           <div className="relative z-10 flex w-full flex-col items-center justify-between gap-6 md:flex-row md:items-start md:text-left lg:gap-8">
             <div className="grid gap-3 text-center md:text-left">
-              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl" style={{ color: '#2F64FF' }}>
-                {title}
+              <h1 className="text-4xl font-extrabold tracking-tight drop-shadow-lg sm:text-5xl md:text-6xl">
+                {title === "CONOCE A NUESTRO EQUIPO" ? (
+                  <>
+                    <span className="text-slate-900">CONOCE A NUESTRO </span>
+                    <span style={{ color: '#2F64FF' }}>EQUIPO</span>
+                  </>
+                ) : (
+                  <span style={{ color: '#2F64FF' }}>{title}</span>
+                )}
               </h1>
               <p className="max-w-[700px] text-black md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 {description}
