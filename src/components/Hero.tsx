@@ -11,11 +11,7 @@ const Hero = () => {
         { text: "Portfolio", href: "#portafolio", primary: true },
         { text: "About Us", href: "#nosotros" },
       ]}
-      microDetails={[
-        "Vision-driven product strategy",
-        "Interactive storytelling in motion",
-        "AI-enhanced experiences built for scale",
-      ]}
+     
     />
   );
 };

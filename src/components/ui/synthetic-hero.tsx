@@ -9,6 +9,7 @@ import { SplitText } from "gsap/SplitText";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import TypingConsole from "@/components/ui/typing-console";
+import { Logos3 } from "@/components/ui/logos3";
 
 gsap.registerPlugin(SplitText, useGSAP);
 
@@ -132,11 +133,7 @@ const SyntheticHero = ({
     { text: "Explore the Canvas", href: "#explore", primary: true },
     { text: "Learn More", href: "#learn-more" },
   ],
-  microDetails = [
-    "Immersive shader landscapes",
-    "Hand-tuned motion easing",
-    "Responsive, tactile feedback",
-  ],
+  microDetails = [],
 }: HeroProps) => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const badgeWrapperRef = useRef<HTMLDivElement | null>(null);
@@ -302,7 +299,7 @@ const SyntheticHero = ({
             const isPrimary = button.primary ?? index === 0;
             const classes = isPrimary
               ? "px-8 py-3 rounded-xl text-base font-medium backdrop-blur-lg bg-[#2F64FF]/85 hover:bg-[#2F64FF]/75 text-white shadow-[0_18px_60px_rgba(47,100,255,0.35)] transition-all duration-300 cursor-pointer"
-              : "px-8 py-3 rounded-xl text-base font-medium border border-white/35 text-white hover:bg-white/10 backdrop-blur-lg transition-all duration-300 cursor-pointer";
+              : "px-8 py-3 rounded-xl text-base font-medium border border-white/35 text-[#2F64FF] hover:bg-white/10 hover:text-[#2F64FF] backdrop-blur-lg transition-all duration-300 cursor-pointer";
 
             if (button.href) {
               return (
@@ -343,6 +340,14 @@ const SyntheticHero = ({
           </ul>
         )}
       </div>
+
+      {/* Technologies Carousel */}
+      <div className="absolute bottom-8 left-0 right-0 z-20">
+          <Logos3 
+            heading=""
+            className="px-6"
+          />
+        </div>
     </section>
   );
 };
