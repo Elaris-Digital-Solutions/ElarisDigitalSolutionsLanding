@@ -16,6 +16,11 @@ const App = () => (
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/servicios" element={<Index />} />
+          <Route path="/portafolio" element={<Index />} />
+          <Route path="/proceso" element={<Index />} />
+          <Route path="/clientes" element={<Index />} />
+          <Route path="/contacto" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
