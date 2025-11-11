@@ -12,7 +12,10 @@ import FloatingWhatsappButton from "@/components/ui/floating-whatsapp-button";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div
+      id="app-scroll-container"
+      className="relative min-h-screen overflow-x-hidden overflow-y-auto"
+    >
       <Navbar />
       <Hero />
         <main className="site-sections">

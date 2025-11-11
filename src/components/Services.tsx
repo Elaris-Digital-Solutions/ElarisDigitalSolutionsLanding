@@ -145,6 +145,7 @@ export default function Services() {
                 ref={(el) => {
                   itemRefs.current[index] = el;
                 }}
+                viewport={{ amount: 0.35, once: false }}
                 className={cn(
                   "flex items-start gap-4 md:gap-6 p-6 rounded-xl transition-all duration-300 border border-transparent",
                   index === current 

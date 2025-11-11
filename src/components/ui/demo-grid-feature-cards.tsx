@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import { Zap, Cpu, Fingerprint, Pencil, Settings2, Sparkles } from 'lucide-react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { FeatureCard } from '@/components/ui/grid-feature-cards';
 
 const features = [
@@ -68,16 +68,42 @@ type ViewAnimationProps = {
 
 function AnimatedContainer({ className, delay = 0.1, children }: ViewAnimationProps) {
   const shouldReduceMotion = useReducedMotion();
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const scrollRootRef = React.useRef<Element | null>(null);
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    scrollRootRef.current = document.getElementById('app-scroll-container');
+  }, []);
+
+  const isInView = useInView(containerRef, {
+    amount: 0.3,
+    root: scrollRootRef,
+  });
+
+  const hiddenState = React.useMemo(
+    () => ({ filter: 'blur(4px)', translateY: -8, opacity: 0 }),
+    [],
+  );
+
+  const visibleState = React.useMemo(
+    () => ({ filter: 'blur(0px)', translateY: 0, opacity: 1 }),
+    [],
+  );
 
   if (shouldReduceMotion) {
-    return <>{children}</>;
+    return (
+      <div ref={containerRef} className={className}>
+        {children}
+      </div>
+    );
   }
 
   return (
     <motion.div
-      initial={{ filter: 'blur(4px)', translateY: -8, opacity: 0 }}
-      whileInView={{ filter: 'blur(0px)', translateY: 0, opacity: 1 }}
-      viewport={{ once: true }}
+      ref={containerRef}
+      initial={hiddenState}
+      animate={isInView ? visibleState : hiddenState}
       transition={{ delay, duration: 0.8 }}
       className={className}
     >
