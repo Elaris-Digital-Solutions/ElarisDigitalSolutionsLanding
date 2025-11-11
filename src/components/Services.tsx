@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useLayoutEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Globe, Code, Brain, ChevronRight } from "lucide-react";
@@ -44,7 +46,10 @@ const services: Service[] = [
 
 export default function Services() {
   const [current, setCurrent] = useState(0);
-  const [progress, setProgress] = useState(0);
+  const itemRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const triggersRef = useRef<ScrollTrigger[]>([]);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const visualRef = useRef<HTMLDivElement | null>(null);
 
   // Local light theme override to ensure a white background like the Hero
   const lightTheme: React.CSSProperties = {
@@ -62,22 +67,65 @@ export default function Services() {
     ["--ring" as any]: "217 91% 60%",
   };
 
-  useEffect(() => {
-    const autoPlayInterval = 4000;
-    const timer = setInterval(() => {
-      if (progress < 100) {
-        setProgress((p) => p + 100 / (autoPlayInterval / 100));
-      } else {
-        setCurrent((c) => (c + 1) % services.length);
-        setProgress(0);
-      }
-    }, 100);
+  useLayoutEffect(() => {
+    if (typeof window === "undefined") return;
 
-    return () => clearInterval(timer);
-  }, [progress]);
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      triggersRef.current.forEach((trigger) => trigger.kill());
+      triggersRef.current = [];
+
+      const triggers = itemRefs.current.map((item, index) => {
+        if (!item) return null;
+
+        return ScrollTrigger.create({
+          trigger: item,
+          start: "top center+=60",
+          end: "bottom center-=60",
+          onToggle: ({ isActive }) => {
+            if (isActive) {
+              setCurrent((prev) => (prev === index ? prev : index));
+            }
+          },
+        });
+      });
+
+      triggersRef.current = triggers.filter((t): t is ScrollTrigger => t !== null);
+
+      if (visualRef.current && sectionRef.current) {
+        gsap.fromTo(
+          visualRef.current,
+          { y: 0 },
+          {
+            y: () => Math.min(-(visualRef.current?.offsetHeight || 0) * 0.25, -160),
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      ScrollTrigger.refresh();
+    }, sectionRef);
+
+    return () => {
+      ctx.revert();
+      triggersRef.current = [];
+    };
+  }, []);
 
   return (
-    <section id="servicios" className="py-20 sm:py-32 relative bg-background text-foreground" style={lightTheme}>
+    <section
+      ref={sectionRef}
+      id="servicios"
+      className="py-20 sm:py-32 relative bg-background text-foreground"
+      style={lightTheme}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl font-extrabold tracking-tight drop-shadow-lg sm:text-4xl lg:text-5xl mb-4">
@@ -88,12 +136,15 @@ export default function Services() {
           </p>
         </div>
 
-  <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 min-h-[40rem] items-start">
+        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 min-h-[40rem] items-start">
           {/* Panel de Servicios (Izquierda) */}
           <div className="order-2 md:order-1 w-full space-y-8 py-8">
             {services.map((service, index) => (
               <motion.div
                 key={service.title}
+                ref={(el) => {
+                  itemRefs.current[index] = el;
+                }}
                 className={cn(
                   "flex items-start gap-4 md:gap-6 p-6 rounded-xl transition-all duration-300 border border-transparent",
                   index === current 
@@ -107,6 +158,8 @@ export default function Services() {
                 }}
                 transition={{ duration: 0.4 }}
                 onMouseEnter={() => setCurrent(index)}
+                onFocus={() => setCurrent(index)}
+                tabIndex={0}
               >
                 <div
                   className={cn(
@@ -150,7 +203,8 @@ export default function Services() {
 
           {/* Panel Visual con Scroll Paralelo (Derecha) */}
           <div 
-            className="order-1 md:order-2 md:sticky md:top-28 lg:top-32 md:self-start h-fit w-full"
+            ref={visualRef}
+            className="relative order-1 md:order-2 md:sticky md:top-28 lg:top-32 md:self-start h-fit w-full"
           >
             <div className="relative w-full aspect-[16/10] rounded-xl bg-cyan-50/30 backdrop-blur-sm overflow-hidden shadow-md border border-cyan-200/40">
               <AnimatePresence mode="wait">
