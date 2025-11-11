@@ -26,24 +26,24 @@ const InteractiveSelector = () => {
 	const options = useMemo<Option[]>(
 		() => [
 			{
-				title: "Plataformas SaaS",
+				title: "Nuestro Barrio, Nuestra Historia",
 				description: "Arquitecturas escalables y dashboards que impulsan productos digitales.",
 				image:
-					"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
+					"/assets/nuestro-barrio-nuestra-historia.png",
 				Icon: AppWindow,
 			},
 			{
 				title: "E-commerce inmersivo",
 				description: "Flujos de compra headless optimizados para conversión multicanal.",
 				image:
-					"https://images.unsplash.com/photo-1515165562835-c4c5c6ca4f41?auto=format&fit=crop&w=1600&q=80",
+					"/assets/diego-joyero.png",
 				Icon: ShoppingBag,
 			},
 			{
-				title: "Experiencias mobile-first",
+				title: "Salcedo Jewels",
 				description: "Apps y PWAs reactivas con microinteracciones diseñadas para retener usuarios.",
 				image:
-					"https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=1600&q=80",
+					"/assets/salcedo.png",
 				Icon: Smartphone,
 			},
 			{
