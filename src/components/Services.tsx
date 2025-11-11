@@ -1,6 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Globe, Code, Brain, ChevronRight } from "lucide-react";
@@ -47,9 +45,9 @@ const services: Service[] = [
 export default function Services() {
   const [current, setCurrent] = useState(0);
   const itemRefs = useRef<Array<HTMLDivElement | null>>([]);
-  const triggersRef = useRef<ScrollTrigger[]>([]);
   const sectionRef = useRef<HTMLElement | null>(null);
   const visualRef = useRef<HTMLDivElement | null>(null);
+  const [visualY, setVisualY] = useState(0);
 
   // Local light theme override to ensure a white background like the Hero
   const lightTheme: React.CSSProperties = {
@@ -67,56 +65,53 @@ export default function Services() {
     ["--ring" as any]: "217 91% 60%",
   };
 
-  useLayoutEffect(() => {
-    if (typeof window === "undefined") return;
+  // Calculate alignment offset inside the section for sticky panel
+  const alignVisualToCard = (index: number) => {
+    const card = itemRefs.current[index];
+    const visual = visualRef.current;
+    const section = sectionRef.current;
+    if (!card || !visual || !section) return;
 
-    gsap.registerPlugin(ScrollTrigger);
+    // Get card position relative to the section
+    const cardRect = card.getBoundingClientRect();
+    const sectionRect = section.getBoundingClientRect();
+    // Compensar el offset sticky del panel visual (top-28/top-32)
+    // md:top-28 = 112px, lg:top-32 = 128px. Usar el valor actual del visualRef
+    // Usar offset fijo según breakpoint para sticky
+    let stickyOffset = 0;
+    const width = window.innerWidth;
+    if (width >= 1024) {
+      stickyOffset = 310; // lg:top-32
+    } else if (width >= 768) {
+      stickyOffset = 112; // md:top-28
+    }
+  // Alinear el panel visual al tope de la tarjeta activa, compensando el sticky
+  const relativeY = cardRect.top - sectionRect.top;
+  const target = relativeY - stickyOffset;
+  // Constrain target so que no se salga del section
+  const visualHeight = visual.offsetHeight;
+  const max = section.offsetHeight - visualHeight;
+  const clamped = Math.max(0, Math.min(target, max));
+  setVisualY(clamped);
+  };
 
-    const ctx = gsap.context(() => {
-      triggersRef.current.forEach((trigger) => trigger.kill());
-      triggersRef.current = [];
+  // Hover/focus updates current and re-align panel
+  const handleActivate = (index: number) => {
+    setCurrent(index);
+    alignVisualToCard(index);
+  };
 
-      const triggers = itemRefs.current.map((item, index) => {
-        if (!item) return null;
+  // Recalculate on resize for responsiveness
+  useEffect(() => {
+    const onResize = () => alignVisualToCard(current);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [current]);
 
-        return ScrollTrigger.create({
-          trigger: item,
-          start: "top center+=60",
-          end: "bottom center-=60",
-          onToggle: ({ isActive }) => {
-            if (isActive) {
-              setCurrent((prev) => (prev === index ? prev : index));
-            }
-          },
-        });
-      });
-
-      triggersRef.current = triggers.filter((t): t is ScrollTrigger => t !== null);
-
-      if (visualRef.current && sectionRef.current) {
-        gsap.fromTo(
-          visualRef.current,
-          { y: 0 },
-          {
-            y: () => Math.min(-(visualRef.current?.offsetHeight || 0) * 0.25, -160),
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
-      }
-
-      ScrollTrigger.refresh();
-    }, sectionRef);
-
-    return () => {
-      ctx.revert();
-      triggersRef.current = [];
-    };
+  // Initial alignment after mount
+  useEffect(() => {
+    alignVisualToCard(current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -158,8 +153,8 @@ export default function Services() {
                   y: 0 
                 }}
                 transition={{ duration: 0.4 }}
-                onMouseEnter={() => setCurrent(index)}
-                onFocus={() => setCurrent(index)}
+                onMouseEnter={() => handleActivate(index)}
+                onFocus={() => handleActivate(index)}
                 tabIndex={0}
               >
                 <div
@@ -206,8 +201,9 @@ export default function Services() {
           <div 
             ref={visualRef}
             className="relative order-1 md:order-2 md:sticky md:top-28 lg:top-32 md:self-start h-fit w-full"
+            style={{ transform: `translateY(${visualY}px)`, transition: 'transform 0.6s cubic-bezier(0.25,0.8,0.3,1)' }}
           >
-            <div className="relative w-full aspect-[16/10] rounded-xl bg-cyan-50/30 backdrop-blur-sm overflow-hidden shadow-md border border-cyan-200/40">
+            <div className="relative w-full aspect-[16/10] rounded-xl bg-cyan-50/30 backdrop-blur-sm overflow-hidden shadow-md border border-cyan-200/40 will-change-transform">
               <AnimatePresence mode="wait">
                 {services.map((service, index) =>
                   index === current && (
