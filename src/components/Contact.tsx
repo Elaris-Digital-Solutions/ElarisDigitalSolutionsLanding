@@ -1,9 +1,16 @@
 import React from "react";
 
+import MatrixRain from "./ui/matrix-code";
+
 export default function Contact() {
   return (
-  <section id="contacto" className="py-20 sm:py-32 site-dark-section text-white" style={{ backgroundColor: '#030E2C' }}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="contacto"
+      className="relative overflow-hidden py-20 sm:py-32 site-dark-section text-white"
+      style={{ backgroundColor: "#030E2C" }}
+    >
+      <MatrixRain className="z-0" />
+      <div className="container relative z-[1] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold tracking-tight drop-shadow-lg sm:text-4xl lg:text-5xl">
             <span className="text-white">Comencemos una </span><span style={{ color: '#2F64FF' }}>Conversación</span>
@@ -16,7 +23,7 @@ export default function Contact() {
         <div className="mt-12 max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Left: form */}
-            <div>
+            <div className="relative z-[1]">
               <div className="rounded-xl border border-white/10 bg-white/5 p-8 backdrop-blur">
                 <form className="space-y-6">
                   <div>
@@ -72,7 +79,7 @@ export default function Contact() {
             </div>
 
             {/* Right: contact info + map */}
-            <div className="space-y-6">
+            <div className="relative z-[1] space-y-6">
               <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur">
                 <h3 className="text-lg font-semibold text-white">Información de Contacto</h3>
                 <ul className="mt-4 space-y-4 text-sm">

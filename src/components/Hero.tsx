@@ -6,7 +6,7 @@ const Hero = () => {
       title="Elaris Digital Solutions"
       description="Experience a new dimension of interaction — fluid, tactile, and alive. Designed for creators who see beauty in motion."
       badgeLabel="Studio"
-      badgeText="Electric Blue Interfaces"
+      badgeText="Software Solutions"
       ctaButtons={[
         { text: "Portfolio", href: "#portafolio", primary: true },
         { text: "About Us", href: "#nosotros" },

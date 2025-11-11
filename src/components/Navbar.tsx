@@ -70,7 +70,7 @@ const Navbar = () => {
             <div className="flex items-center gap-4">
               <Button
                 onClick={() => scrollToSection("contacto")}
-                className={`hidden sm:flex bg-gradient-to-r from-[#2F64FF] to-[#5F8CFF] hover:from-[#1E40AF] hover:to-[#3B82F6] text-white font-bold tracking-tight px-8 py-2.5 rounded-full transition-all duration-500 shadow-[0_8px_30px_rgba(47,100,255,0.3)] hover:shadow-[0_12px_40px_rgba(47,100,255,0.4)] hover:scale-105 hover:-translate-y-0.5 ${
+                className={`hidden sm:flex bg-[#2F64FF]/85 hover:bg-[#2F64FF]/75 text-white font-bold tracking-tight px-8 py-2.5 rounded-xl transition-all duration-500 shadow-[0_18px_60px_rgba(47,100,255,0.35)] hover:scale-105 hover:-translate-y-0.5 ${
                   isScrolled ? 'text-sm h-10' : 'text-base h-12'
                 }`}
               >
@@ -116,7 +116,7 @@ const Navbar = () => {
                 ))}
                 <Button
                   onClick={() => scrollToSection("contacto")}
-                  className="mt-6 w-full bg-gradient-to-r from-[#2F64FF] to-[#5F8CFF] hover:from-[#1E40AF] hover:to-[#3B82F6] text-white font-bold tracking-tight px-8 py-4 rounded-full transition-all duration-500 shadow-[0_8px_30px_rgba(47,100,255,0.3)] hover:shadow-[0_12px_40px_rgba(47,100,255,0.4)] hover:scale-105"
+                  className="mt-6 w-full bg-[#2F64FF]/85 hover:bg-[#2F64FF]/75 text-white font-bold tracking-tight px-8 py-4 rounded-xl transition-all duration-500 shadow-[0_18px_60px_rgba(47,100,255,0.35)] hover:scale-105"
                 >
                   Contáctanos
                 </Button>

@@ -88,7 +88,7 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 min-h-[40rem]">
+  <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 min-h-[40rem] items-start">
           {/* Panel de Servicios (Izquierda) */}
           <div className="order-2 md:order-1 w-full space-y-8 py-8">
             {services.map((service, index) => (
@@ -148,8 +148,10 @@ export default function Services() {
             ))}
           </div>
 
-          {/* Panel Visual Sticky (Derecha) */}
-          <div className="order-1 md:order-2 md:sticky md:top-32 h-fit w-full">
+          {/* Panel Visual con Scroll Paralelo (Derecha) */}
+          <div 
+            className="order-1 md:order-2 md:sticky md:top-28 lg:top-32 md:self-start h-fit w-full"
+          >
             <div className="relative w-full aspect-[16/10] rounded-xl bg-cyan-50/30 backdrop-blur-sm overflow-hidden shadow-md border border-cyan-200/40">
               <AnimatePresence mode="wait">
                 {services.map((service, index) =>
@@ -171,14 +173,20 @@ export default function Services() {
                           src={service.image} 
                           alt={service.title} 
                           className="w-full h-full object-cover"
-                          initial={{ scale: 1 }}
-                          animate={{ scale: 1.1 }}
+                          initial={{ scale: 1.1, y: 20 }}
+                          animate={{ scale: 1, y: 0 }}
+                          exit={{ scale: 0.95, y: -20 }}
                           transition={{
-                            duration: 10,
-                            repeat: Infinity,
-                            repeatType: "reverse",
-                            ease: "linear"
+                            duration: 0.8,
+                            ease: [0.25, 0.46, 0.45, 0.94]
                           }}
+                        />
+                        <motion.div 
+                          className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.5 }}
                         />
                       </div>
                       
