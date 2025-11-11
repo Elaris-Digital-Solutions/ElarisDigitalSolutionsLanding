@@ -227,22 +227,14 @@ const Navbar = () => {
               >
                 <motion.button
                   onClick={scrollHome}
-                  className="group flex items-center gap-3 text-left"
-                  whileHover={{ scale: 1.04 }}
+                  className="flex items-center text-left"
+                  whileHover={{ scale: 1.08 }}
                 >
-                  <div className="rounded-2xl border border-blue-400/30 bg-blue-500/15 p-2.5 shadow-[0_18px_50px_rgba(29,78,216,0.4)] transition-all duration-500 group-hover:border-blue-200/70 group-hover:bg-blue-500/25">
-                    <img
-                      src={brandAssets.default}
-                      alt="Elaris Logo"
-                      className="h-10 w-auto drop-shadow-[0_6px_28px_rgba(96,165,250,0.65)]"
-                    />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs uppercase tracking-[0.4em] text-blue-100/75">Elaris</span>
-                    <span className="text-lg font-semibold text-white drop-shadow-[0_6px_20px_rgba(37,99,235,0.55)]">
-                      Digital Solutions
-                    </span>
-                  </div>
+                  <img
+                    src={brandAssets.default}
+                    alt="Elaris Logo"
+                    className="h-16 w-auto drop-shadow-[0_6px_28px_rgba(96,165,250,0.65)] transition-all duration-300"
+                  />
                 </motion.button>
 
                 <div className="flex items-center gap-6">
