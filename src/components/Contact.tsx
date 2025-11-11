@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 import MatrixRain from "./ui/matrix-code";
 
 export default function Contact() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [reason, setReason] = useState("");
+  const [message, setMessage] = useState("");
+
+  const phoneNumber = "51987450340";
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const composedMessage = `Nuevo contacto desde la web:\nNombre: ${fullName}\nEmail: ${email}\nMotivo: ${reason}\nMensaje: ${message}`;
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(composedMessage)}`;
+
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <section
       id="contacto"
@@ -25,7 +41,7 @@ export default function Contact() {
             {/* Left: form */}
             <div className="relative z-[1]">
               <div className="rounded-xl border border-white/10 bg-white/5 p-8 backdrop-blur">
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                   <div>
                     <label className="block text-sm font-medium text-white/90 mb-2">Nombre Completo *</label>
                     <input
@@ -33,6 +49,9 @@ export default function Contact() {
                       name="name"
                       placeholder="Juan Pérez"
                       className="w-full rounded-md bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#2F64FF]/40"
+                      value={fullName}
+                      onChange={(event) => setFullName(event.target.value)}
+                      required
                     />
                   </div>
 
@@ -43,16 +62,22 @@ export default function Contact() {
                       name="email"
                       placeholder="juan@estudio.com"
                       className="w-full rounded-md bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#2F64FF]/40"
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                      required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-white/90 mb-2">Estudio/Empresa *</label>
+                    <label className="block text-sm font-medium text-white/90 mb-2">Motivo *</label>
                     <input
                       type="text"
-                      name="company"
-                      placeholder="Estudio Legal Pérez & Asociados"
+                      name="reason"
+                      placeholder="Desarrollo de página web"
                       className="w-full rounded-md bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#2F64FF]/40"
+                      value={reason}
+                      onChange={(event) => setReason(event.target.value)}
+                      required
                     />
                   </div>
 
@@ -63,6 +88,9 @@ export default function Contact() {
                       rows={6}
                       placeholder="Cuéntenos sobre sus necesidades..."
                       className="w-full rounded-md bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#2F64FF]/40"
+                      value={message}
+                      onChange={(event) => setMessage(event.target.value)}
+                      required
                     />
                   </div>
 
