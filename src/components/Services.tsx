@@ -49,6 +49,49 @@ export default function Services() {
   const visualRef = useRef<HTMLDivElement | null>(null);
   const [visualY, setVisualY] = useState(0);
 
+  // Preload images to ensure smooth transitions: insert <link rel="preload"> and
+  // create Image objects to warm the browser cache. Remove link tags on cleanup.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const createdLinks: HTMLLinkElement[] = [];
+    const preloadedImgs: HTMLImageElement[] = [];
+
+    services.forEach((s) => {
+      if (!s.image) return;
+      try {
+        const href = s.image;
+        // Avoid duplicating existing preload links
+        if (!document.querySelector(`link[rel=\"preload\"][href=\"${href}\"]`)) {
+          const link = document.createElement("link");
+          link.rel = "preload";
+          link.as = "image";
+          link.href = href;
+          // Some browsers support fetchpriority; set if available
+          // @ts-ignore
+          link.setAttribute("importance", "high");
+          document.head.appendChild(link);
+          createdLinks.push(link);
+        }
+
+        const img = new Image();
+        img.decoding = "async";
+        img.src = href;
+        preloadedImgs.push(img);
+      } catch (e) {
+        // ignore preload errors
+      }
+    });
+
+    return () => {
+      createdLinks.forEach((l) => l.parentNode && l.parentNode.removeChild(l));
+      // allow Image objects to be GC'd
+      preloadedImgs.length = 0;
+    };
+    // services is static in this file; keep empty deps to run once
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Local light theme override to ensure a white background like the Hero
   const lightTheme: React.CSSProperties = {
     ["--background" as any]: "0 0% 100%",
@@ -95,18 +138,49 @@ export default function Services() {
   setVisualY(clamped);
   };
 
-  // Hover/focus updates current and re-align panel
-  const handleActivate = (index: number) => {
-    setCurrent(index);
-    alignVisualToCard(index);
-  };
-
   // Recalculate on resize for responsiveness
   useEffect(() => {
     const onResize = () => alignVisualToCard(current);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, [current]);
+
+  // IntersectionObserver: observe each card and activate it when it
+  // enters the centered virtual area. Configuration required by spec:
+  // root: null, threshold: 0.25, rootMargin: "-30% 0px -30% 0px"
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const callback: IntersectionObserverCallback = (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          const target = entry.target as HTMLDivElement;
+          const index = itemRefs.current.findIndex((el) => el === target);
+          if (index !== -1) {
+            // Per instructions: call setCurrent then alignVisualToCard
+            setCurrent(index);
+            alignVisualToCard(index);
+          }
+        }
+      }
+    };
+
+    const observer = new IntersectionObserver(callback, {
+      root: null,
+      threshold: 0.25,
+      rootMargin: "-30% 0px -30% 0px",
+    });
+
+    // Observe elements once refs are attached
+    itemRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [services.length]);
 
   // Initial alignment after mount
   useEffect(() => {
@@ -153,8 +227,6 @@ export default function Services() {
                   y: 0 
                 }}
                 transition={{ duration: 0.4 }}
-                onMouseEnter={() => handleActivate(index)}
-                onFocus={() => handleActivate(index)}
                 tabIndex={0}
               >
                 <div
@@ -220,16 +292,18 @@ export default function Services() {
                       }}
                     >
                       <div className="absolute inset-0 z-0">
-                        <motion.img 
-                          src={service.image} 
-                          alt={service.title} 
+                        <motion.img
+                          src={service.image}
+                          alt={service.title}
                           className="w-full h-full object-cover"
+                          loading="lazy"
+                          decoding="async"
                           initial={{ scale: 1.1, y: 20 }}
                           animate={{ scale: 1, y: 0 }}
                           exit={{ scale: 0.95, y: -20 }}
                           transition={{
                             duration: 0.8,
-                            ease: [0.25, 0.46, 0.45, 0.94]
+                            ease: [0.25, 0.46, 0.45, 0.94],
                           }}
                         />
                         <motion.div 
