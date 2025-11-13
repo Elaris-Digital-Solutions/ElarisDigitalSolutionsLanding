@@ -5,7 +5,7 @@ import Portfolio from "@/components/Portfolio";
 import Process from "@/components/Process";
 import Testimonials from "@/components/Testimonials";
 import { Logos3 } from "@/components/ui/logos3";
-// import About from "@/components/About";
+import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FloatingWhatsappButton from "@/components/ui/floating-whatsapp-button";
@@ -51,7 +51,7 @@ const Index = () => {
               </div>
             </div>
           </section>
-          {/* <About /> */}
+          <About />
           <Contact />
         </main>
       <Footer />
