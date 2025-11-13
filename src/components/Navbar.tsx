@@ -184,15 +184,26 @@ const Navbar = () => {
           animate={isCollapsed ? "compact" : "expanded"}
           transition={{ duration: 0.8, ease: "easeInOut" }}
           className="relative flex items-center justify-center overflow-hidden"
-          style={{
-            pointerEvents: "auto",
-            background:
-              "linear-gradient(135deg, rgba(37,99,235,0.55), rgba(30,64,175,0.6), rgba(15,23,42,0.55))",
-            border: "1px solid rgba(96, 165, 250, 0.45)",
-            boxShadow: "0 30px 90px rgba(30, 64, 175, 0.45)",
-            backdropFilter: "blur(18px)",
-            WebkitBackdropFilter: "blur(18px)",
-          }}
+          style={
+            isCollapsed
+              ? {
+                  pointerEvents: "auto",
+                  background:
+                    "linear-gradient(135deg, rgba(37,99,235,0.55), rgba(30,64,175,0.6), rgba(15,23,42,0.55))",
+                  border: "1px solid rgba(96, 165, 250, 0.45)",
+                  boxShadow: "0 30px 90px rgba(30, 64, 175, 0.45)",
+                  backdropFilter: "blur(18px)",
+                  WebkitBackdropFilter: "blur(18px)",
+                }
+              : {
+                  pointerEvents: "auto",
+                  background: "transparent",
+                  border: "none",
+                  boxShadow: "none",
+                  backdropFilter: "none",
+                  WebkitBackdropFilter: "none",
+                }
+          }
         >
           <AnimatePresence mode="wait">
             {isCollapsed ? (
