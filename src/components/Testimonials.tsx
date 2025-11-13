@@ -40,7 +40,7 @@ export default function Testimonials() {
             Empresas y organizaciones que han confiado en nosotros para soluciones digitales y proyectos con IA.
           </p>
         </div>
-        <div className="p-16 rounded-3xl min-h-[300px] flex flex-wrap gap-6 items-center justify-center relative text-slate-900" style={{ backgroundColor: '#F0F4FF' }}>
+        <div className="p-4 rounded-3xl min-h-[300px] flex flex-wrap gap-6 items-center justify-center relative text-slate-900" style={{ backgroundColor: '#F0F4FF' }}>
           <div className="items-center justify-center relative flex" style={{ maxWidth: '1024px' }}>
             <CircularTestimonials
               testimonials={testimonials}
