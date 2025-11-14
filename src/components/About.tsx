@@ -37,7 +37,7 @@ const team: TeamMember[] = [
   {
     name: "Fabrizio Bussalleu",
     role: "Co-Founder",
-    image: "/images/team/furro.jpg",
+    image: "/images/team/fabrizio.jpg",
     accent: "from-emerald-500/60 via-teal-500/40 to-blue-500/60",
     focus: "center 10%",
     socials: [
@@ -84,11 +84,22 @@ export default function About() {
             <div className="absolute inset-0 -z-10 hidden rounded-[3.2rem] bg-gradient-to-br from-sky-200/50 via-white to-fuchsia-200/40 blur-3xl lg:block" aria-hidden="true" />
             <div className="relative w-full overflow-hidden rounded-[3.2rem] border border-slate-200 bg-white shadow-[0_45px_140px_rgba(15,118,210,0.2)]">
               <div className="relative aspect-[6/4]">
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 scale-[1.04] transform-gpu overflow-hidden"
+                  style={{
+                    backgroundImage: `url(${displayImage})`,
+                    backgroundPosition: activeMember?.focus ?? groupFocus,
+                    backgroundSize: "cover",
+                    filter: "blur(14px)",
+                    opacity: 0.45,
+                  }}
+                />
                 <img
                   key={displayImage}
                   src={displayImage}
                   alt={activeMember ? `Retrato de ${activeMember.name}` : "Foto grupal del equipo Elaris"}
-                  className="h-full w-full object-cover transition duration-700 ease-out"
+                  className="relative z-10 h-full w-full object-contain transition duration-700 ease-out"
                   style={{ objectPosition: activeMember?.focus ?? groupFocus }}
                 />
               </div>
