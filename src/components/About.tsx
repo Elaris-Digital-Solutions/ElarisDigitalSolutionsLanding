@@ -57,7 +57,7 @@ const team: TeamMember[] = [
     ],
   },
   {
-    name: "Joaquin del Solar",
+    name: "Joaquin Del Solar",
     role: "Co-Founder",
     image: "/images/team/delso.jpg",
     accent: "from-rose-500/60 via-orange-500/40 to-amber-500/60",
