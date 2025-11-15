@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import SmartImage from "@/components/ui/smart-image";
 
 interface Testimonial {
   quote: string;
@@ -175,13 +176,14 @@ const CircularTestimonials: React.FC<CircularTestimonialsProps> = ({
         {/* Images */}
         <div className="image-container" ref={imageContainerRef}>
           {testimonials.map((testimonial, index) => (
-            <img
+            <SmartImage
               key={testimonial.src}
               src={testimonial.src}
               alt={testimonial.name}
               className="testimonial-image"
               data-index={index}
               style={getImageStyle(index)}
+              priority={index === activeIndex}
             />
           ))}
         </div>

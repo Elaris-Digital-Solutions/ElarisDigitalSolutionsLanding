@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { NeuralNoise } from "@/components/ui/neural-noise-cursor";
+import SmartImage from "@/components/ui/smart-image";
 
 type NavItem = {
   id: string;
@@ -129,9 +130,10 @@ const Navbar = () => {
                   className="flex items-center gap-3"
                   onClick={scrollHome}
                 >
-                  <img
+                  <SmartImage
                     src={brandAssets.default}
                     alt="Elaris Logo"
+                    priority
                     className="h-10 w-auto drop-shadow-lg"
                   />
                 </button>
@@ -255,9 +257,10 @@ const Navbar = () => {
                   className="flex items-center text-left"
                   whileHover={{ scale: 1.08 }}
                 >
-                  <img
+                  <SmartImage
                     src={brandAssets.default}
                     alt="Elaris Logo"
+                    priority
                     className="h-16 w-auto drop-shadow-[0_6px_28px_rgba(96,165,250,0.65)] transition-all duration-300"
                   />
                 </motion.button>

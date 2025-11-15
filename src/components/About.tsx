@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef, useCallback } from "react"
 import { Github, Linkedin, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import SmartImage from "@/components/ui/smart-image";
 
 type TeamMember = {
   name: string;
@@ -201,18 +202,14 @@ export default function About() {
                 onTouchEnd={isMobile ? handleTouchEnd : undefined}
                 onTouchCancel={isMobile ? handleTouchEnd : undefined}
               >
-                <div
+                <SmartImage
                   aria-hidden="true"
-                  className="absolute inset-0 scale-[1.04] transform-gpu overflow-hidden"
-                  style={{
-                    backgroundImage: `url(${displayImage})`,
-                    backgroundPosition: displayFocus,
-                    backgroundSize: "cover",
-                    filter: "blur(14px)",
-                    opacity: 0.45,
-                  }}
+                  src={displayImage}
+                  alt=""
+                  className="absolute inset-0 h-full w-full scale-[1.06] transform-gpu object-cover blur-[14px] opacity-45"
+                  style={{ objectPosition: displayFocus }}
                 />
-                <img
+                <SmartImage
                   key={displayImage}
                   src={displayImage}
                   alt={effectiveMember ? `Retrato de ${effectiveMember.name}` : "Foto grupal del equipo Elaris"}

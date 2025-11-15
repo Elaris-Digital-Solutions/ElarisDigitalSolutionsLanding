@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useMemo, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import SmartImage from "@/components/ui/smart-image";
 import { Globe, Code, Brain, ChevronRight } from "lucide-react";
 
 interface Service {
@@ -44,6 +45,8 @@ const services: Service[] = [
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
   },
 ];
+
+const MotionSmartImage = motion(SmartImage);
 
 export default function Services() {
   const [current, setCurrent] = useState(0);
@@ -346,12 +349,11 @@ function ServiceVisual({ service }: { service: Service }) {
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
       >
         <div className="absolute inset-0 z-0">
-          <motion.img
-            src={service.image}
+          <MotionSmartImage
+            src={service.image as string}
             alt={service.title}
             className="w-full h-full object-cover"
-            loading="lazy"
-            decoding="async"
+            priority
             initial={{ scale: 1.1, y: 20 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.95, y: -20 }}
