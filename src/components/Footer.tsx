@@ -1,13 +1,19 @@
-import { Linkedin, Twitter, Github, Mail } from "lucide-react";
+import { Linkedin, Twitter, Github, Mail, Instagram, Facebook, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
     Servicios: ["Desarrollo Web", "Desarrollo de Software", "Soluciones de IA", "Consultoría"],
-    Empresa: ["Sobre Nosotros", "Casos de Éxito", "Blog", "Contacto"],
-    Legal: ["Términos y Condiciones", "Política de Privacidad", "Aviso Legal"],
   };
+
+  const navItems = [
+    "Servicios",
+    "Portafolio",
+    "Proceso",
+    "Clientes",
+    "Contacto",
+  ];
 
   return (
     <footer className="bg-[#030E2C] border-t border-white/10 text-white">
@@ -27,28 +33,57 @@ const Footer = () => {
             </p>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://www.linkedin.com/company/elaris-digital-solutions/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 bg-white/6 rounded-lg hover:bg-white/10 hover:text-white transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
+
               <a
-                href="#"
+                href="https://www.instagram.com/elarisdigitalsolutions"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 bg-white/6 rounded-lg hover:bg-white/10 hover:text-white transition-colors"
-                aria-label="Twitter"
+                aria-label="Instagram"
               >
-                <Twitter className="h-5 w-5" />
+                <Instagram className="h-5 w-5" />
               </a>
+
               <a
-                href="#"
+                href="https://github.com/Elaris-Digital-Solutions"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 bg-white/6 rounded-lg hover:bg-white/10 hover:text-white transition-colors"
                 aria-label="GitHub"
               >
                 <Github className="h-5 w-5" />
               </a>
+
               <a
-                href="mailto:hola@elaris.com"
+                href="https://www.facebook.com/profile.php?id=61582879186110"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-white/6 rounded-lg hover:bg-white/10 hover:text-white transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="h-5 w-5" />
+              </a>
+
+              <a
+                href="https://x.com/ElarisSolutions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-white/6 rounded-lg hover:bg-white/10 hover:text-white transition-colors"
+                aria-label="X"
+              >
+                <Twitter className="h-5 w-5" />
+              </a>
+
+              <a
+                href="mailto:solutions.elaris@gmail.com"
                 className="p-2 bg-white/6 rounded-lg hover:bg-white/10 hover:text-white transition-colors"
                 aria-label="Email"
               >
@@ -56,7 +91,6 @@ const Footer = () => {
               </a>
             </div>
           </div>
-
           {/* Links Columns */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
@@ -75,16 +109,86 @@ const Footer = () => {
               </ul>
             </div>
           ))}
+
+          {/* Navegación Column (links to page sections with smooth scroll) */}
+          <div key="Navegacion">
+            <h3 className="font-semibold mb-4">Navegación</h3>
+            <ul className="space-y-2">
+              {navItems.map((label) => {
+                const id = label.toLowerCase();
+                return (
+                  <li key={label}>
+                    <a
+                      href={`#${id}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const el = document.getElementById(id);
+                        if (el) {
+                          el.scrollIntoView({ behavior: "smooth", block: "start" });
+                        } else {
+                          // Fallback: navigate to root anchor if element not present
+                          window.location.href = `/#${id}`;
+                        }
+                      }}
+                      className="text-white/80 text-sm hover:text-white transition-colors"
+                    >
+                      {label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          {/* Contact Column (replaces previous "Legal") */}
+          <div key="Contacto">
+            <h3 className="font-semibold mb-4">Contacto</h3>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="mailto:solutions.elaris@gmail.com"
+                  className="flex items-center gap-2 text-white/80 text-sm hover:text-white transition-colors"
+                >
+                  <Mail className="h-4 w-4" />
+                  solutions.elaris@gmail.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="tel:+51987450340"
+                  className="flex items-center gap-2 text-white/80 text-sm hover:text-white transition-colors"
+                >
+                  <Phone className="h-4 w-4" />
+                  +51 987 450 340
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/elarisdigitalsolutions"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-white/80 text-sm hover:text-white transition-colors"
+                >
+                  <Instagram className="h-4 w-4" />
+                  @elarisdigitalsolutions
+                </a>
+              </li>
+              <li className="flex items-center gap-2 text-white/80 text-sm">
+                <MapPin className="h-4 w-4" />
+                Surco
+              </li>
+            </ul>
+          </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-white/80 text-sm">
-              © {currentYear} Elaris. Todos los derechos reservados.
+              © {currentYear} Elaris Digital Solutions. Todos los derechos reservados.
             </p>
             <p className="text-white/80 text-sm">
-              E.L.A.R.I.S - Empowering Solutions with AI
+              E.L.A.R.I.S - Enterprise Logic & AI Research Integrated Systems
             </p>
           </div>
         </div>
