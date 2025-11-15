@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils"; // Assuming you have a utility for class concatenation
+import SmartImage from "@/components/ui/smart-image";
 
 // Define interfaces for props
 interface SocialLink {
@@ -118,7 +119,7 @@ export const TeamSection = React.forwardRef<HTMLDivElement, TeamSectionProps>(
                   className="relative z-10 h-36 w-36 overflow-hidden rounded-full border-4 transition-all duration-500 ease-out group-hover:scale-105"
                   style={{ transitionDelay: `${index * 100}ms`, backgroundColor: 'rgba(47,100,255,0.08)', borderColor: 'rgba(47,100,255,0.12)' }}
                 >
-                  <img
+                  <SmartImage
                     src={member.imageSrc}
                     alt={member.name}
                     className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"

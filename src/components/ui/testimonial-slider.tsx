@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import SmartImage from '@/components/ui/smart-image'
 
 
 interface Project {
@@ -204,7 +205,7 @@ export default function TestimonialSlider(): JSX.Element {
                 damping: 20,
               }}
             >
-              {projects.map((project) => (
+              {projects.map((project, index) => (
                 <motion.div
                   key={project.id}
                   className={`flex-shrink-0 w-full ${
@@ -241,17 +242,18 @@ export default function TestimonialSlider(): JSX.Element {
                     </div>
                     {/* Main project image - banner style with superimposed watermark */}
                     <div className="w-full h-40 sm:h-48 md:h-52 lg:h-36 relative z-10 overflow-hidden">
-                      <img
+                      <SmartImage
                         src={project.imageUrl}
                         alt={project.title}
                         className="w-full h-full object-cover"
+                        priority={index < visibleCount}
                       />
                     </div>
 
                     {/* Footer area: logo + project title + description */}
                     <div className="mt-0 relative z-20 p-4 bg-transparent">
                       <div className="flex items-center gap-3">
-                        <img
+                        <SmartImage
                           src={project.logoUrl}
                           alt={`${project.title} logo`}
                           className="w-10 h-10 object-contain rounded"

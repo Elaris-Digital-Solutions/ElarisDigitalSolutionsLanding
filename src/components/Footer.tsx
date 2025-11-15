@@ -1,4 +1,5 @@
 import { Linkedin, Twitter, Github, Mail, Instagram, Facebook, Phone, MapPin } from "lucide-react";
+import SmartImage from "@/components/ui/smart-image";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -22,9 +23,10 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <img 
-                src="/assets/ElarisLogoWhite.png" 
-                alt="Elaris Logo" 
+              <SmartImage
+                src="/assets/ElarisLogoWhite.png"
+                alt="Elaris Logo"
+                priority
                 className="h-20 w-auto"
               />
             </div>

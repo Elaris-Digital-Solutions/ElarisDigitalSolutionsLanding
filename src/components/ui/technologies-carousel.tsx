@@ -1,59 +1,60 @@
 import React from 'react';
 import { Marquee } from "@/components/ui/marquee";
+import SmartImage from "@/components/ui/smart-image";
 
 // Logos de tecnologías desde archivos SVG locales
 const TechLogos = {
   react: () => (
     <div className="flex items-center gap-3">
-      <img src="/assets/React.svg" alt="React" className="h-10 w-10" />
+      <SmartImage src="/assets/React.svg" alt="React" className="h-10 w-10" />
       <span className="font-semibold text-gray-800">React</span>
     </div>
   ),
   nextjs: () => (
     <div className="flex items-center gap-3">
-      <img src="/assets/Next.svg" alt="Next.js" className="h-10 w-10" />
+      <SmartImage src="/assets/Next.svg" alt="Next.js" className="h-10 w-10" />
       <span className="font-semibold text-gray-800">Next.js</span>
     </div>
   ),
   typescript: () => (
     <div className="flex items-center gap-3">
-      <img src="/assets/TypeScript.svg" alt="TypeScript" className="h-10 w-10" />
+      <SmartImage src="/assets/TypeScript.svg" alt="TypeScript" className="h-10 w-10" />
       <span className="font-semibold text-gray-800">TypeScript</span>
     </div>
   ),
   python: () => (
     <div className="flex items-center gap-3">
-      <img src="/assets/Python.svg" alt="Python" className="h-10 w-10" />
+      <SmartImage src="/assets/Python.svg" alt="Python" className="h-10 w-10" />
       <span className="font-semibold text-gray-800">Python</span>
     </div>
   ),
   nodejs: () => (
     <div className="flex items-center gap-3">
-      <img src="/assets/NodeJS.svg" alt="Node.js" className="h-10 w-10" />
+      <SmartImage src="/assets/NodeJS.svg" alt="Node.js" className="h-10 w-10" />
       <span className="font-semibold text-gray-800">Node.js</span>
     </div>
   ),
   tailwind: () => (
     <div className="flex items-center gap-3">
-      <img src="/assets/TailwindCSS.svg" alt="Tailwind CSS" className="h-10 w-10" />
+      <SmartImage src="/assets/TailwindCSS.svg" alt="Tailwind CSS" className="h-10 w-10" />
       <span className="font-semibold text-gray-800">Tailwind CSS</span>
     </div>
   ),
   aws: () => (
     <div className="flex items-center gap-3">
-      <img src="/assets/AWS.svg" alt="AWS" className="h-10 w-10" />
+      <SmartImage src="/assets/AWS.svg" alt="AWS" className="h-10 w-10" />
       <span className="font-semibold text-gray-800">AWS</span>
     </div>
   ),
   docker: () => (
     <div className="flex items-center gap-3">
-      <img src="/assets/Docker.png" alt="Docker" className="h-10 w-10" />
+      <SmartImage src="/assets/Docker.png" alt="Docker" className="h-10 w-10" />
       <span className="font-semibold text-gray-800">Docker</span>
     </div>
   ),
   mongodb: () => (
     <div className="flex items-center gap-3">
-      <img src="/assets/MongoDB.svg" alt="MongoDB" className="h-10 w-10" />
+      <SmartImage src="/assets/MongoDB.svg" alt="MongoDB" className="h-10 w-10" />
       <span className="font-semibold text-gray-800">MongoDB</span>
     </div>
   ),

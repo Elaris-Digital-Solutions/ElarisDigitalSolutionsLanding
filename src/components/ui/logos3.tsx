@@ -8,6 +8,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import SmartImage from "@/components/ui/smart-image";
 
 interface Logo {
   id: string;
@@ -283,7 +284,7 @@ const Logos3 = ({
                 >
                   <div className="mx-2 flex shrink-0 flex-row items-center justify-center gap-4 py-4 transform hover:scale-110 transition-all duration-300">
                     <div className="flex items-center justify-center h-16 w-16 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 shadow-lg">
-                      <img
+                      <SmartImage
                         src={logo.image}
                         alt={logo.description}
                         className={cn(logo.className, "opacity-80 hover:opacity-100 transition-all duration-300 filter drop-shadow-lg")}

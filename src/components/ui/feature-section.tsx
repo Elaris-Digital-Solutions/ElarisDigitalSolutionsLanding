@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
+import SmartImage from "@/components/ui/smart-image"
 
 interface Feature {
   step: string
@@ -103,7 +104,7 @@ export function FeatureSteps({
                       exit={{ y: -100, opacity: 0, rotateX: 20 }}
                       transition={{ duration: 0.5, ease: "easeInOut" }}
                     >
-                      <img
+                      <SmartImage
                         src={feature.image}
                         alt={feature.step}
                         className="w-full h-full object-cover transition-transform transform"

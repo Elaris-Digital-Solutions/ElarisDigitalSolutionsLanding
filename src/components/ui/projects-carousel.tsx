@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import SmartImage from '@/components/ui/smart-image';
 
 const ProjectsCarousel: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -82,10 +83,11 @@ const ProjectsCarousel: React.FC = () => {
           <div className="relative">
             <div className="bg-gray-50 rounded-2xl overflow-hidden shadow-lg">
               <div className="relative h-64">
-                <img 
+                <SmartImage 
                   src={projects[currentProject].image} 
                   alt={projects[currentProject].name}
                   className="w-full h-full object-cover"
+                  priority
                 />
                 <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
                   {projects[currentProject].category}
