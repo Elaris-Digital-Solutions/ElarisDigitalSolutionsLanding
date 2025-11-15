@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import MatrixRain from "./ui/matrix-code";
 
@@ -9,6 +9,12 @@ export default function Contact() {
   const [message, setMessage] = useState("");
 
   const phoneNumber = "51987450340";
+  const formRef = useRef<HTMLDivElement | null>(null);
+  const contactInfoRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<HTMLDivElement | null>(null);
+  const [mapHeight, setMapHeight] = useState<number | null>(null);
+  // keep map height in sync so the map grows upward toward the contact card (desktop only)
+  useSyncMapHeight(contactInfoRef, mapRef, setMapHeight);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,7 +45,7 @@ export default function Contact() {
         <div className="mt-12 max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Left: form */}
-            <div className="relative z-[1]">
+            <div className="relative z-[1]" ref={formRef}>
               <div className="rounded-xl border border-white/10 bg-white/5 p-8 backdrop-blur">
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div>
@@ -107,8 +113,8 @@ export default function Contact() {
             </div>
 
             {/* Right: contact info + map */}
-            <div className="relative z-[1] space-y-6">
-              <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+            <div className="relative z-[1] flex flex-col">
+              <div ref={contactInfoRef} className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur">
                 <h3 className="text-lg font-semibold text-white">Información de Contacto</h3>
                 <ul className="mt-4 space-y-4 text-sm">
                   <li className="flex items-start gap-3">
@@ -137,11 +143,12 @@ export default function Contact() {
                 </ul>
               </div>
 
-              <div className="rounded-xl border border-white/10 bg-white/5 overflow-hidden">
+              <div ref={mapRef} className="rounded-xl border border-white/10 bg-white/5 overflow-hidden mt-6 lg:mt-auto">
                 <iframe
                   title="mapa"
-                  src="https://www.google.com/maps?q=Av.+Primavera+2390+Santiago+de+Surco&output=embed"
-                  className="w-full h-64 border-0"
+                  src="https://www.google.com/maps?q=Jr.+Jeronimo+Aliaga+Norte+595+Santiago+de+Surco&output=embed"
+                  className="w-full border-0"
+                  style={{ height: mapHeight ? `${mapHeight}px` : undefined, minHeight: mapHeight ? undefined : '16rem' }}
                   loading="lazy"
                 />
               </div>
@@ -151,4 +158,54 @@ export default function Contact() {
       </div>
     </section>
   );
+}
+
+// Measure form height and update map height on desktop
+function useSyncMapHeight(
+  contactRef: React.RefObject<HTMLDivElement>,
+  mapRef: React.RefObject<HTMLDivElement>,
+  setMapHeight: (h: number | null) => void,
+) {
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const GAP_PX = 12; // small visual gap between contact card and map
+
+    const measure = () => {
+      const contactEl = contactRef.current;
+      const mapEl = mapRef.current;
+      if (!contactEl || !mapEl) {
+        setMapHeight(null);
+        return;
+      }
+
+      const contactRect = contactEl.getBoundingClientRect();
+      const mapRect = mapEl.getBoundingClientRect();
+
+      if (window.innerWidth >= 1024) {
+        const currentBottom = Math.round(mapRect.bottom);
+        const desiredTop = Math.round(contactRect.bottom + GAP_PX);
+        const newHeight = currentBottom - desiredTop;
+
+        if (newHeight > 0 && newHeight !== mapEl.offsetHeight) {
+          setMapHeight(newHeight);
+        } else {
+          // if measurement is invalid, clear and let CSS fallback
+          setMapHeight(null);
+        }
+      } else {
+        setMapHeight(null);
+      }
+    };
+
+    const rafId = requestAnimationFrame(measure);
+    window.addEventListener('resize', measure);
+    window.addEventListener('orientationchange', measure);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', measure);
+      window.removeEventListener('orientationchange', measure);
+    };
+  }, [contactRef, mapRef, setMapHeight]);
 }

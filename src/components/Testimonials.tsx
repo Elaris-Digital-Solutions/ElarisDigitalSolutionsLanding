@@ -6,7 +6,7 @@ const testimonials = [
     quote:
       "El trabajo que realizaron superó ampliamente mis expectativas. Su enfoque, su metodología y su capacidad de transformar mis ideas en experiencias digitales fueron clave. Estoy realmente agradecida con ellos.",
     name: "Daniela Bussalleu",
-    designation: "Biologa y Comunicadora",
+    designation: "Bióloga  y Comunicadora",
     src:
       "/assets/daniela-bussalleu.jpg",
   },
