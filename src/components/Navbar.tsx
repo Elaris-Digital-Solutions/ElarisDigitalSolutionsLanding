@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { NeuralNoise } from "@/components/ui/neural-noise-cursor";
 
 type NavItem = {
   id: string;
@@ -16,6 +17,16 @@ const navItems: NavItem[] = [
   { id: "clientes", label: "Clientes", href: "/clientes" },
   { id: "contacto", label: "Contacto", href: "/contacto" },
 ];
+
+const MobileAnimatedBackdrop = () => (
+  <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+    <div className="absolute inset-[-25%] blur-[60px] opacity-[0.85]">
+      <NeuralNoise opacity={0.85} pointerStrength={0.8} timeScale={0.6} />
+    </div>
+    <div className="absolute inset-0 bg-gradient-to-br from-[#010616]/70 via-[#071237]/65 to-[#0b1d3f]/60" />
+    <div className="absolute inset-0 bg-[#010a1d]/65 backdrop-blur-[26px]" />
+  </div>
+);
 
 const Navbar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -109,31 +120,34 @@ const Navbar = () => {
   if (!isDesktop) {
     return (
       <header className="fixed top-0 left-0 right-0 z-50">
-        <nav className="bg-slate-950/40 backdrop-blur-2xl border-b border-blue-500/25 shadow-[0_16px_45px_rgba(30,64,175,0.45)]">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between">
-              <button
-                className="flex items-center gap-3"
-                onClick={scrollHome}
-              >
-                <img
-                  src={brandAssets.default}
-                  alt="Elaris Logo"
-                  className="h-10 w-auto drop-shadow-lg"
-                />
-              </button>
+        <div className="relative overflow-hidden shadow-[0_16px_45px_rgba(30,64,175,0.45)]">
+          <MobileAnimatedBackdrop />
+          <nav className="relative border-b border-white/10">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex h-16 items-center justify-between">
+                <button
+                  className="flex items-center gap-3"
+                  onClick={scrollHome}
+                >
+                  <img
+                    src={brandAssets.default}
+                    alt="Elaris Logo"
+                    className="h-10 w-auto drop-shadow-lg"
+                  />
+                </button>
 
-              <button
-                onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-                className="rounded-full border border-blue-400/40 bg-blue-500/15 p-3 text-blue-100 shadow-[0_12px_35px_rgba(29,78,216,0.4)] transition-transform duration-300 hover:scale-110"
-              >
-                {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-              </button>
+                <button
+                  onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+                  className="rounded-full border border-blue-400/40 bg-blue-500/15 p-3 text-blue-100 shadow-[0_12px_35px_rgba(29,78,216,0.4)] transition-transform duration-300 hover:scale-110"
+                >
+                  {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                </button>
+              </div>
             </div>
-          </div>
+          </nav>
 
           <div
-            className={`overflow-hidden bg-slate-950/40 backdrop-blur-xl transition-all duration-500 ${
+            className={`relative overflow-hidden border-t border-white/10 transition-all duration-500 ${
               isMobileMenuOpen ? "max-h-96" : "max-h-0"
             }`}
           >
@@ -151,7 +165,7 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-        </nav>
+        </div>
       </header>
     );
   }
