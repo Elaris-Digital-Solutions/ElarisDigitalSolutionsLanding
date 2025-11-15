@@ -79,51 +79,52 @@ const ProjectsCarousel: React.FC = () => {
           </div>
 
           {/* Mobile Carousel */}
-          <div className="relative">
-            <div className="bg-gray-50 rounded-2xl overflow-hidden shadow-lg">
-              <div className="relative h-64">
+          <div className="relative max-w-sm mx-auto">
+            <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100">
+              <div className="relative h-56">
                 <img 
                   src={projects[currentProject].image} 
                   alt={projects[currentProject].name}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-blue-600 px-3 py-1 rounded-full text-xs font-semibold shadow-sm">
                   {projects[currentProject].category}
                 </div>
               </div>
               
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-black mb-3">
-                  {projects[currentProject].name}
-                </h3>
-                
-                <p className="text-gray-600 mb-4 leading-relaxed">
-                  {projects[currentProject].description}
-                </p>
-                
-                <div className="mb-4">
-                  <div className="flex flex-wrap gap-2">
-                    {projects[currentProject].stack.map((tech, i) => (
-                      <span key={i} className="bg-blue-100 text-blue-800 px-2 py-1 rounded-md text-xs font-medium">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+              <div className="p-6 space-y-4">
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">
+                    {projects[currentProject].name}
+                  </h3>
+                  
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {projects[currentProject].description}
+                  </p>
                 </div>
                 
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-semibold text-green-600">{projects[currentProject].metrics}</p>
-                  </div>
-                  <div className="flex space-x-2">
-                    <button
-                      className="p-2 bg-gray-200 hover:bg-blue-600 hover:text-white rounded-lg transition-colors"
-                      onClick={() => projects[currentProject].url && window.open(projects[currentProject].url, '_blank')}
-                      aria-label="Ver proyecto"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                    </button>
-                  </div>
+                <div className="flex flex-wrap gap-2">
+                  {projects[currentProject].stack.map((tech, i) => (
+                    <span key={i} className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium border border-blue-100">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                
+                <div className="flex items-center justify-between pt-2">
+                  <p className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md">
+                    {projects[currentProject].metrics}
+                  </p>
+                  
+                  <button
+                    className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium shadow-sm"
+                    onClick={() => projects[currentProject].url && window.open(projects[currentProject].url, '_blank')}
+                    aria-label="Ver proyecto"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Ver proyecto
+                  </button>
                 </div>
               </div>
             </div>
@@ -131,27 +132,29 @@ const ProjectsCarousel: React.FC = () => {
             {/* Navigation */}
             <button
               onClick={prevProject}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 hover:bg-blue-600 hover:text-white transition-colors"
+              className="absolute -left-2 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-xl rounded-full p-3 hover:bg-blue-600 hover:text-white transition-all duration-200 hover:scale-105 border border-gray-100"
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-5 h-5" />
             </button>
             
             <button
               onClick={nextProject}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 hover:bg-blue-600 hover:text-white transition-colors"
+              className="absolute -right-2 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-xl rounded-full p-3 hover:bg-blue-600 hover:text-white transition-all duration-200 hover:scale-105 border border-gray-100"
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-5 h-5" />
             </button>
           </div>
 
           {/* Dots */}
-          <div className="flex justify-center space-x-2 mt-6">
+          <div className="flex justify-center space-x-3 mt-8">
             {projects.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentProject(index)}
-                className={`w-3 h-3 rounded-full transition-colors ${
-                  index === currentProject ? 'bg-blue-600' : 'bg-gray-300'
+                className={`transition-all duration-300 ${
+                  index === currentProject 
+                    ? 'w-8 h-2 bg-blue-600 rounded-full' 
+                    : 'w-2 h-2 bg-gray-300 rounded-full hover:bg-gray-400'
                 }`}
               />
             ))}
