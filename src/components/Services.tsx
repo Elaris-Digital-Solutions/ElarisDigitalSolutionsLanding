@@ -1,6 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Globe, Code, Brain, ChevronRight } from "lucide-react";
 
 interface Service {
@@ -12,6 +13,8 @@ interface Service {
   highlight?: boolean;
   image?: string;
 }
+
+type MobileSequenceItem = { type: "visual" } | { type: "card"; index: number };
 
 const services: Service[] = [
   {
@@ -48,6 +51,22 @@ export default function Services() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const visualRef = useRef<HTMLDivElement | null>(null);
   const [visualY, setVisualY] = useState(0);
+  const isMobile = useIsMobile();
+
+  const currentIndex = Math.min(Math.max(current, 0), services.length - 1);
+  const currentService = services[currentIndex];
+
+  const mobileSequence = useMemo<MobileSequenceItem[]>(() => {
+    if (!isMobile) return [];
+    return services.flatMap((_, index) => {
+      const entries: MobileSequenceItem[] = [];
+      if (index === currentIndex) {
+        entries.push({ type: "visual" });
+      }
+      entries.push({ type: "card", index });
+      return entries;
+    });
+  }, [currentIndex, isMobile]);
 
   // Preload images to ensure smooth transitions: insert <link rel="preload"> and
   // create Image objects to warm the browser cache. Remove link tags on cleanup.
@@ -109,7 +128,8 @@ export default function Services() {
   };
 
   // Calculate alignment offset inside the section for sticky panel
-  const alignVisualToCard = (index: number) => {
+  const alignVisualToCard = useCallback((index: number) => {
+    if (typeof window === "undefined" || isMobile) return;
     const card = itemRefs.current[index];
     const visual = visualRef.current;
     const section = sectionRef.current;
@@ -128,22 +148,23 @@ export default function Services() {
     } else if (width >= 768) {
       stickyOffset = 112; // md:top-28
     }
-  // Alinear el panel visual al tope de la tarjeta activa, compensando el sticky
-  const relativeY = cardRect.top - sectionRect.top;
-  const target = relativeY - stickyOffset;
-  // Constrain target so que no se salga del section
-  const visualHeight = visual.offsetHeight;
-  const max = section.offsetHeight - visualHeight;
-  const clamped = Math.max(0, Math.min(target, max));
-  setVisualY(clamped);
-  };
+    // Alinear el panel visual al tope de la tarjeta activa, compensando el sticky
+    const relativeY = cardRect.top - sectionRect.top;
+    const target = relativeY - stickyOffset;
+    // Constrain target so que no se salga del section
+    const visualHeight = visual.offsetHeight;
+    const max = section.offsetHeight - visualHeight;
+    const clamped = Math.max(0, Math.min(target, max));
+    setVisualY(clamped);
+  }, [isMobile]);
 
   // Recalculate on resize for responsiveness
   useEffect(() => {
+    if (typeof window === "undefined" || isMobile) return;
     const onResize = () => alignVisualToCard(current);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
-  }, [current]);
+  }, [alignVisualToCard, current, isMobile]);
 
   // IntersectionObserver: observe each card and activate it when it
   // enters the centered virtual area. Configuration required by spec:
@@ -180,13 +201,77 @@ export default function Services() {
       observer.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [services.length]);
+  }, [services.length, isMobile]);
 
   // Initial alignment after mount
   useEffect(() => {
     alignVisualToCard(current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [alignVisualToCard, current]);
+
+  const renderVisualModule = () => {
+    if (!currentService) return null;
+    return (
+      <div className="relative w-full aspect-[16/10] rounded-xl bg-cyan-50/30 backdrop-blur-sm overflow-hidden shadow-md border border-cyan-200/40 will-change-transform">
+        <ServiceVisual service={currentService} />
+      </div>
+    );
+  };
+
+  const renderServiceCard = (service: Service, index: number) => (
+    <motion.div
+      key={service.title}
+      ref={(el) => {
+        itemRefs.current[index] = el;
+      }}
+      viewport={{ amount: 0.35, once: false }}
+      className={cn(
+        "flex items-start gap-4 md:gap-6 p-6 rounded-xl transition-all duration-300 border border-transparent",
+        index === current
+          ? "bg-cyan-50/40 backdrop-blur-sm border-cyan-200/30"
+          : "hover:bg-cyan-50/20 hover:border-cyan-200/20"
+      )}
+      initial={{ opacity: 0.3, y: 20 }}
+      animate={{
+        opacity: index === current ? 1 : 0.5,
+        y: 0,
+      }}
+      transition={{ duration: 0.4 }}
+      tabIndex={0}
+    >
+      <div
+        className={cn(
+          "w-14 h-14 rounded-lg flex items-center justify-center p-3 shrink-0 transition-all duration-300",
+          index === current
+            ? "bg-background text-foreground scale-110 ring-1 ring-border shadow-sm"
+            : "bg-muted"
+        )}
+      >
+        <service.icon className="w-full h-full text-[#2F64FF]" />
+      </div>
+
+      <div className="flex-1 min-w-0">
+        <h3 className="text-xl md:text-2xl font-bold truncate mb-2" style={{ color: "#2F64FF" }}>
+          {service.title}
+        </h3>
+        <p className="text-black text-base md:text-lg line-clamp-2">{service.description}</p>
+
+        <ul className="mt-4 space-y-2">
+          {service.features.map((f, i) => (
+            <li
+              key={i}
+              className={cn(
+                "flex items-center gap-3 transition-opacity duration-300",
+                index === current ? "opacity-100" : "opacity-70"
+              )}
+            >
+              <ChevronRight className="w-4 h-4 text-black shrink-0" />
+              <span className="text-sm md:text-base text-black truncate">{f}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  );
 
   return (
     <section
@@ -205,138 +290,93 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 min-h-[40rem] items-start">
-          {/* Panel de Servicios (Izquierda) */}
-          <div className="order-2 md:order-1 w-full space-y-8 py-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.title}
-                ref={(el) => {
-                  itemRefs.current[index] = el;
-                }}
-                viewport={{ amount: 0.35, once: false }}
-                className={cn(
-                  "flex items-start gap-4 md:gap-6 p-6 rounded-xl transition-all duration-300 border border-transparent",
-                  index === current 
-                    ? "bg-cyan-50/40 backdrop-blur-sm border-cyan-200/30" 
-                    : "hover:bg-cyan-50/20 hover:border-cyan-200/20"
-                )}
-                initial={{ opacity: 0.3, y: 20 }}
-                animate={{ 
-                  opacity: index === current ? 1 : 0.5,
-                  y: 0 
-                }}
-                transition={{ duration: 0.4 }}
-                tabIndex={0}
-              >
-                <div
-                  className={cn(
-                    "w-14 h-14 rounded-lg flex items-center justify-center p-3 shrink-0 transition-all duration-300",
-                    index === current 
-                      ? "bg-background text-foreground scale-110 ring-1 ring-border shadow-sm" 
-                      : "bg-muted"
-                  )}
-                >
-                  <service.icon className="w-full h-full text-[#2F64FF]" />
-                </div>
-
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-xl md:text-2xl font-bold truncate mb-2" style={{ color: '#2F64FF' }}>
-                    {service.title}
-                  </h3>
-                  <p className="text-black text-base md:text-lg line-clamp-2">
-                    {service.description}
-                  </p>
-
-                  <ul className="mt-4 space-y-2">
-                    {service.features.map((f, i) => (
-                      <li 
-                        key={i} 
-                        className={cn(
-                          "flex items-center gap-3 transition-opacity duration-300",
-                          index === current ? "opacity-100" : "opacity-70"
-                        )}
-                      >
-                        <ChevronRight className="w-4 h-4 text-black shrink-0" />
-                        <span className="text-sm md:text-base text-black truncate">
-                          {f}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Panel Visual con Scroll Paralelo (Derecha) */}
-          <div 
-            ref={visualRef}
-            className="relative order-1 md:order-2 md:sticky md:top-28 lg:top-32 md:self-start h-fit w-full"
-            style={{ transform: `translateY(${visualY}px)`, transition: 'transform 0.6s cubic-bezier(0.25,0.8,0.3,1)' }}
-          >
-            <div className="relative w-full aspect-[16/10] rounded-xl bg-cyan-50/30 backdrop-blur-sm overflow-hidden shadow-md border border-cyan-200/40 will-change-transform">
-              <AnimatePresence mode="wait">
-                {services.map((service, index) =>
-                  index === current && (
+        <div className="relative">
+          {isMobile ? (
+            <div className="flex flex-col gap-8 py-8">
+              {mobileSequence.map((item) => {
+                if (item.type === "visual") {
+                  return (
                     <motion.div
-                      key={service.title}
-                      className="absolute inset-0 flex items-center justify-center"
-                      initial={{ scale: 1.1, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0.95, opacity: 0 }}
-                      transition={{ 
-                        type: "spring",
-                        stiffness: 100,
-                        damping: 20
-                      }}
+                      key="mobile-visual-panel"
+                      layout
+                      transition={{ type: "spring", stiffness: 220, damping: 32 }}
                     >
-                      <div className="absolute inset-0 z-0">
-                        <motion.img
-                          src={service.image}
-                          alt={service.title}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                          decoding="async"
-                          initial={{ scale: 1.1, y: 20 }}
-                          animate={{ scale: 1, y: 0 }}
-                          exit={{ scale: 0.95, y: -20 }}
-                          transition={{
-                            duration: 0.8,
-                            ease: [0.25, 0.46, 0.45, 0.94],
-                          }}
-                        />
-                        <motion.div 
-                          className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.5 }}
-                        />
-                      </div>
-                      
-                      <div className="relative z-10 p-8 text-center max-w-lg mx-auto">
-                        <motion.div
-                          initial={{ y: 20, opacity: 0 }}
-                          animate={{ y: 0, opacity: 1 }}
-                          transition={{ delay: 0.2 }}
-                        >
-                          <h4 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-white text-shadow-lg">
-                            {service.title}
-                          </h4>
-                          <p className="text-base md:text-lg text-muted-foreground/90 text-white text-shadow-md">
-                            {service.description}
-                          </p>
-                        </motion.div>
-                      </div>
+                      {renderVisualModule()}
                     </motion.div>
-                  )
-                )}
-              </AnimatePresence>
+                  );
+                }
+
+                const service = services[item.index];
+                return renderServiceCard(service, item.index);
+              })}
             </div>
-          </div>
+          ) : (
+            <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 min-h-[40rem] items-start">
+              <div className="order-2 md:order-1 w-full space-y-8 py-8">
+                {services.map((service, index) => renderServiceCard(service, index))}
+              </div>
+
+              <div
+                ref={visualRef}
+                className="relative order-1 md:order-2 md:sticky md:top-28 lg:top-32 md:self-start h-fit w-full"
+                style={{
+                  transform: `translateY(${visualY}px)`,
+                  transition: "transform 0.6s cubic-bezier(0.25,0.8,0.3,1)",
+                }}
+              >
+                {renderVisualModule()}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>
+  );
+}
+
+function ServiceVisual({ service }: { service: Service }) {
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={service.title}
+        className="absolute inset-0 flex items-center justify-center"
+        initial={{ scale: 1.1, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.95, opacity: 0 }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      >
+        <div className="absolute inset-0 z-0">
+          <motion.img
+            src={service.image}
+            alt={service.title}
+            className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+            initial={{ scale: 1.1, y: 20 }}
+            animate={{ scale: 1, y: 0 }}
+            exit={{ scale: 0.95, y: -20 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          />
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          />
+        </div>
+
+        <div className="relative z-10 p-8 text-center max-w-lg mx-auto">
+          <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }}>
+            <h4 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-white text-shadow-lg">
+              {service.title}
+            </h4>
+            <p className="text-base md:text-lg text-muted-foreground/90 text-white text-shadow-md">
+              {service.description}
+            </p>
+          </motion.div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
   );
 }
