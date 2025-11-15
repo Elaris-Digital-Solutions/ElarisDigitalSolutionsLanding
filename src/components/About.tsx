@@ -187,6 +187,39 @@ export default function About() {
   const displayFocus = isMobile ? mobileSlide?.focus ?? groupFocus : effectiveMember?.focus ?? groupFocus;
   const showCaption = isMobile && mobileSlide?.type === "member" && !!mobileSlide.caption;
 
+  // Preload all images used in this section (warm network cache) but keep img elements lazy
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    const imgs = [groupImage, ...team.map((t) => t.image)];
+
+    imgs.forEach((src) => {
+      if (typeof src !== "string" || !src) return;
+      const attr = `about-preload-${src}`;
+      if (!document.querySelector(`link[data-about-preload="${attr}"]`)) {
+        try {
+          const link = document.createElement("link");
+          link.rel = "preload";
+          link.as = "image";
+          link.href = src;
+          link.setAttribute("data-about-preload", attr);
+          document.head.appendChild(link);
+        } catch (e) {
+          // ignore
+        }
+      }
+
+      // Warm browser cache
+      try {
+        const img = new Image();
+        img.decoding = "async";
+        img.src = src;
+      } catch (e) {
+        // ignore
+      }
+    });
+  }, []);
+
   return (
     <section id="nosotros" className="relative isolate overflow-hidden bg-gradient-to-br from-slate-50 via-sky-50 to-white py-24 sm:py-28">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(14,165,233,0.18),_transparent_55%),radial-gradient(circle_at_bottom,_rgba(168,85,247,0.15),_transparent_45%)]" />
@@ -205,6 +238,7 @@ export default function About() {
                 <SmartImage
                   aria-hidden="true"
                   src={displayImage}
+                  priority
                   alt=""
                   className="absolute inset-0 h-full w-full scale-[1.06] transform-gpu object-cover blur-[14px] opacity-45"
                   style={{ objectPosition: displayFocus }}
@@ -212,6 +246,7 @@ export default function About() {
                 <SmartImage
                   key={displayImage}
                   src={displayImage}
+                  priority
                   alt={effectiveMember ? `Retrato de ${effectiveMember.name}` : "Foto grupal del equipo Elaris"}
                   className="relative z-10 h-full w-full object-contain transition duration-700 ease-out"
                   style={{ objectPosition: displayFocus }}
