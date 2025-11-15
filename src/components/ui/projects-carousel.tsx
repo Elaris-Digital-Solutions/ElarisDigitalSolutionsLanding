@@ -26,13 +26,22 @@ const ProjectsCarousel: React.FC = () => {
 
   const projects = [
     {
-      name: 'Salcedo Jewels',
-      description: 'E-commerce de joyería de lujo con catálogo interactivo y pagos en línea.',
-      image: '/assets/salcedo.png',
-      stack: ['Next.js', 'React', 'Stripe', 'Vercel'],
-      metrics: 'Lanzamiento 2024, ventas internacionales',
-      category: 'E-commerce',
-      url: 'https://salcedo-jewels.vercel.app/'
+      name: 'Nuestro Barrio, Nuestra Historia',
+      description: 'Plataforma social que conecta comunidades y preserva historias locales.',
+      image: '/assets/nuestro-barrio-nuestra-historia.png',
+      stack: ['React', 'Node.js', 'MongoDB'],
+      metrics: 'Impacto social positivo',
+      category: 'Plataforma Social',
+      url: 'https://nuestro-barrio-nuestra-historia.netlify.app/'
+    },
+    {
+      name: 'Kar & Ma',
+      description: 'Landing corporativa para Kar & Ma, una empresa distribuidora de sal.',
+      image: '/assets/kar-ma.png',
+      stack: ['React', 'Tailwind', 'Vite'],
+      metrics: 'Presencia Digital, mejor portafolio, más ventas',
+      category: 'Landing Page',
+      url: 'https://kar-ma.netlify.app/'
     },
     {
       name: 'Diego Joyero',
@@ -44,14 +53,16 @@ const ProjectsCarousel: React.FC = () => {
       url: 'https://diego-joyero.netlify.app/'
     },
     {
-      name: 'Nuestro Barrio, Nuestra Historia',
-      description: 'Plataforma social que conecta comunidades y preserva historias locales.',
-      image: '/assets/nuestro-barrio-nuestra-historia.png',
-      stack: ['React', 'Node.js', 'MongoDB'],
-      metrics: 'Impacto social positivo',
-      category: 'Plataforma Social',
-      url: 'https://nuestro-barrio-nuestra-historia.netlify.app/'
+      name: 'Salcedo Jewels',
+      description: 'E-commerce de joyería de lujo con catálogo interactivo y pagos en línea.',
+      image: '/assets/salcedo.png',
+      stack: ['Next.js', 'React', 'Stripe', 'Vercel'],
+      metrics: 'Lanzamiento 2024, ventas internacionales',
+      category: 'E-commerce',
+      url: 'https://salcedo-jewels.vercel.app/'
     },
+    
+    
   ];
 
   const nextProject = () => {
