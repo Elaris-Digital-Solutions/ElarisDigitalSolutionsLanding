@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { Github, Linkedin, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type TeamMember = {
   name: string;
@@ -15,6 +16,15 @@ type SocialLink = {
   label: string;
   href: string;
   icon: LucideIcon;
+};
+
+type MobileSlide = {
+  type: "group" | "member";
+  image: string;
+  focus: string;
+  caption: string;
+  duration: number;
+  member?: TeamMember;
 };
 
 const groupImage =
@@ -71,9 +81,110 @@ const team: TeamMember[] = [
 
 export default function About() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [mobileSlideIndex, setMobileSlideIndex] = useState(0);
+  const slideTimeoutRef = useRef<number | null>(null);
+  const touchStartXRef = useRef<number | null>(null);
+  const touchDeltaXRef = useRef(0);
+  const isMobile = useIsMobile();
+  const [isUserInteracting, setIsUserInteracting] = useState(false);
 
-  const activeMember = typeof activeIndex === "number" ? team[activeIndex] : null;
-  const displayImage = activeMember?.image ?? groupImage;
+  const mobileSlides = useMemo<MobileSlide[]>(() => {
+    const slides: MobileSlide[] = [
+      {
+        type: "group",
+        image: groupImage,
+        focus: groupFocus,
+        caption: "Equipo Elaris",
+        duration: 6000,
+      },
+      ...team.map((member) => ({
+        type: "member" as const,
+        image: member.image,
+        focus: member.focus ?? groupFocus,
+        caption: member.name,
+        duration: 3800,
+        member,
+      })),
+    ];
+    return slides;
+  }, []);
+
+  const totalSlides = mobileSlides.length;
+
+  useEffect(() => {
+    if (!isMobile || isUserInteracting || totalSlides === 0) {
+      if (!isMobile) {
+        setMobileSlideIndex(0);
+      }
+      if (slideTimeoutRef.current) {
+        window.clearTimeout(slideTimeoutRef.current);
+        slideTimeoutRef.current = null;
+      }
+      return;
+    }
+
+    const currentDuration = mobileSlides[mobileSlideIndex]?.duration ?? 4000;
+    slideTimeoutRef.current = window.setTimeout(() => {
+      setMobileSlideIndex((prev) => (prev + 1) % totalSlides);
+    }, currentDuration);
+
+    return () => {
+      if (slideTimeoutRef.current) {
+        window.clearTimeout(slideTimeoutRef.current);
+        slideTimeoutRef.current = null;
+      }
+    };
+  }, [isMobile, isUserInteracting, mobileSlideIndex, mobileSlides, totalSlides]);
+
+  const goToRelativeSlide = useCallback(
+    (direction: number) => {
+      if (totalSlides <= 1) return;
+      setMobileSlideIndex((prev) => (prev + direction + totalSlides) % totalSlides);
+    },
+    [totalSlides]
+  );
+
+  const handleTouchStart = useCallback(
+    (event: React.TouchEvent<HTMLDivElement>) => {
+      if (!isMobile || totalSlides <= 1) return;
+      const touch = event.touches[0];
+      if (!touch) return;
+      setIsUserInteracting(true);
+      touchStartXRef.current = touch.clientX;
+      touchDeltaXRef.current = 0;
+    },
+    [isMobile, totalSlides]
+  );
+
+  const handleTouchMove = useCallback(
+    (event: React.TouchEvent<HTMLDivElement>) => {
+      if (!isMobile || touchStartXRef.current === null) return;
+      const touch = event.touches[0];
+      if (!touch) return;
+      touchDeltaXRef.current = touch.clientX - touchStartXRef.current;
+    },
+    [isMobile]
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    if (!isMobile) return;
+    const deltaX = touchDeltaXRef.current;
+    const threshold = 60;
+    if (touchStartXRef.current !== null && Math.abs(deltaX) > threshold) {
+      const direction = deltaX > 0 ? -1 : 1;
+      goToRelativeSlide(direction);
+    }
+    touchStartXRef.current = null;
+    touchDeltaXRef.current = 0;
+    setIsUserInteracting(false);
+  }, [goToRelativeSlide, isMobile]);
+
+  const mobileSlide = isMobile ? mobileSlides[mobileSlideIndex] : null;
+  const activeMember = !isMobile && typeof activeIndex === "number" ? team[activeIndex] : null;
+  const effectiveMember = isMobile ? mobileSlide?.member ?? null : activeMember;
+  const displayImage = isMobile ? mobileSlide?.image ?? groupImage : effectiveMember?.image ?? groupImage;
+  const displayFocus = isMobile ? mobileSlide?.focus ?? groupFocus : effectiveMember?.focus ?? groupFocus;
+  const showCaption = isMobile && mobileSlide?.type === "member" && !!mobileSlide.caption;
 
   return (
     <section id="nosotros" className="relative isolate overflow-hidden bg-gradient-to-br from-slate-50 via-sky-50 to-white py-24 sm:py-28">
@@ -83,13 +194,19 @@ export default function About() {
           <div className="relative order-2 lg:order-1">
             <div className="absolute inset-0 -z-10 hidden rounded-[3.2rem] bg-gradient-to-br from-sky-200/50 via-white to-fuchsia-200/40 blur-3xl lg:block" aria-hidden="true" />
             <div className="relative w-full overflow-hidden rounded-[3.2rem] border border-slate-200 bg-white shadow-[0_45px_140px_rgba(15,118,210,0.2)]">
-              <div className="relative aspect-[6/4]">
+              <div
+                className="relative aspect-[6/4]"
+                onTouchStart={isMobile ? handleTouchStart : undefined}
+                onTouchMove={isMobile ? handleTouchMove : undefined}
+                onTouchEnd={isMobile ? handleTouchEnd : undefined}
+                onTouchCancel={isMobile ? handleTouchEnd : undefined}
+              >
                 <div
                   aria-hidden="true"
                   className="absolute inset-0 scale-[1.04] transform-gpu overflow-hidden"
                   style={{
                     backgroundImage: `url(${displayImage})`,
-                    backgroundPosition: activeMember?.focus ?? groupFocus,
+                    backgroundPosition: displayFocus,
                     backgroundSize: "cover",
                     filter: "blur(14px)",
                     opacity: 0.45,
@@ -98,10 +215,15 @@ export default function About() {
                 <img
                   key={displayImage}
                   src={displayImage}
-                  alt={activeMember ? `Retrato de ${activeMember.name}` : "Foto grupal del equipo Elaris"}
+                  alt={effectiveMember ? `Retrato de ${effectiveMember.name}` : "Foto grupal del equipo Elaris"}
                   className="relative z-10 h-full w-full object-contain transition duration-700 ease-out"
-                  style={{ objectPosition: activeMember?.focus ?? groupFocus }}
+                  style={{ objectPosition: displayFocus }}
                 />
+                {showCaption && (
+                  <div className="absolute bottom-4 left-1/2 z-20 w-[85%] -translate-x-1/2 rounded-full border border-white/30 bg-black/45 px-4 py-2 text-center text-sm font-semibold text-white backdrop-blur-md">
+                    {mobileSlide.caption}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -128,11 +250,18 @@ export default function About() {
                 key={member.name}
                 role="button"
                 tabIndex={0}
-                aria-pressed={isActive}
-                onMouseEnter={() => setActiveIndex(index)}
-                onFocus={() => setActiveIndex(index)}
-                onMouseLeave={() => setActiveIndex(null)}
+                aria-pressed={!isMobile && isActive}
+                onMouseEnter={() => {
+                  if (!isMobile) setActiveIndex(index);
+                }}
+                onFocus={() => {
+                  if (!isMobile) setActiveIndex(index);
+                }}
+                onMouseLeave={() => {
+                  if (!isMobile) setActiveIndex(null);
+                }}
                 onBlur={(event) => {
+                  if (isMobile) return;
                   const next = event.relatedTarget as Node | null;
                   if (!next || !event.currentTarget.contains(next)) {
                     setActiveIndex(null);
@@ -141,7 +270,7 @@ export default function About() {
                 className={cn(
                   "group relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-2xl border p-5 text-left transition duration-300 outline-none",
                   "border-slate-200 bg-white/95 hover:border-sky-400 hover:shadow-[0_18px_45px_rgba(14,165,233,0.16)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/40",
-                  isActive && "border-sky-500 shadow-[0_18px_45px_rgba(14,165,233,0.22)]"
+                  !isMobile && isActive && "border-sky-500 shadow-[0_18px_45px_rgba(14,165,233,0.22)]"
                 )}
               >
                 <span
@@ -150,7 +279,7 @@ export default function About() {
                     "pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br opacity-0 transition duration-300",
                     member.accent,
                     "group-hover:opacity-30",
-                    isActive && "opacity-40"
+                    !isMobile && isActive && "opacity-40"
                   )}
                 />
                 <div className="space-y-1">
