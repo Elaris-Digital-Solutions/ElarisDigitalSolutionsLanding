@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 import MatrixRain from "./ui/matrix-code";
 
@@ -118,7 +119,9 @@ export default function Contact() {
                 <h3 className="text-lg font-semibold text-white">Información de Contacto</h3>
                 <ul className="mt-4 space-y-4 text-sm">
                   <li className="flex items-start gap-3">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-[#2F64FF]/20 text-[#2F64FF]">✉️</span>
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-[#2F64FF]/20 text-[#2F64FF]">
+                      <Mail className="h-5 w-5" />
+                    </div>
                     <div>
                       <div className="text-white/90">Email</div>
                       <div className="font-semibold">solutions.elaris@gmail.com</div>
@@ -126,7 +129,9 @@ export default function Contact() {
                   </li>
 
                   <li className="flex items-start gap-3">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-[#2F64FF]/20 text-[#2F64FF]">📞</span>
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-[#2F64FF]/20 text-[#2F64FF]">
+                      <Phone className="h-5 w-5" />
+                    </div>
                     <div>
                       <div className="text-white/90">Teléfono</div>
                       <div className="font-semibold">+51 987 450 340</div>
@@ -134,7 +139,9 @@ export default function Contact() {
                   </li>
 
                   <li className="flex items-start gap-3">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-[#2F64FF]/20 text-[#2F64FF]">📍</span>
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-[#2F64FF]/20 text-[#2F64FF]">
+                      <MapPin className="h-5 w-5" />
+                    </div>
                     <div>
                       <div className="text-white/90">Oficina</div>
                       <div className="font-semibold">Av. Primavera 2390<br/>Santiago de Surco 15023</div>
