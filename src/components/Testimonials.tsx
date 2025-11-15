@@ -4,19 +4,19 @@ import CircularTestimonials from '@/components/ui/circular-testimonials'
 const testimonials = [
   {
     quote:
-      "I was impressed by the food! And I could really tell that they use high-quality ingredients. The staff was friendly and attentive. I'll definitely be back for more!",
-    name: "Tamar Mendelson",
-    designation: "Restaurant Critic",
+      "El trabajo que realizaron superó ampliamente mis expectativas. Su enfoque, su metodología y su capacidad de transformar mis ideas en experiencias digitales fueron clave. Estoy realmente agradecida con ellos.",
+    name: "Daniela Bussalleu",
+    designation: "Biologa y Comunicadora",
     src:
-      "https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "/assets/daniela-bussalleu.jpg",
   },
   {
     quote:
-      "This place exceeded all expectations! The atmosphere is inviting, and the staff truly goes above and beyond. I'll keep returning for more exceptional dining experience.",
-    name: "Joe Charlescraft",
-    designation: "Frequent Visitor",
+      "La web quedó intuitiva, el e-commerce fluye muy bien y la base de datos es fácil de entender y administrar. Excelente trabajo para Salcedo Jewels.",
+    name: "Milagros Salcedo",
+    designation: "CEO de Salcedo Jewels S.A.C.",
     src:
-      "https://images.unsplash.com/photo-1628749528992-f5702133b686?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D",
+      "/assets/milagros-salcedo.jpg",
   },
   {
     quote:
