@@ -49,6 +49,7 @@ const InteractiveSelector = () => {
 				image:
 					"/assets/kar-ma.png",
 				Icon: Rocket,
+				url: "https://kar-ma.netlify.app/"
 			},
 			{
 				title: "Salcedo Jewels",
