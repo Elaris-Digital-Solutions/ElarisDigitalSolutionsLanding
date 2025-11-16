@@ -44,6 +44,14 @@ const InteractiveSelector = () => {
 				url: "https://diego-joyero.netlify.app/"
 			},
 			{
+				title: "Kar & Ma",
+				description: "Landing corporativa con rebranding y formulario SEO integrado",
+				image:
+					"/assets/kar-ma.png",
+				Icon: Rocket,
+				url: "https://kar-ma.netlify.app/"
+			},
+			{
 				title: "Salcedo Jewels",
 				description: "E-commerce de joyería de lujo con catálogo interactivo y pagos en línea.",
 				image:
@@ -57,13 +65,6 @@ const InteractiveSelector = () => {
 				image:
 					"https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=80",
 				Icon: Bot,
-			},
-			{
-				title: "Lanzamientos a escala",
-				description: "Estrategias de go-to-market con branding, motion y growth stack integrado.",
-				image:
-					"https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
-				Icon: Rocket,
 			},
 		],
 		[],
