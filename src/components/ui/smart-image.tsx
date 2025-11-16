@@ -54,8 +54,9 @@ export const SmartImage = forwardRef<HTMLImageElement, SmartImageProps>(
     const resolvedLoading: React.ImgHTMLAttributes<HTMLImageElement>["loading"] =
       loading ?? (priority ? "eager" : "lazy");
 
-    const resolvedFetchPriority: React.ImgHTMLAttributes<HTMLImageElement>["fetchPriority"] =
-      fetchPriority ?? (priority ? "high" : "low");
+    const resolvedFetchPriority: string | undefined =
+      // Keep behavior: priority => high, otherwise low; allow explicit undefined
+      (fetchPriority as any) ?? (priority ? "high" : "low");
 
     return (
       <img
@@ -63,7 +64,7 @@ export const SmartImage = forwardRef<HTMLImageElement, SmartImageProps>(
         src={src}
         loading={resolvedLoading}
         decoding={decoding}
-        fetchPriority={resolvedFetchPriority}
+        {...(resolvedFetchPriority ? { fetchpriority: resolvedFetchPriority } : {})}
         {...rest}
       />
     );

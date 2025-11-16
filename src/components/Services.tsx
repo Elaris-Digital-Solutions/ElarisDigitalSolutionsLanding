@@ -46,7 +46,8 @@ const services: Service[] = [
   },
 ];
 
-const MotionSmartImage = motion(SmartImage);
+// Use the newer API per framer-motion deprecation: motion.create()
+const MotionSmartImage = motion.create ? motion.create(SmartImage) : motion(SmartImage);
 
 export default function Services() {
   const [current, setCurrent] = useState(0);
