@@ -85,7 +85,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="mailto:contact@elarisdigitalsolutions.com"
+                href="mailto:solutions.elaris@gmail.com"
                 className="p-2 bg-white/6 rounded-lg hover:bg-white/10 hover:text-white transition-colors"
                 aria-label="Email"
               >
@@ -151,7 +151,7 @@ const Footer = () => {
                   href="mailto:contact@elarisdigitalsolutions.com"
                   className="flex items-center gap-2 text-white/80 text-sm hover:text-white transition-colors"
                 >
-                  <Mail className="h-5 w-5 flex-shrink-0" />
+                  <Mail className="h-4 w-4" />
                   contact@elarisdigitalsolutions.com
                 </a>
               </li>

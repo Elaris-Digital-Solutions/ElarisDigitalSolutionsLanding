@@ -151,8 +151,7 @@ const Footer = () => {
                   href="mailto:contact@elarisdigitalsolutions.com"
                   className="flex items-center gap-2 text-white/80 text-sm hover:text-white transition-colors"
                 >
-                  <Mail className="h-5 w-5 flex-shrink-0" />
-                  contact@elarisdigitalsolutions.com
+                  <Mail className="h-4 w-4" />contact@elarisdigitalsolutions.com
                 </a>
               </li>
               <li>
