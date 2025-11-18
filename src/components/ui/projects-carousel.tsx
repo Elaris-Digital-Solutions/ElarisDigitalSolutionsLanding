@@ -28,7 +28,7 @@ const ProjectsCarousel: React.FC = () => {
     {
       name: 'Nuestro Barrio, Nuestra Historia',
       description: 'Plataforma social que conecta comunidades y preserva historias locales.',
-      image: '/assets/nuestro-barrio-nuestra-historia.png',
+      image: '/assets/nuestro-barrio-nuestra-historia.webp',
       stack: ['React', 'Node.js', 'MongoDB'],
       metrics: 'Impacto social positivo',
       category: 'Plataforma Social',

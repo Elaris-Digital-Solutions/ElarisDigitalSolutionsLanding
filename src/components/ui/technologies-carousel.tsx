@@ -48,7 +48,7 @@ const TechLogos = {
   ),
   docker: () => (
     <div className="flex items-center gap-3">
-      <SmartImage src="/assets/Docker.png" alt="Docker" className="h-10 w-10" />
+      <img src="/assets/Docker.png" alt="Docker" className="h-10 w-10" />
       <span className="font-semibold text-gray-800">Docker</span>
     </div>
   ),

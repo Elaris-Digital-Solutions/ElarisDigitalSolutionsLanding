@@ -29,7 +29,7 @@ type MobileSlide = {
 };
 
 const groupImage =
-  "/images/team/team.JPG";
+  "/images/team/team.webp";
 
 const groupFocus = "center 40%";
 
@@ -37,7 +37,7 @@ const team: TeamMember[] = [
   {
     name: "Jorge García",
     role: "Co-Founder",
-    image: "/images/team/jorge.jpg",
+    image: "/images/team/jorge.webp",
     accent: "from-cyan-500/60 via-blue-500/40 to-violet-500/60",
     focus: "center 10%",
     socials: [
@@ -48,7 +48,7 @@ const team: TeamMember[] = [
   {
     name: "Fabrizio Bussalleu",
     role: "Co-Founder",
-    image: "/images/team/fabrizio.jpg",
+    image: "/images/team/fabrizio.webp",
     accent: "from-emerald-500/60 via-teal-500/40 to-blue-500/60",
     focus: "center 10%",
     socials: [
@@ -59,7 +59,7 @@ const team: TeamMember[] = [
   {
     name: "Alejandro Colfer",
     role: "Co-Founder",
-    image: "/images/team/colfer.jpg",
+    image: "/images/team/colfer.webp",
     accent: "from-purple-500/60 via-fuchsia-500/40 to-amber-500/60",
     focus: "center 45%",
     socials: [
@@ -70,7 +70,7 @@ const team: TeamMember[] = [
   {
     name: "Joaquin Del Solar",
     role: "Co-Founder",
-    image: "/images/team/delso.jpg",
+    image: "/images/team/delso.webp",
     accent: "from-rose-500/60 via-orange-500/40 to-amber-500/60",
     focus: "center 38%",
     socials: [

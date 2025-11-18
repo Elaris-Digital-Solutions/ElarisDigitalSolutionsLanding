@@ -6,7 +6,7 @@ const members = [
   {
     name: "Jorge",
     designation: "Co-Founder",
-    imageSrc: "/images/team/jorge.jpg",
+    imageSrc: "/images/team/jorge.webp",
     socialLinks: [
       { icon: Linkedin, href: "https://www.linkedin.com/in/jorge-garcia18/" },
       { icon: Github, href: "https://github.com/JorgeGarcia005" },
@@ -15,7 +15,7 @@ const members = [
   {
     name: "Fabrizio",
     designation: "Co-Founder",
-    imageSrc: "/images/team/furro.jpg",
+    imageSrc: "/images/team/furro.webp",
     socialLinks: [
       { icon: Linkedin, href: "https://www.linkedin.com/in/fabrizio-bussalleu-salcedo-237760323" },
       { icon: Github, href: "https://github.com/FabrizioBussalleu" },
@@ -24,7 +24,7 @@ const members = [
   {
     name: "Alejandro",
     designation: "Co-Founder",
-    imageSrc: "/images/team/colfer.jpg",
+    imageSrc: "/images/team/colfer.webp",
     socialLinks: [
       { icon: Linkedin, href: "https://www.linkedin.com/in/carlos-alejandro-colfer-mendoza-a59a08355/" },
       { icon: Github, href: "https://github.com/Elkfle" },
@@ -33,7 +33,7 @@ const members = [
   {
     name: "Delso",
     designation: "Co-Founder",
-    imageSrc: "/images/team/delso.jpg",
+    imageSrc: "/images/team/delso.webp",
     socialLinks: [
       { icon: Linkedin, href: "https://www.linkedin.com/in/joaquin-del-solar-383069355" },
       { icon: Github, href: "https://github.com/JOACODS22" },

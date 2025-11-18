@@ -8,7 +8,7 @@ const testimonials = [
     name: "Daniela Bussalleu",
     designation: "Bióloga  y Comunicadora",
     src:
-      "/assets/daniela-bussalleu.jpg",
+      "/assets/daniela-bussalleu.webp",
   },
   {
     quote:
@@ -16,7 +16,7 @@ const testimonials = [
     name: "Milagros Salcedo",
     designation: "CEO de Salcedo Jewels S.A.C.",
     src:
-      "/assets/milagros-salcedo.jpg",
+      "/assets/milagros-salcedo.webp",
   },
   {
     quote:

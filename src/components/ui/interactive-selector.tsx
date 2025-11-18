@@ -31,7 +31,7 @@ const InteractiveSelector = () => {
 				title: "Nuestro Barrio, Nuestra Historia",
 				description: "Plataforma social que conecta comunidades y preserva historias locales.",
 				image:
-					"/assets/nuestro-barrio-nuestra-historia.png",
+					"/assets/nuestro-barrio-nuestra-historia.webp",
 				Icon: AppWindow,
 				url: "https://nuestro-barrio-nuestra-historia.netlify.app/"
 			},
@@ -39,7 +39,7 @@ const InteractiveSelector = () => {
 				title: "Diego Joyero",
 				description: "Landing page profesional para joyería con diseño elegante y moderno.",
 				image:
-					"/assets/diego-joyero.png",
+					"/assets/diego-joyero.webp",
 				Icon: ShoppingBag,
 				url: "https://diego-joyero.netlify.app/"
 			},
@@ -55,7 +55,7 @@ const InteractiveSelector = () => {
 				title: "Salcedo Jewels",
 				description: "E-commerce de joyería de lujo con catálogo interactivo y pagos en línea.",
 				image:
-					"/assets/salcedo.png",
+					"/assets/salcedo.webp",
 				Icon: Smartphone,
 				url: "https://salcedo-jewels.vercel.app/"
 			},
