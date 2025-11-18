@@ -36,14 +36,6 @@ const InteractiveSelector = () => {
 				url: "https://nuestro-barrio-nuestra-historia.netlify.app/"
 			},
 			{
-				title: "Diego Joyero",
-				description: "Landing page profesional para joyería con diseño elegante y moderno.",
-				image:
-					"/assets/diego-joyero.webp",
-				Icon: ShoppingBag,
-				url: "https://diego-joyero.netlify.app/"
-			},
-			{
 				title: "Kar & Ma",
 				description: "Landing corporativa con rebranding y formulario SEO integrado",
 				image:
@@ -52,19 +44,29 @@ const InteractiveSelector = () => {
 				url: "https://kar-ma.netlify.app/"
 			},
 			{
+				title: "Papelera Latinoamericana S.A.C.",
+				description: "Landing institucional para Papelera Latinoamericana S.A.C. con catálogo y contacto digital.",
+				image:
+						"/assets/papelera-latinoamericana.png",
+				Icon: Bot,
+				url: "https://papelera-latinoamericana.netlify.app"
+			},
+			{
+				title: "Diego Joyero",
+				description: "Landing page profesional para joyería con diseño elegante y moderno.",
+				image:
+					"/assets/diego-joyero.webp",
+				Icon: ShoppingBag,
+				url: "https://diego-joyero.netlify.app/"
+			},
+		
+			{
 				title: "Salcedo Jewels",
 				description: "E-commerce de joyería de lujo con catálogo interactivo y pagos en línea.",
 				image:
 					"/assets/salcedo.webp",
 				Icon: Smartphone,
 				url: "https://salcedo-jewels.vercel.app/"
-			},
-			{
-				title: "Automatización con IA",
-				description: "Bots, asistentes y workflows inteligentes que reducen tiempos operativos.",
-				image:
-					"https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=80",
-				Icon: Bot,
 			},
 		],
 		[],

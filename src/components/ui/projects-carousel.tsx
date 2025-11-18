@@ -44,6 +44,15 @@ const ProjectsCarousel: React.FC = () => {
       url: 'https://kar-ma.netlify.app/'
     },
     {
+      name: 'Papelera Latinoamericana S.A.C.',
+      description: 'Landing institucional para Papelera Latinoamericana S.A.C. con catálogo y contacto digital.',
+      image: '/assets/pepelera-latinoamericana.png',
+      stack: ['React', 'Tailwind', 'Netlify'],
+      metrics: 'Catálogo digital, contacto rápido',
+      category: 'Landing Page',
+      url: 'https://papelera-latinoamericana.netlify.app'
+    },
+    {
       name: 'Diego Joyero',
       description: 'Landing page profesional para joyería con diseño elegante y moderno.',
       image: '/assets/diego-joyero.png',
@@ -61,8 +70,6 @@ const ProjectsCarousel: React.FC = () => {
       category: 'E-commerce',
       url: 'https://salcedo-jewels.vercel.app/'
     },
-    
-    
   ];
 
   const nextProject = () => {
