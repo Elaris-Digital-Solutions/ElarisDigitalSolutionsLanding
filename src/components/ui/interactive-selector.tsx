@@ -46,8 +46,8 @@ const InteractiveSelector = () => {
 			{
 				title: "Papelera Latinoamericana S.A.C.",
 				description: "Landing institucional para Papelera Latinoamericana S.A.C. con catálogo y contacto digital.",
-				image:
-						"/assets/papelera-latinoamericana.png",
+				  image:
+					  "/assets/papelera-latinoamericana.png",
 				Icon: Bot,
 				url: "https://papelera-latinoamericana.netlify.app"
 			},

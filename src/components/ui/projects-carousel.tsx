@@ -46,7 +46,7 @@ const ProjectsCarousel: React.FC = () => {
     {
       name: 'Papelera Latinoamericana S.A.C.',
       description: 'Landing institucional para Papelera Latinoamericana S.A.C. con catálogo y contacto digital.',
-      image: '/assets/pepelera-latinoamericana.png',
+      image: '/assets/papelera-latinoamericana.png',
       stack: ['React', 'Tailwind', 'Netlify'],
       metrics: 'Catálogo digital, contacto rápido',
       category: 'Landing Page',
