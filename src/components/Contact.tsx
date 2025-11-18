@@ -38,9 +38,9 @@ export default function Contact() {
           <h2 className="text-3xl font-extrabold tracking-tight drop-shadow-lg sm:text-4xl lg:text-5xl">
             <span className="text-white">Comencemos una </span><span style={{ color: '#2F64FF' }}>Conversación</span>
           </h2>
-          <p className="text-lg text-white/80 max-w-3xl mx-auto mt-4">
-            ¿Listo para transformar su práctica legal? Contáctenos hoy para una demostración personalizada.
-          </p>
+            <p className="text-lg text-white/80 max-w-3xl mx-auto mt-4">
+              ¿Buscas soluciones digitales que impulsen tu negocio? Ofrecemos desarrollo web, automatización, consultoría digital y proyectos de Inteligencia Artificial. Cuéntanos tu desafío y te ayudamos a innovar.
+            </p>
         </div>
 
         <div className="mt-12 max-w-6xl mx-auto">
@@ -54,7 +54,7 @@ export default function Contact() {
                     <input
                       type="text"
                       name="name"
-                      placeholder="Juan Pérez"
+                      placeholder="John Doe"
                       className="w-full rounded-md bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#2F64FF]/40"
                       value={fullName}
                       onChange={(event) => setFullName(event.target.value)}
@@ -67,7 +67,7 @@ export default function Contact() {
                     <input
                       type="email"
                       name="email"
-                      placeholder="juan@estudio.com"
+                      placeholder="jhondoe@corp.com"
                       className="w-full rounded-md bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#2F64FF]/40"
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
@@ -77,28 +77,28 @@ export default function Contact() {
 
                   <div>
                     <label className="block text-sm font-medium text-white/90 mb-2">Motivo *</label>
-                    <input
-                      type="text"
-                      name="reason"
-                      placeholder="Desarrollo de página web"
-                      className="w-full rounded-md bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#2F64FF]/40"
-                      value={reason}
-                      onChange={(event) => setReason(event.target.value)}
-                      required
-                    />
+                      <input
+                        type="text"
+                        name="reason"
+                        placeholder="Desarrollo web, automatización, consultoría digital, IA..."
+                        className="w-full rounded-md bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#2F64FF]/40"
+                        value={reason}
+                        onChange={(event) => setReason(event.target.value)}
+                        required
+                      />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-white/90 mb-2">Mensaje *</label>
-                    <textarea
-                      name="message"
-                      rows={6}
-                      placeholder="Cuéntenos sobre sus necesidades..."
-                      className="w-full rounded-md bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#2F64FF]/40"
-                      value={message}
-                      onChange={(event) => setMessage(event.target.value)}
-                      required
-                    />
+                      <textarea
+                        name="message"
+                        rows={6}
+                        placeholder="¿Qué necesitas? Ej: Automatizar procesos, crear una web, consultoría digital, proyecto de IA..."
+                        className="w-full rounded-md bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#2F64FF]/40"
+                        value={message}
+                        onChange={(event) => setMessage(event.target.value)}
+                        required
+                      />
                   </div>
 
                   <div>
