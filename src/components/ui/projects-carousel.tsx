@@ -1,11 +1,60 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import SmartImage from '@/components/ui/smart-image';
+import { useI18n } from '@/lib/i18n';
+
+const projectConfigs = [
+  {
+    slug: 'nuestroBarrio',
+    image: '/assets/nuestro-barrio-nuestra-historia.webp',
+    stack: ['React', 'Node.js', 'MongoDB'],
+    url: 'https://nuestro-barrio-nuestra-historia.netlify.app/'
+  },
+  {
+    slug: 'karMa',
+    image: '/assets/kar-ma.png',
+    stack: ['React', 'Tailwind', 'Vite'],
+    url: 'https://kar-ma.netlify.app/'
+  },
+  {
+    slug: 'papeleraLatinoamericana',
+    image: '/assets/papelera-latinoamericana.png',
+    stack: ['React', 'Tailwind', 'Netlify'],
+    url: 'https://papelera-latinoamericana.netlify.app'
+  },
+  {
+    slug: 'diegoJoyero',
+    image: '/assets/diego-joyero.png',
+    stack: ['React', 'Tailwind', 'Netlify'],
+    url: 'https://diego-joyero.netlify.app/'
+  },
+  {
+    slug: 'salcedoJewels',
+    image: '/assets/salcedo.png',
+    stack: ['Next.js', 'React', 'Stripe', 'Vercel'],
+    url: 'https://salcedo-jewels.vercel.app/'
+  }
+] as const;
 
 const ProjectsCarousel: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentProject, setCurrentProject] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
+  const { t } = useI18n();
+
+  const projects = useMemo(
+    () =>
+      projectConfigs.map((config) => ({
+        name: t(`portfolio.projects.${config.slug}.title`),
+        description: t(`portfolio.projects.${config.slug}.description`),
+        category: t(`portfolio.projects.${config.slug}.category`),
+        metrics: t(`portfolio.projects.${config.slug}.metrics`),
+        image: config.image,
+        stack: config.stack,
+        url: config.url,
+      })),
+    [t]
+  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -24,54 +73,6 @@ const ProjectsCarousel: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  const projects = [
-    {
-      name: 'Nuestro Barrio, Nuestra Historia',
-      description: 'Plataforma social que conecta comunidades y preserva historias locales.',
-      image: '/assets/nuestro-barrio-nuestra-historia.webp',
-      stack: ['React', 'Node.js', 'MongoDB'],
-      metrics: 'Impacto social positivo',
-      category: 'Plataforma Social',
-      url: 'https://nuestro-barrio-nuestra-historia.netlify.app/'
-    },
-    {
-      name: 'Kar & Ma',
-      description: 'Landing corporativa para Kar & Ma, una empresa distribuidora de sal.',
-      image: '/assets/kar-ma.png',
-      stack: ['React', 'Tailwind', 'Vite'],
-      metrics: 'Presencia Digital, mejor portafolio, más ventas',
-      category: 'Landing Page',
-      url: 'https://kar-ma.netlify.app/'
-    },
-    {
-      name: 'Papelera Latinoamericana S.A.C.',
-      description: 'Landing institucional para Papelera Latinoamericana S.A.C. con catálogo y contacto digital.',
-      image: '/assets/papelera-latinoamericana.png',
-      stack: ['React', 'Tailwind', 'Netlify'],
-      metrics: 'Catálogo digital, contacto rápido',
-      category: 'Landing Page',
-      url: 'https://papelera-latinoamericana.netlify.app'
-    },
-    {
-      name: 'Diego Joyero',
-      description: 'Landing page profesional para joyería con diseño elegante y moderno.',
-      image: '/assets/diego-joyero.png',
-      stack: ['React', 'Tailwind', 'Netlify'],
-      metrics: 'Más clientes, mejor catálogo, más ventas',
-      category: 'Landing Page',
-      url: 'https://diego-joyero.netlify.app/'
-    },
-    {
-      name: 'Salcedo Jewels',
-      description: 'E-commerce de joyería de lujo con catálogo interactivo y pagos en línea.',
-      image: '/assets/salcedo.png',
-      stack: ['Next.js', 'React', 'Stripe', 'Vercel'],
-      metrics: 'Lanzamiento 2024, ventas internacionales',
-      category: 'E-commerce',
-      url: 'https://salcedo-jewels.vercel.app/'
-    },
-  ];
-
   const nextProject = () => {
     setCurrentProject((prev) => (prev + 1) % projects.length);
   };
@@ -88,12 +89,12 @@ const ProjectsCarousel: React.FC = () => {
         }`}>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-extrabold tracking-tight drop-shadow-lg sm:text-5xl mb-4">
-              <span className="text-slate-900">Nuestro </span>
-              <span style={{ color: '#2F64FF' }}>Portafolio</span>
+              <span className="text-slate-900">{t('portfolio.headingNormal')}</span>
+              <span style={{ color: '#2F64FF' }}>{t('portfolio.headingAccent')}</span>
             </h2>
             <div className="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Casos reales donde combinamos diseño, tecnología y automatización para crear experiencias memorables.
+              {t('portfolio.description')}
             </p>
           </div>
 
@@ -138,8 +139,8 @@ const ProjectsCarousel: React.FC = () => {
                   <div className="flex space-x-2">
                     <button
                       className="p-2 bg-gray-200 hover:bg-blue-600 hover:text-white rounded-lg transition-colors"
-                      onClick={() => projects[currentProject].url && window.open(projects[currentProject].url, '_blank')}
-                      aria-label="Ver proyecto"
+                        onClick={() => projects[currentProject].url && window.open(projects[currentProject].url, '_blank')}
+                        aria-label={t('common.buttons.viewProject')}
                     >
                       <ExternalLink className="w-4 h-4" />
                     </button>

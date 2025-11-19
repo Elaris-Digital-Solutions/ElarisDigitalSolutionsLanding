@@ -1,0 +1,269 @@
+{
+  "common": {
+    "languageToggle": {
+      "ariaLabel": "Cambiar idioma",
+      "es": "ES",
+      "en": "EN"
+    },
+    "buttons": {
+      "sendMessage": "Enviar Mensaje",
+      "viewProject": "Ver proyecto"
+    }
+  },
+  "navbar": {
+    "logoAlt": "Elaris Logo",
+    "items": {
+      "services": "Servicios",
+      "portfolio": "Portafolio",
+      "process": "Procesos",
+      "clients": "Clientes",
+      "contact": "Contacto"
+    }
+  },
+  "hero": {
+    "title": "Elaris Digital Solutions",
+    "description": "Experience a new dimension of interaction — fluid, tactile, and alive. Designed for creators who see beauty in motion.",
+    "badgeLabel": "Studio",
+    "badgeText": "Software Solutions",
+    "ctas": {
+      "primary": "Portfolio",
+      "secondary": "About Us"
+    },
+    "consolePhrases": [
+      "Desarrollando soluciones digitales de vanguardia...",
+      "Construyendo aplicaciones web modernas y responsivas...",
+      "Creando experiencias de usuario fluidas...",
+      "Implementando arquitecturas en la nube escalables...",
+      "Diseñando interfaces intuitivas...",
+      "Optimizando rendimiento y accesibilidad...",
+      "Entregando software innovador..."
+    ]
+  },
+  "tech": {
+    "titleNormal": "Tecnologías que ",
+    "titleAccent": "Dominamos",
+    "description": "Utilizamos las tecnologías más avanzadas y confiables del mercado para construir soluciones robustas, escalables y futuro-compatibles.",
+    "note": "Y muchas tecnologías más que se adaptan a las necesidades específicas de cada proyecto"
+  },
+  "services": {
+    "headingNormal": "Nuestros ",
+    "headingAccent": "Servicios",
+    "description": "Soluciones digitales integrales diseñadas para impulsar tu transformación tecnológica",
+    "items": {
+      "web": {
+        "title": "Desarrollo Web",
+        "description": "Aplicaciones web modernas, responsivas y optimizadas para SEO que convierten visitantes en clientes.",
+        "features": [
+          "Diseño UI/UX profesional",
+          "Progressive Web Apps",
+          "E-commerce avanzado",
+          "CMS personalizado"
+        ]
+      },
+      "software": {
+        "title": "Desarrollo de Software",
+        "description": "Software a medida que automatiza procesos y optimiza operaciones empresariales.",
+        "features": [
+          "Arquitectura escalable",
+          "APIs robustas",
+          "Integraciones empresariales",
+          "DevOps & CI/CD"
+        ]
+      },
+      "ai": {
+        "title": "Soluciones de IA",
+        "description": "Implementación estratégica de Inteligencia Artificial para impulsar la innovación en tu negocio.",
+        "features": [
+          "Machine Learning",
+          "Procesamiento de lenguaje natural",
+          "Computer Vision",
+          "Automatización inteligente"
+        ]
+      }
+    }
+  },
+  "portfolio": {
+    "headingNormal": "Nuestro ",
+    "headingAccent": "Portafolio",
+    "description": "Casos reales donde combinamos diseño, tecnología y automatización para crear experiencias memorables.",
+    "projects": {
+      "nuestroBarrio": {
+        "title": "Nuestro Barrio, Nuestra Historia",
+        "description": "Plataforma social que conecta comunidades y preserva historias locales.",
+        "category": "Plataforma Social",
+        "metrics": "Impacto social positivo"
+      },
+      "karMa": {
+        "title": "Kar & Ma",
+        "description": "Landing corporativa con rebranding y formulario SEO integrado",
+        "category": "Landing Page",
+        "metrics": "Presencia Digital, mejor portafolio, más ventas"
+      },
+      "papeleraLatinoamericana": {
+        "title": "Papelera Latinoamericana S.A.C.",
+        "description": "Landing institucional para Papelera Latinoamericana S.A.C. con catálogo y contacto digital.",
+        "category": "Landing Page",
+        "metrics": "Catálogo digital, contacto rápido"
+      },
+      "diegoJoyero": {
+        "title": "Diego Joyero",
+        "description": "Landing page profesional para joyería con diseño elegante y moderno.",
+        "category": "Landing Page",
+        "metrics": "Más clientes, mejor catálogo, más ventas"
+      },
+      "salcedoJewels": {
+        "title": "Salcedo Jewels",
+        "description": "E-commerce de joyería de lujo con catálogo interactivo y pagos en línea.",
+        "category": "E-commerce",
+        "metrics": "Lanzamiento 2024, ventas internacionales"
+      }
+    }
+  },
+  "process": {
+    "headingNormal": "Nuestro ",
+    "headingAccent": "Proceso",
+    "description": "Un flujo probado desde la idea hasta la producción, combinando metodología ágil y modelos de IA.",
+    "steps": {
+      "analysis": {
+        "title": "01. Análisis",
+        "heading": "Evaluación de Necesidades",
+        "description": "Analizamos a fondo tus necesidades y objetivos empresariales para identificar las mejores oportunidades de implementación de IA."
+      },
+      "design": {
+        "title": "02. Diseño",
+        "heading": "Arquitectura de Solución",
+        "description": "Diseñamos una arquitectura personalizada que integra los modelos de IA más adecuados para tu caso de uso específico."
+      },
+      "development": {
+        "title": "03. Desarrollo",
+        "heading": "Implementación & Entrenamiento",
+        "description": "Desarrollamos e implementamos la solución, entrenando los modelos con tus datos específicos para maximizar la precisión y relevancia."
+      },
+      "testing": {
+        "title": "04. Pruebas",
+        "heading": "Validación & Optimización",
+        "description": "Realizamos pruebas exhaustivas y ajustes finos para asegurar el rendimiento óptimo de la solución en tu entorno real."
+      },
+      "deployment": {
+        "title": "05. Despliegue",
+        "heading": "Implementación & Monitoreo",
+        "description": "Desplegamos la solución en producción y establecemos sistemas de monitoreo continuo para garantizar su rendimiento."
+      },
+      "support": {
+        "title": "06. Soporte",
+        "heading": "Mejora Continua",
+        "description": "Proporcionamos soporte continuo y actualizaciones periódicas para mantener tu solución de IA al día con las últimas tecnologías."
+      }
+    }
+  },
+  "testimonials": {
+    "headingNormal": "Confían en ",
+    "headingAccent": "Nosotros",
+    "description": "Empresas y organizaciones que han confiado en nosotros para soluciones digitales y proyectos con IA.",
+    "items": {
+      "daniela": {
+        "quote": "El trabajo que realizaron superó ampliamente mis expectativas. Su enfoque, su metodología y su capacidad de transformar mis ideas en experiencias digitales fueron clave. Estoy realmente agradecida con ellos.",
+        "name": "Daniela Bussalleu",
+        "designation": "Bióloga  y Comunicadora",
+        "src": "/assets/daniela-bussalleu.webp"
+      },
+      "milagros": {
+        "quote": "La web quedó intuitiva, el e-commerce fluye muy bien y la base de datos es fácil de entender y administrar. Excelente trabajo para Salcedo Jewels.",
+        "name": "Milagros Salcedo",
+        "designation": "CEO de Salcedo Jewels S.A.C.",
+        "src": "/assets/milagros-salcedo.webp"
+      },
+      "martina": {
+        "quote": "Shining Yam is a hidden gem! The impeccable service and overall attention to detail created a memorable experience. I highly recommend it!",
+        "name": "Martina Edelweist",
+        "designation": "Satisfied Customer",
+        "src": "https://images.unsplash.com/photo-1524267213992-b76e8577d046?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D"
+      }
+    }
+  },
+  "about": {
+    "badge": "Sobre nosotros",
+    "title": "Inteligencia colectiva para crear soluciones extraordinarias",
+    "description": "Combinamos estrategia, diseño y desarrollo para transformar de manera responsable los procesos de nuestros clientes. La diversidad de habilidades en el equipo es la clave para materializar experiencias digitales con impacto humano.",
+    "caption": "Equipo Elaris",
+    "alt": {
+      "memberPrefix": "Retrato de",
+      "group": "Foto grupal del equipo Elaris"
+    },
+    "social": {
+      "linkedin": "LinkedIn de {name}",
+      "github": "GitHub de {name}"
+    }
+  },
+  "contact": {
+    "titleNormal": "Comencemos una ",
+    "titleAccent": "Conversación",
+    "description": "¿Buscas soluciones digitales que impulsen tu negocio? Ofrecemos desarrollo web, automatización, consultoría digital y proyectos de Inteligencia Artificial. Cuéntanos tu desafío y te ayudamos a innovar.",
+    "form": {
+      "fullNameLabel": "Nombre Completo *",
+      "emailLabel": "Email Corporativo *",
+      "reasonLabel": "Motivo *",
+      "messageLabel": "Mensaje *",
+      "fullNamePlaceholder": "John Doe",
+      "emailPlaceholder": "jhondoe@corp.com",
+      "reasonPlaceholder": "Desarrollo web, automatización, consultoría digital, IA...",
+      "messagePlaceholder": "¿Qué necesitas? Ej: Automatizar procesos, crear una web, consultoría digital, proyecto de IA...",
+      "whatsappTemplate": "Nuevo contacto desde la web:\nNombre: {fullName}\nEmail: {email}\nMotivo: {reason}\nMensaje: {message}"
+    },
+    "info": {
+      "title": "Información de Contacto",
+      "email": "Email",
+      "phone": "Teléfono",
+      "office": "Oficina",
+      "addressLines": [
+        "Av. Primavera 2390",
+        "Santiago de Surco 15023"
+      ]
+    },
+    "mapTitle": "mapa"
+  },
+  "footer": {
+    "description": "Transformamos negocios con soluciones digitales innovadoras e Inteligencia Artificial.",
+    "sections": {
+      "services": {
+        "title": "Servicios",
+        "items": [
+          "Desarrollo Web",
+          "Desarrollo de Software",
+          "Soluciones de IA",
+          "Consultoría"
+        ]
+      },
+      "navigation": {
+        "title": "Navegación",
+        "items": [
+          "Servicios",
+          "Portafolio",
+          "Proceso",
+          "Clientes",
+          "Contacto"
+        ]
+      },
+      "contact": {
+        "title": "Contacto",
+        "email": "contact@elarisdigitalsolutions.com",
+        "phone": "+51 987 450 340",
+        "instagram": "@elarisdigitalsolutions",
+        "location": "Surco"
+      }
+    },
+    "bottom": {
+      "rights": "© {year} Elaris Digital Solutions. Todos los derechos reservados.",
+      "tagline": "E.L.A.R.I.S - Enterprise Logic & AI Research Integrated Systems"
+    }
+  },
+  "floatingWhatsapp": {
+    "defaultMessage": "Hola, me gustaría conocer más sobre sus soluciones digitales.",
+    "ariaLabel": "Contactar por WhatsApp"
+  },
+  "notFound": {
+    "title": "404",
+    "description": "¡Ups! Página no encontrada",
+    "cta": "Volver al inicio"
+  }
+}

@@ -4,12 +4,23 @@ import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import SmartImage from "@/components/ui/smart-image";
 import { Globe, Code, Brain, ChevronRight } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 interface Service {
-  icon: any;
+  icon: LucideIcon;
   title: string;
   description: string;
   features: string[];
+  accent?: string;
+  highlight?: boolean;
+  image?: string;
+  key: string;
+}
+
+interface ServiceDescriptor {
+  icon: LucideIcon;
+  baseKey: string;
   accent?: string;
   highlight?: boolean;
   image?: string;
@@ -17,29 +28,22 @@ interface Service {
 
 type MobileSequenceItem = { type: "visual" } | { type: "card"; index: number };
 
-const services: Service[] = [
+const serviceContent: ServiceDescriptor[] = [
   {
     icon: Globe,
-    title: "Desarrollo Web",
-    description:
-      "Aplicaciones web modernas, responsivas y optimizadas para SEO que convierten visitantes en clientes.",
-    features: ["Diseño UI/UX profesional", "Progressive Web Apps", "E-commerce avanzado", "CMS personalizado"],
+    baseKey: "services.items.web",
     accent: "primary",
     image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2070&auto=format&fit=crop",
   },
   {
     icon: Code,
-    title: "Desarrollo de Software",
-    description: "Software a medida que automatiza procesos y optimiza operaciones empresariales.",
-    features: ["Arquitectura escalable", "APIs robustas", "Integraciones empresariales", "DevOps & CI/CD"],
+    baseKey: "services.items.software",
     accent: "secondary",
     image: "https://images.unsplash.com/photo-1592659762303-90081d34b277?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1373",
   },
   {
     icon: Brain,
-    title: "Soluciones de IA",
-    description: "Implementación estratégica de Inteligencia Artificial para impulsar la innovación en tu negocio.",
-    features: ["Machine Learning", "Procesamiento de lenguaje natural", "Computer Vision", "Automatización inteligente"],
+    baseKey: "services.items.ai",
     accent: "accent",
     highlight: true,
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
@@ -56,6 +60,22 @@ export default function Services() {
   const visualRef = useRef<HTMLDivElement | null>(null);
   const [visualY, setVisualY] = useState(0);
   const isMobile = useIsMobile();
+  const { t, tArray } = useI18n();
+
+  const services = useMemo<Service[]>(
+    () =>
+      serviceContent.map((service) => ({
+        key: service.baseKey,
+        icon: service.icon,
+        title: t(`${service.baseKey}.title`),
+        description: t(`${service.baseKey}.description`),
+        features: tArray(`${service.baseKey}.features`),
+        accent: service.accent,
+        highlight: service.highlight,
+        image: service.image,
+      })),
+    [t, tArray]
+  );
 
   const currentIndex = Math.min(Math.max(current, 0), services.length - 1);
   const currentService = services[currentIndex];
@@ -70,7 +90,7 @@ export default function Services() {
       entries.push({ type: "card", index });
       return entries;
     });
-  }, [currentIndex, isMobile]);
+  }, [currentIndex, isMobile, services]);
 
   // Preload images to ensure smooth transitions: insert <link rel="preload"> and
   // create Image objects to warm the browser cache. Remove link tags on cleanup.
@@ -80,7 +100,7 @@ export default function Services() {
     const createdLinks: HTMLLinkElement[] = [];
     const preloadedImgs: HTMLImageElement[] = [];
 
-    services.forEach((s) => {
+    serviceContent.forEach((s) => {
       if (!s.image) return;
       try {
         const href = s.image;
@@ -223,7 +243,7 @@ export default function Services() {
 
   const renderServiceCard = (service: Service, index: number) => (
     <motion.div
-      key={service.title}
+      key={service.key}
       ref={(el) => {
         itemRefs.current[index] = el;
       }}
@@ -287,10 +307,11 @@ export default function Services() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl font-extrabold tracking-tight drop-shadow-lg sm:text-4xl lg:text-5xl mb-4">
-            <span className="text-slate-900">Nuestros </span><span style={{ color: '#2F64FF' }}>Servicios</span>
+            <span className="text-slate-900">{t("services.headingNormal")}</span>
+            <span style={{ color: '#2F64FF' }}>{t("services.headingAccent")}</span>
           </h2>
           <p className="text-lg text-black max-w-2xl mx-auto">
-            Soluciones digitales integrales diseñadas para impulsar tu transformación tecnológica
+            {t("services.description")}
           </p>
         </div>
 

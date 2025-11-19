@@ -3,6 +3,7 @@ import { Github, Linkedin, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import SmartImage from "@/components/ui/smart-image";
+import { useI18n } from "@/lib/i18n";
 
 type TeamMember = {
   name: string;
@@ -14,7 +15,7 @@ type TeamMember = {
 };
 
 type SocialLink = {
-  label: string;
+  type: "linkedin" | "github";
   href: string;
   icon: LucideIcon;
 };
@@ -41,8 +42,8 @@ const team: TeamMember[] = [
     accent: "from-cyan-500/60 via-blue-500/40 to-violet-500/60",
     focus: "center 10%",
     socials: [
-      { label: "LinkedIn de Jorge", href: "https://www.linkedin.com/in/jorge-garcia18/", icon: Linkedin },
-      { label: "GitHub de Jorge", href: "https://github.com/JorgeGarcia005", icon: Github },
+      { type: "linkedin", href: "https://www.linkedin.com/in/jorge-garcia18/", icon: Linkedin },
+      { type: "github", href: "https://github.com/JorgeGarcia005", icon: Github },
     ],
   },
   {
@@ -52,8 +53,8 @@ const team: TeamMember[] = [
     accent: "from-emerald-500/60 via-teal-500/40 to-blue-500/60",
     focus: "center 10%",
     socials: [
-      { label: "LinkedIn de Fabrizio", href: "https://www.linkedin.com/in/fabrizio-bussalleu-salcedo-237760323", icon: Linkedin },
-      { label: "GitHub de Fabrizio", href: "https://github.com/FabrizioBussalleu", icon: Github },
+      { type: "linkedin", href: "https://www.linkedin.com/in/fabrizio-bussalleu-salcedo-237760323", icon: Linkedin },
+      { type: "github", href: "https://github.com/FabrizioBussalleu", icon: Github },
     ],
   },
   {
@@ -63,8 +64,8 @@ const team: TeamMember[] = [
     accent: "from-purple-500/60 via-fuchsia-500/40 to-amber-500/60",
     focus: "center 45%",
     socials: [
-      { label: "LinkedIn de Alejandro", href: "https://www.linkedin.com/in/carlos-alejandro-colfer-mendoza-a59a08355/", icon: Linkedin },
-      { label: "GitHub de Alejandro", href: "https://github.com/Elkfle", icon: Github },
+      { type: "linkedin", href: "https://www.linkedin.com/in/carlos-alejandro-colfer-mendoza-a59a08355/", icon: Linkedin },
+      { type: "github", href: "https://github.com/Elkfle", icon: Github },
     ],
   },
   {
@@ -74,13 +75,14 @@ const team: TeamMember[] = [
     accent: "from-rose-500/60 via-orange-500/40 to-amber-500/60",
     focus: "center 38%",
     socials: [
-      { label: "LinkedIn de Joaquin", href: "https://www.linkedin.com/in/joaquin-del-solar-383069355", icon: Linkedin },
-      { label: "GitHub de Joaquin", href: "https://github.com/JOACODS22", icon: Github },
+      { type: "linkedin", href: "https://www.linkedin.com/in/joaquin-del-solar-383069355", icon: Linkedin },
+      { type: "github", href: "https://github.com/JOACODS22", icon: Github },
     ],
   },
 ];
 
 export default function About() {
+  const { t } = useI18n();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [mobileSlideIndex, setMobileSlideIndex] = useState(0);
   const slideTimeoutRef = useRef<number | null>(null);
@@ -95,7 +97,7 @@ export default function About() {
         type: "group",
         image: groupImage,
         focus: groupFocus,
-        caption: "Equipo Elaris",
+        caption: t("about.caption"),
         duration: 6000,
       },
       ...team.map((member) => ({
@@ -108,7 +110,7 @@ export default function About() {
       })),
     ];
     return slides;
-  }, []);
+  }, [t]);
 
   const totalSlides = mobileSlides.length;
 
@@ -247,7 +249,11 @@ export default function About() {
                   key={displayImage}
                   src={displayImage}
                   priority
-                  alt={effectiveMember ? `Retrato de ${effectiveMember.name}` : "Foto grupal del equipo Elaris"}
+                  alt={
+                    effectiveMember
+                      ? `${t("about.alt.memberPrefix")} ${effectiveMember.name}`
+                      : t("about.alt.group")
+                  }
                   className="relative z-10 h-full w-full object-contain transition duration-700 ease-out"
                   style={{ objectPosition: displayFocus }}
                 />
@@ -262,13 +268,13 @@ export default function About() {
 
           <div className="order-1 space-y-4 text-center lg:order-2 lg:text-left">
             <span className="inline-flex items-center justify-center rounded-full bg-sky-100 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.28em] text-sky-700">
-              Sobre nosotros
+              {t("about.badge")}
             </span>
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Inteligencia colectiva para crear soluciones extraordinarias
+              {t("about.title")}
             </h2>
             <p className="mx-auto max-w-2xl text-base text-slate-600 sm:text-lg lg:mx-0">
-              Combinamos estrategia, diseño y desarrollo para transformar de manera responsable los procesos de nuestros clientes. La diversidad de habilidades en el equipo es la clave para materializar experiencias digitales con impacto humano.
+              {t("about.description")}
             </p>
           </div>
         </div>
@@ -319,13 +325,13 @@ export default function About() {
                   <p className="text-xs text-slate-600">{member.role}</p>
                 </div>
                 <div className="flex items-center gap-2 pt-4">
-                  {member.socials.map(({ label, href, icon: Icon }) => (
+                  {member.socials.map(({ type, href, icon: Icon }) => (
                     <a
                       key={href}
                       href={href}
                       target="_blank"
                       rel="noreferrer"
-                      aria-label={label}
+                      aria-label={t(`about.social.${type}`, { name: member.name })}
                       className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition hover:border-sky-400 hover:text-sky-600"
                     >
                       <Icon className="h-5 w-5" />

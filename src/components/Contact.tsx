@@ -2,8 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 import MatrixRain from "./ui/matrix-code";
+import { useI18n } from "@/lib/i18n";
 
 export default function Contact() {
+  const { t, tArray } = useI18n();
+  const addressLines = tArray("contact.info.addressLines");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [reason, setReason] = useState("");
@@ -20,7 +23,12 @@ export default function Contact() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const composedMessage = `Nuevo contacto desde la web:\nNombre: ${fullName}\nEmail: ${email}\nMotivo: ${reason}\nMensaje: ${message}`;
+    const composedMessage = t("contact.form.whatsappTemplate", {
+      fullName,
+      email,
+      reason,
+      message,
+    });
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(composedMessage)}`;
 
     window.open(url, "_blank", "noopener,noreferrer");
@@ -36,10 +44,11 @@ export default function Contact() {
       <div className="container relative z-[1] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold tracking-tight drop-shadow-lg sm:text-4xl lg:text-5xl">
-            <span className="text-white">Comencemos una </span><span style={{ color: '#2F64FF' }}>Conversación</span>
+            <span className="text-white">{t("contact.titleNormal")}</span>
+            <span style={{ color: '#2F64FF' }}>{t("contact.titleAccent")}</span>
           </h2>
             <p className="text-lg text-white/80 max-w-3xl mx-auto mt-4">
-              ¿Buscas soluciones digitales que impulsen tu negocio? Ofrecemos desarrollo web, automatización, consultoría digital y proyectos de Inteligencia Artificial. Cuéntanos tu desafío y te ayudamos a innovar.
+              {t("contact.description")}
             </p>
         </div>
 
@@ -50,11 +59,11 @@ export default function Contact() {
               <div className="rounded-xl border border-white/10 bg-white/5 p-8 backdrop-blur">
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div>
-                    <label className="block text-sm font-medium text-white/90 mb-2">Nombre Completo *</label>
+                    <label className="block text-sm font-medium text-white/90 mb-2">{t("contact.form.fullNameLabel")}</label>
                     <input
                       type="text"
                       name="name"
-                      placeholder="John Doe"
+                      placeholder={t("contact.form.fullNamePlaceholder")}
                       className="w-full rounded-md bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#2F64FF]/40"
                       value={fullName}
                       onChange={(event) => setFullName(event.target.value)}
@@ -63,11 +72,11 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-white/90 mb-2">Email Corporativo *</label>
+                    <label className="block text-sm font-medium text-white/90 mb-2">{t("contact.form.emailLabel")}</label>
                     <input
                       type="email"
                       name="email"
-                      placeholder="jhondoe@corp.com"
+                      placeholder={t("contact.form.emailPlaceholder")}
                       className="w-full rounded-md bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#2F64FF]/40"
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
@@ -76,11 +85,11 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-white/90 mb-2">Motivo *</label>
+                    <label className="block text-sm font-medium text-white/90 mb-2">{t("contact.form.reasonLabel")}</label>
                       <input
                         type="text"
                         name="reason"
-                        placeholder="Desarrollo web, automatización, consultoría digital, IA..."
+                        placeholder={t("contact.form.reasonPlaceholder")}
                         className="w-full rounded-md bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#2F64FF]/40"
                         value={reason}
                         onChange={(event) => setReason(event.target.value)}
@@ -89,11 +98,11 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-white/90 mb-2">Mensaje *</label>
+                    <label className="block text-sm font-medium text-white/90 mb-2">{t("contact.form.messageLabel")}</label>
                       <textarea
                         name="message"
                         rows={6}
-                        placeholder="¿Qué necesitas? Ej: Automatizar procesos, crear una web, consultoría digital, proyecto de IA..."
+                        placeholder={t("contact.form.messagePlaceholder")}
                         className="w-full rounded-md bg-white/5 border border-white/10 px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#2F64FF]/40"
                         value={message}
                         onChange={(event) => setMessage(event.target.value)}
@@ -106,7 +115,7 @@ export default function Contact() {
                       type="submit"
                       className="w-full inline-flex items-center justify-center gap-2 rounded-md bg-[#2F64FF] px-6 py-3 text-white font-semibold shadow-sm hover:bg-[#2553e6] transition-colors"
                     >
-                      Enviar Mensaje
+                      {t("common.buttons.sendMessage")}
                     </button>
                   </div>
                 </form>
@@ -116,14 +125,14 @@ export default function Contact() {
             {/* Right: contact info + map */}
             <div className="relative z-[1] flex flex-col">
               <div ref={contactInfoRef} className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-                <h3 className="text-lg font-semibold text-white">Información de Contacto</h3>
+                <h3 className="text-lg font-semibold text-white">{t("contact.info.title")}</h3>
                 <ul className="mt-4 space-y-4 text-sm">
                   <li className="flex items-start gap-3">
                     <div className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-[#2F64FF]/20 text-[#2F64FF]">
                       <Mail className="h-5 w-5" />
                     </div>
                     <div>
-                      <div className="text-white/90">Email</div>
+                      <div className="text-white/90">{t("contact.info.email")}</div>
                       <div className="font-semibold">contact@elarisdigitalsolutions.com</div>
                     </div>
                   </li>
@@ -133,7 +142,7 @@ export default function Contact() {
                       <Phone className="h-5 w-5" />
                     </div>
                     <div>
-                      <div className="text-white/90">Teléfono</div>
+                      <div className="text-white/90">{t("contact.info.phone")}</div>
                       <div className="font-semibold">+51 987 450 340</div>
                     </div>
                   </li>
@@ -143,8 +152,15 @@ export default function Contact() {
                       <MapPin className="h-5 w-5" />
                     </div>
                     <div>
-                      <div className="text-white/90">Oficina</div>
-                      <div className="font-semibold">Av. Primavera 2390<br/>Santiago de Surco 15023</div>
+                      <div className="text-white/90">{t("contact.info.office")}</div>
+                      <div className="font-semibold">
+                        {addressLines.map((line, index) => (
+                          <React.Fragment key={`${line}-${index}`}>
+                            {line}
+                            {index < addressLines.length - 1 && <br />}
+                          </React.Fragment>
+                        ))}
+                      </div>
                     </div>
                   </li>
                 </ul>
@@ -152,7 +168,7 @@ export default function Contact() {
 
               <div ref={mapRef} className="rounded-xl border border-white/10 bg-white/5 overflow-hidden mt-6 lg:mt-auto">
                 <iframe
-                  title="mapa"
+                  title={t("contact.mapTitle")}
                   src="https://www.google.com/maps?q=Jr.+Jeronimo+Aliaga+Norte+595+Santiago+de+Surco&output=embed"
                   className="w-full border-0"
                   style={{ height: mapHeight ? `${mapHeight}px` : undefined, minHeight: mapHeight ? undefined : '16rem' }}

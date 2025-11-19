@@ -18,6 +18,7 @@ interface HeroProps {
   badgeLabel?: string;
   ctaButtons?: Array<{ text: string; href?: string; primary?: boolean }>;
   microDetails?: Array<string>;
+  consolePhrases?: string[];
 }
 
 const SyntheticHero = ({
@@ -31,6 +32,7 @@ const SyntheticHero = ({
     { text: "Learn More", href: "#learn-more" },
   ],
   microDetails = [],
+  consolePhrases: consolePhrasesProp = [],
 }: HeroProps) => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const badgeWrapperRef = useRef<HTMLDivElement | null>(null);
@@ -38,16 +40,27 @@ const SyntheticHero = ({
   const consoleRef = useRef<HTMLDivElement | null>(null);
   const ctaRef = useRef<HTMLDivElement | null>(null);
   const microRef = useRef<HTMLUListElement | null>(null);
-  const consolePhrases = useMemo(() => [
-    "Developing cutting-edge digital solutions...",
-    "Building responsive and modern web applications...", 
-    "Creating seamless user experiences...",
-    "Implementing scalable cloud architectures...",
-    "Designing intuitive user interfaces...",
-    "Optimizing performance and accessibility...",
-    "Delivering innovative software solutions...",
-    description
-  ], [description]);
+  const consolePhrases = useMemo(() => {
+    const normalized = (consolePhrasesProp ?? [])
+      .filter((phrase) => typeof phrase === "string")
+      .map((phrase) => phrase.trim())
+      .filter((phrase) => phrase.length > 0);
+
+    if (normalized.length > 0) {
+      return normalized;
+    }
+
+    return [
+      "Developing cutting-edge digital solutions...",
+      "Building responsive and modern web applications...",
+      "Creating seamless user experiences...",
+      "Implementing scalable cloud architectures...",
+      "Designing intuitive user interfaces...",
+      "Optimizing performance and accessibility...",
+      "Delivering innovative software solutions...",
+      description,
+    ];
+  }, [consolePhrasesProp, description]);
 
   useGSAP(
     () => {

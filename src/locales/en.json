@@ -1,0 +1,269 @@
+{
+  "common": {
+    "languageToggle": {
+      "ariaLabel": "Change language",
+      "es": "ES",
+      "en": "EN"
+    },
+    "buttons": {
+      "sendMessage": "Send Message",
+      "viewProject": "View project"
+    }
+  },
+  "navbar": {
+    "logoAlt": "Elaris Logo",
+    "items": {
+      "services": "Services",
+      "portfolio": "Portfolio",
+      "process": "Process",
+      "clients": "Clients",
+      "contact": "Contact"
+    }
+  },
+  "hero": {
+    "title": "Elaris Digital Solutions",
+    "description": "Experience a new dimension of interaction — fluid, tactile, and alive. Designed for creators who see beauty in motion.",
+    "badgeLabel": "Studio",
+    "badgeText": "Software Solutions",
+    "ctas": {
+      "primary": "Portfolio",
+      "secondary": "About Us"
+    },
+    "consolePhrases": [
+      "Developing cutting-edge digital solutions...",
+      "Building responsive and modern web applications...",
+      "Creating seamless user experiences...",
+      "Implementing scalable cloud architectures...",
+      "Designing intuitive user interfaces...",
+      "Optimizing performance and accessibility...",
+      "Delivering innovative software solutions..."
+    ]
+  },
+  "tech": {
+    "titleNormal": "Technologies we ",
+    "titleAccent": "Master",
+    "description": "We rely on the most advanced and trusted technologies to build robust, scalable, future-proof solutions.",
+    "note": "And many more technologies tailored to each project's specific needs"
+  },
+  "services": {
+    "headingNormal": "Our ",
+    "headingAccent": "Services",
+    "description": "End-to-end digital solutions designed to accelerate your technology transformation",
+    "items": {
+      "web": {
+        "title": "Web Development",
+        "description": "Modern, responsive, SEO-optimized web applications that turn visitors into clients.",
+        "features": [
+          "Professional UI/UX design",
+          "Progressive Web Apps",
+          "Advanced e-commerce",
+          "Custom CMS"
+        ]
+      },
+      "software": {
+        "title": "Software Development",
+        "description": "Custom software that automates processes and optimizes business operations.",
+        "features": [
+          "Scalable architecture",
+          "Robust APIs",
+          "Enterprise integrations",
+          "DevOps & CI/CD"
+        ]
+      },
+      "ai": {
+        "title": "AI Solutions",
+        "description": "Strategic Artificial Intelligence implementations to drive innovation across your business.",
+        "features": [
+          "Machine Learning",
+          "Natural Language Processing",
+          "Computer Vision",
+          "Intelligent automation"
+        ]
+      }
+    }
+  },
+  "portfolio": {
+    "headingNormal": "Our ",
+    "headingAccent": "Portfolio",
+    "description": "Real-world cases where design, technology, and automation come together to create memorable experiences.",
+    "projects": {
+      "nuestroBarrio": {
+        "title": "Nuestro Barrio, Nuestra Historia",
+        "description": "Social platform that connects communities and preserves local stories.",
+        "category": "Social Platform",
+        "metrics": "Positive social impact"
+      },
+      "karMa": {
+        "title": "Kar & Ma",
+        "description": "Corporate landing page with rebranding and SEO-ready lead form.",
+        "category": "Landing Page",
+        "metrics": "Digital presence, stronger portfolio, more sales"
+      },
+      "papeleraLatinoamericana": {
+        "title": "Papelera Latinoamericana S.A.C.",
+        "description": "Institutional landing for Papelera Latinoamericana with catalog and digital contact.",
+        "category": "Landing Page",
+        "metrics": "Digital catalog, faster inquiries"
+      },
+      "diegoJoyero": {
+        "title": "Diego Joyero",
+        "description": "Premium jewelry landing page with a modern and elegant design.",
+        "category": "Landing Page",
+        "metrics": "More clients, better catalog, increased sales"
+      },
+      "salcedoJewels": {
+        "title": "Salcedo Jewels",
+        "description": "Luxury jewelry e-commerce with interactive catalog and online payments.",
+        "category": "E-commerce",
+        "metrics": "2024 launch, international sales"
+      }
+    }
+  },
+  "process": {
+    "headingNormal": "Our ",
+    "headingAccent": "Process",
+    "description": "A proven flow from idea to production that blends agile methodology with AI models.",
+    "steps": {
+      "analysis": {
+        "title": "01. Analysis",
+        "heading": "Needs Assessment",
+        "description": "We take a deep look at your goals to uncover the best AI opportunities for your business."
+      },
+      "design": {
+        "title": "02. Design",
+        "heading": "Solution Architecture",
+        "description": "We design a tailored architecture that brings together the right AI models for your specific use case."
+      },
+      "development": {
+        "title": "03. Development",
+        "heading": "Implementation & Training",
+        "description": "We build and deploy the solution, training the models with your data to maximize accuracy and relevance."
+      },
+      "testing": {
+        "title": "04. Testing",
+        "heading": "Validation & Optimization",
+        "description": "We run thorough tests and fine-tune the system to ensure peak performance in real conditions."
+      },
+      "deployment": {
+        "title": "05. Deployment",
+        "heading": "Launch & Monitoring",
+        "description": "We roll out the solution to production and set up continuous monitoring to guarantee reliability."
+      },
+      "support": {
+        "title": "06. Support",
+        "heading": "Continuous Improvement",
+        "description": "We deliver ongoing support and periodic updates to keep your AI solution evolving with new technologies."
+      }
+    }
+  },
+  "testimonials": {
+    "headingNormal": "Trusted by ",
+    "headingAccent": "Our Clients",
+    "description": "Organizations that rely on us for digital solutions and AI-powered initiatives.",
+    "items": {
+      "daniela": {
+        "quote": "The work they delivered far exceeded my expectations. Their approach, methodology, and ability to turn my ideas into digital experiences were key. I’m truly grateful for their support.",
+        "name": "Daniela Bussalleu",
+        "designation": "Biologist & Communicator",
+        "src": "/assets/daniela-bussalleu.webp"
+      },
+      "milagros": {
+        "quote": "The website feels intuitive, the e-commerce flows perfectly, and the database is easy to manage. Outstanding work for Salcedo Jewels.",
+        "name": "Milagros Salcedo",
+        "designation": "CEO, Salcedo Jewels S.A.C.",
+        "src": "/assets/milagros-salcedo.webp"
+      },
+      "martina": {
+        "quote": "Shining Yam is a hidden gem! The impeccable service and attention to detail made it a memorable experience. Highly recommended!",
+        "name": "Martina Edelweist",
+        "designation": "Satisfied Customer",
+        "src": "https://images.unsplash.com/photo-1524267213992-b76e8577d046?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D"
+      }
+    }
+  },
+  "about": {
+    "badge": "About us",
+    "title": "Collective intelligence to build remarkable solutions",
+    "description": "We blend strategy, design, and engineering to reshape our clients’ processes responsibly. Our diverse skill set is the key to crafting digital experiences with real human impact.",
+    "caption": "Elaris Team",
+    "alt": {
+      "memberPrefix": "Portrait of",
+      "group": "Group photo of the Elaris team"
+    },
+    "social": {
+      "linkedin": "{name}'s LinkedIn",
+      "github": "{name}'s GitHub"
+    }
+  },
+  "contact": {
+    "titleNormal": "Let’s start a ",
+    "titleAccent": "Conversation",
+    "description": "Looking for digital solutions to boost your business? We deliver web development, automation, digital consulting, and AI projects. Tell us about your challenge and we’ll help you innovate.",
+    "form": {
+      "fullNameLabel": "Full Name *",
+      "emailLabel": "Corporate Email *",
+      "reasonLabel": "Reason *",
+      "messageLabel": "Message *",
+      "fullNamePlaceholder": "John Doe",
+      "emailPlaceholder": "johndoe@corp.com",
+      "reasonPlaceholder": "Web development, automation, digital consulting, AI...",
+      "messagePlaceholder": "What do you need? e.g., automate processes, build a site, digital consulting, AI project...",
+      "whatsappTemplate": "New contact from the website:\nName: {fullName}\nEmail: {email}\nReason: {reason}\nMessage: {message}"
+    },
+    "info": {
+      "title": "Contact Information",
+      "email": "Email",
+      "phone": "Phone",
+      "office": "Office",
+      "addressLines": [
+        "Av. Primavera 2390",
+        "Santiago de Surco 15023"
+      ]
+    },
+    "mapTitle": "map"
+  },
+  "footer": {
+    "description": "We transform businesses with innovative digital solutions and Artificial Intelligence.",
+    "sections": {
+      "services": {
+        "title": "Services",
+        "items": [
+          "Web Development",
+          "Software Development",
+          "AI Solutions",
+          "Consulting"
+        ]
+      },
+      "navigation": {
+        "title": "Navigation",
+        "items": [
+          "Services",
+          "Portfolio",
+          "Process",
+          "Clients",
+          "Contact"
+        ]
+      },
+      "contact": {
+        "title": "Contact",
+        "email": "contact@elarisdigitalsolutions.com",
+        "phone": "+51 987 450 340",
+        "instagram": "@elarisdigitalsolutions",
+        "location": "Surco"
+      }
+    },
+    "bottom": {
+      "rights": "© {year} Elaris Digital Solutions. All rights reserved.",
+      "tagline": "E.L.A.R.I.S - Enterprise Logic & AI Research Integrated Systems"
+    }
+  },
+  "floatingWhatsapp": {
+    "defaultMessage": "Hi! I’d love to learn more about your digital solutions.",
+    "ariaLabel": "Contact via WhatsApp"
+  },
+  "notFound": {
+    "title": "404",
+    "description": "Oops! Page not found",
+    "cta": "Return to Home"
+  }
+}

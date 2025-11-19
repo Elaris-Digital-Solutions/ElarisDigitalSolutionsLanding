@@ -4,20 +4,24 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { NeuralNoise } from "@/components/ui/neural-noise-cursor";
 import SmartImage from "@/components/ui/smart-image";
+import { useI18n, type Language } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
 
 type NavItem = {
   id: string;
-  label: string;
+  labelKey: string;
   href: string;
 };
 
 const navItems: NavItem[] = [
-  { id: "servicios", label: "Servicios", href: "/servicios" },
-  { id: "portafolio", label: "Portafolio", href: "/portafolio" },
-  { id: "proceso", label: "Procesos", href: "/proceso" },
-  { id: "clientes", label: "Clientes", href: "/clientes" },
-  { id: "contacto", label: "Contacto", href: "/contacto" },
+  { id: "servicios", labelKey: "navbar.items.services", href: "/servicios" },
+  { id: "portafolio", labelKey: "navbar.items.portfolio", href: "/portafolio" },
+  { id: "proceso", labelKey: "navbar.items.process", href: "/proceso" },
+  { id: "clientes", labelKey: "navbar.items.clients", href: "/clientes" },
+  { id: "contacto", labelKey: "navbar.items.contact", href: "/contacto" },
 ];
+
+const languages: Language[] = ["es", "en"];
 
 const MobileAnimatedBackdrop = () => (
   <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
@@ -37,6 +41,7 @@ const Navbar = () => {
   });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { language, setLanguage, t } = useI18n();
 
   const brandAssets = {
     default: "/assets/ElarisLogoWhite.png",
@@ -119,6 +124,28 @@ const Navbar = () => {
   };
 
   if (!isDesktop) {
+    const renderLanguageToggle = () => (
+      <div
+        className="flex items-center gap-2 rounded-full border border-blue-400/25 bg-blue-500/10 px-2 py-1 text-xs font-semibold text-blue-50/80"
+        role="group"
+        aria-label={t("common.languageToggle.ariaLabel")}
+      >
+        {languages.map((lang) => (
+          <button
+            key={lang}
+            type="button"
+            onClick={() => setLanguage(lang)}
+            className={cn(
+              "rounded-full px-2 py-1 transition-colors",
+              language === lang ? "bg-blue-500/40 text-white" : "hover:text-white"
+            )}
+          >
+            {t(`common.languageToggle.${lang}`)}
+          </button>
+        ))}
+      </div>
+    );
+
     return (
       <header className="fixed top-0 left-0 right-0 z-50">
         <div className="relative overflow-hidden shadow-[0_16px_45px_rgba(30,64,175,0.45)]">
@@ -132,7 +159,7 @@ const Navbar = () => {
                 >
                   <SmartImage
                     src={brandAssets.default}
-                    alt="Elaris Logo"
+                    alt={t("navbar.logoAlt")}
                     priority
                     className="h-10 w-auto drop-shadow-lg"
                   />
@@ -161,9 +188,10 @@ const Navbar = () => {
                     onClick={() => navigateTo(item)}
                     className="rounded-xl border border-blue-400/25 bg-blue-500/10 px-4 py-3 text-left text-blue-100 shadow-[0_12px_35px_rgba(29,78,216,0.35)] transition-all duration-300 hover:bg-blue-500/20"
                   >
-                    {item.label}
+                    {t(item.labelKey)}
                   </button>
                 ))}
+                {renderLanguageToggle()}
               </div>
             </div>
           </div>
@@ -182,14 +210,39 @@ const Navbar = () => {
       marginRight: "auto",
     },
     compact: {
-      width: "min(82vw, 640px)",
-      height: 72,
-      borderRadius: 999,
-      padding: "14px 28px",
+      width: "min(50vw, 780px)",
+      height: 80,
+      borderRadius: 64,
+      padding: "16px 32px",
       marginLeft: "auto",
       marginRight: "auto",
     },
   } as const;
+
+  const renderLanguageToggle = (wrapperClass?: string) => (
+    <div
+      className={cn(
+        "flex items-center gap-1 rounded-full border border-blue-400/25 bg-blue-500/10 p-1 text-[0.7rem] font-semibold uppercase text-blue-50/80",
+        wrapperClass
+      )}
+      role="group"
+      aria-label={t("common.languageToggle.ariaLabel")}
+    >
+      {languages.map((lang) => (
+        <button
+          key={lang}
+          type="button"
+          onClick={() => setLanguage(lang)}
+          className={cn(
+            "rounded-full px-3 py-1 transition-all",
+            language === lang ? "bg-blue-500/40 text-white shadow-inner" : "hover:text-white"
+          )}
+        >
+          {t(`common.languageToggle.${lang}`)}
+        </button>
+      ))}
+    </div>
+  );
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -229,7 +282,7 @@ const Navbar = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.6 }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
-                className="flex h-full w-full items-center justify-center gap-8 px-4"
+                className="flex h-full w-full flex-wrap items-center justify-center gap-8 px-4"
               >
                 {navItems.map((item) => (
                   <motion.button
@@ -239,7 +292,7 @@ const Navbar = () => {
                     whileTap={{ scale: 0.96 }}
                     className="bg-transparent px-0 text-base font-semibold tracking-[0.08em] text-blue-100 transition-colors duration-300 hover:text-white focus:outline-none"
                   >
-                    {item.label}
+                    {t(item.labelKey)}
                   </motion.button>
                 ))}
               </motion.div>
@@ -259,23 +312,24 @@ const Navbar = () => {
                 >
                   <SmartImage
                     src={brandAssets.default}
-                    alt="Elaris Logo"
+                    alt={t("navbar.logoAlt")}
                     priority
                     className="h-16 w-auto drop-shadow-[0_6px_28px_rgba(96,165,250,0.65)] transition-all duration-300"
                   />
                 </motion.button>
 
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-4">
                   {navItems.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => navigateTo(item)}
                       className="group relative flex items-center gap-2 rounded-full border border-blue-400/25 bg-blue-500/10 px-5 py-2 text-sm font-medium tracking-tight text-blue-50 backdrop-blur-xl transition-all duration-500 hover:border-blue-200/60 hover:text-white hover:shadow-[0_20px_45px_rgba(29,78,216,0.4)]"
                     >
-                      {item.label}
+                      {t(item.labelKey)}
                       <span className="absolute inset-x-2 bottom-1 h-px origin-left scale-x-0 bg-gradient-to-r from-blue-200 via-blue-400 to-blue-600 transition-transform duration-500 group-hover:scale-x-100" />
                     </button>
                   ))}
+                  {renderLanguageToggle("ml-2")}
                 </div>
               </motion.div>
             )}

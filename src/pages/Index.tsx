@@ -9,8 +9,10 @@ import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FloatingWhatsappButton from "@/components/ui/floating-whatsapp-button";
+import { useI18n } from "@/lib/i18n";
 
 const Index = () => {
+  const { t } = useI18n();
   return (
     <div
       id="app-scroll-container"
@@ -27,11 +29,11 @@ const Index = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-8 lg:mb-12">
                 <h2 className="text-3xl font-extrabold tracking-tight drop-shadow-lg sm:text-4xl lg:text-5xl mb-4">
-                  <span className="text-slate-900">Tecnologías que </span>
-                  <span style={{ color: '#2F64FF' }}>Dominamos</span>
+                  <span className="text-slate-900">{t("tech.titleNormal")}</span>
+                  <span style={{ color: '#2F64FF' }}>{t("tech.titleAccent")}</span>
                 </h2>
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                  Utilizamos las tecnologías más avanzadas y confiables del mercado para construir soluciones robustas, escalables y futuro-compatibles.
+                  {t("tech.description")}
                 </p>
               </div>
             </div>
@@ -46,7 +48,7 @@ const Index = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mt-6 lg:mt-8">
                 <p className="text-sm text-gray-500 font-medium">
-                  Y muchas tecnologías más que se adaptan a las necesidades específicas de cada proyecto
+                  {t("tech.note")}
                 </p>
               </div>
             </div>

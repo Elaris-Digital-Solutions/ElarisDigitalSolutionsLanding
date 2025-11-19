@@ -11,6 +11,7 @@ import {
 	Smartphone,
 	ExternalLink,
 } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 interface Option {
 	title: string;
@@ -20,56 +21,55 @@ interface Option {
 	url?: string;
 }
 
+const projectConfigs = [
+	{
+		slug: "nuestroBarrio",
+		image: "/assets/nuestro-barrio-nuestra-historia.webp",
+		Icon: AppWindow,
+		url: "https://nuestro-barrio-nuestra-historia.netlify.app/",
+	},
+	{
+		slug: "karMa",
+		image: "/assets/kar-ma.png",
+		Icon: Rocket,
+		url: "https://kar-ma.netlify.app/",
+	},
+	{
+		slug: "papeleraLatinoamericana",
+		image: "/assets/papelera-latinoamericana.png",
+		Icon: Bot,
+		url: "https://papelera-latinoamericana.netlify.app",
+	},
+	{
+		slug: "diegoJoyero",
+		image: "/assets/diego-joyero.webp",
+		Icon: ShoppingBag,
+		url: "https://diego-joyero.netlify.app/",
+	},
+	{
+		slug: "salcedoJewels",
+		image: "/assets/salcedo.webp",
+		Icon: Smartphone,
+		url: "https://salcedo-jewels.vercel.app/",
+	},
+] as const;
+
 const InteractiveSelector = () => {
 	const [activeIndex, setActiveIndex] = useState(0);
 	const [animatedOptions, setAnimatedOptions] = useState<number[]>([]);
 	const [headerVisible, setHeaderVisible] = useState(false);
+	const { t } = useI18n();
 
 	const options = useMemo<Option[]>(
-		() => [
-			{
-				title: "Nuestro Barrio, Nuestra Historia",
-				description: "Plataforma social que conecta comunidades y preserva historias locales.",
-				image:
-					"/assets/nuestro-barrio-nuestra-historia.webp",
-				Icon: AppWindow,
-				url: "https://nuestro-barrio-nuestra-historia.netlify.app/"
-			},
-			{
-				title: "Kar & Ma",
-				description: "Landing corporativa con rebranding y formulario SEO integrado",
-				image:
-					"/assets/kar-ma.png",
-				Icon: Rocket,
-				url: "https://kar-ma.netlify.app/"
-			},
-			{
-				title: "Papelera Latinoamericana S.A.C.",
-				description: "Landing institucional para Papelera Latinoamericana S.A.C. con catálogo y contacto digital.",
-				  image:
-					  "/assets/papelera-latinoamericana.png",
-				Icon: Bot,
-				url: "https://papelera-latinoamericana.netlify.app"
-			},
-			{
-				title: "Diego Joyero",
-				description: "Landing page profesional para joyería con diseño elegante y moderno.",
-				image:
-					"/assets/diego-joyero.webp",
-				Icon: ShoppingBag,
-				url: "https://diego-joyero.netlify.app/"
-			},
-		
-			{
-				title: "Salcedo Jewels",
-				description: "E-commerce de joyería de lujo con catálogo interactivo y pagos en línea.",
-				image:
-					"/assets/salcedo.webp",
-				Icon: Smartphone,
-				url: "https://salcedo-jewels.vercel.app/"
-			},
-		],
-		[],
+		() =>
+			projectConfigs.map((config) => ({
+				title: t(`portfolio.projects.${config.slug}.title`),
+				description: t(`portfolio.projects.${config.slug}.description`),
+				image: config.image,
+				Icon: config.Icon,
+				url: config.url,
+			})),
+		[t]
 	);
 
 	useEffect(() => {
@@ -113,8 +113,8 @@ const InteractiveSelector = () => {
 						transition: "opacity 0.8s ease-in-out, transform 0.8s ease-in-out",
 					}}
 				>
-					<span className="text-slate-900">Nuestro </span>
-					<span className="text-[#2F64FF]">Portafolio</span>
+					<span className="text-slate-900">{t("portfolio.headingNormal")}</span>
+					<span className="text-[#2F64FF]">{t("portfolio.headingAccent")}</span>
 				</h2>
 				<p
 					className="mt-4 text-lg font-medium text-slate-600 sm:text-xl"
@@ -124,7 +124,7 @@ const InteractiveSelector = () => {
 						transition: "opacity 0.8s ease-in-out 0.3s, transform 0.8s ease-in-out 0.3s",
 					}}
 				>
-					Casos reales donde combinamos diseño, tecnología y automatización para crear experiencias memorables.
+					{t("portfolio.description")}
 				</p>
 			</div>
 
