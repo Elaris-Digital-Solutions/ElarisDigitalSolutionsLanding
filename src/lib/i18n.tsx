@@ -23,17 +23,30 @@ const STORAGE_KEY = "elaris-lang";
 
 const detectBrowserLanguage = (): Language => {
   if (typeof navigator === "undefined") {
-    return "es";
+    return "en";
   }
   const detected = navigator.language?.toLowerCase() ?? "";
-  if (detected.startsWith("en")) return "en";
   if (detected.startsWith("es")) return "es";
-  return "es";
+  return "en";
+};
+
+const getLanguageFromPathname = (pathname?: string): Language | null => {
+  if (typeof pathname !== "string") {
+    return null;
+  }
+  if (pathname === "/es" || pathname.startsWith("/es/")) {
+    return "es";
+  }
+  return null;
 };
 
 const getInitialLanguage = (): Language => {
   if (typeof window === "undefined") {
-    return "es";
+    return "en";
+  }
+  const pathnameLang = getLanguageFromPathname(window.location.pathname);
+  if (pathnameLang) {
+    return pathnameLang;
   }
   const stored = window.localStorage.getItem(STORAGE_KEY);
   if (stored === "en" || stored === "es") {

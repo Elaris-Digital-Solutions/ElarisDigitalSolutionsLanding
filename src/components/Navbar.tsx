@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { NeuralNoise } from "@/components/ui/neural-noise-cursor";
 import SmartImage from "@/components/ui/smart-image";
 import { useI18n, type Language } from "@/lib/i18n";
@@ -10,15 +10,15 @@ import { cn } from "@/lib/utils";
 type NavItem = {
   id: string;
   labelKey: string;
-  href: string;
+  slug: string;
 };
 
 const navItems: NavItem[] = [
-  { id: "servicios", labelKey: "navbar.items.services", href: "/servicios" },
-  { id: "portafolio", labelKey: "navbar.items.portfolio", href: "/portafolio" },
-  { id: "proceso", labelKey: "navbar.items.process", href: "/proceso" },
-  { id: "clientes", labelKey: "navbar.items.clients", href: "/clientes" },
-  { id: "contacto", labelKey: "navbar.items.contact", href: "/contacto" },
+  { id: "servicios", labelKey: "navbar.items.services", slug: "servicios" },
+  { id: "portafolio", labelKey: "navbar.items.portfolio", slug: "portafolio" },
+  { id: "proceso", labelKey: "navbar.items.process", slug: "proceso" },
+  { id: "clientes", labelKey: "navbar.items.clients", slug: "clientes" },
+  { id: "contacto", labelKey: "navbar.items.contact", slug: "contacto" },
 ];
 
 const languages: Language[] = ["es", "en"];
@@ -33,6 +33,14 @@ const MobileAnimatedBackdrop = () => (
   </div>
 );
 
+const getPathForLanguage = (lang: Language, slug?: string) => {
+  const prefix = lang === "es" ? "/es" : "";
+  if (!slug) {
+    return prefix === "" ? "/" : prefix;
+  }
+  return `${prefix}/${slug}`;
+};
+
 const Navbar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isDesktop, setIsDesktop] = useState<boolean>(() => {
@@ -41,11 +49,53 @@ const Navbar = () => {
   });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { language, setLanguage, t } = useI18n();
 
   const brandAssets = {
     default: "/assets/ElarisLogoWhite.png",
+    width: 160,
+    height: 64,
   } as const;
+
+  const basePath = getPathForLanguage(language);
+
+  const resolveCurrentSlug = () => {
+    const segments = location.pathname.split("/").filter(Boolean);
+    const slug = segments[0] === "es" ? segments[1] : segments[0];
+    if (!slug) return undefined;
+    return navItems.some((item) => item.slug === slug) ? slug : undefined;
+  };
+
+  const handleLanguageChange = (lang: Language) => {
+    const currentSlug = resolveCurrentSlug();
+    const currentHash = location.hash?.replace("#", "") || undefined;
+    const targetPath = getPathForLanguage(lang, currentSlug);
+
+    setLanguage(lang);
+    if (typeof window === "undefined") return;
+
+    const needsNavigation = window.location.pathname !== targetPath;
+    if (needsNavigation) {
+      navigate(targetPath, { replace: false });
+    }
+
+    requestAnimationFrame(() => {
+      updateHash(targetPath, currentHash);
+      if (currentHash) {
+        const target = document.getElementById(currentHash);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    });
+  };
+
+  const updateHash = (path: string, hash?: string) => {
+    if (typeof window === "undefined") return;
+    const finalUrl = hash ? `${path}#${hash}` : path;
+    window.history.replaceState({}, "", finalUrl);
+  };
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -84,8 +134,8 @@ const Navbar = () => {
   const scrollHome = () => {
     if (typeof window === "undefined") return;
 
-    if (window.location.pathname !== "/") {
-      navigate("/", { replace: false });
+    if (window.location.pathname !== basePath) {
+      navigate(basePath, { replace: false });
     }
 
     setIsMobileMenuOpen(false);
@@ -95,14 +145,16 @@ const Navbar = () => {
     requestAnimationFrame(() => {
       scrollToTop();
       setTimeout(scrollToTop, 160);
+      updateHash(basePath);
     });
   };
 
   const navigateTo = (item: NavItem) => {
     if (typeof window === "undefined") return;
 
-    if (window.location.pathname !== item.href) {
-      navigate(item.href, { replace: false });
+    const targetPath = getPathForLanguage(language, item.slug);
+    if (window.location.pathname !== targetPath) {
+      navigate(targetPath, { replace: false });
     }
 
     setIsMobileMenuOpen(false);
@@ -111,6 +163,7 @@ const Navbar = () => {
       const target = document.getElementById(item.id);
       if (target) {
         target.scrollIntoView({ behavior: "smooth", block: "start" });
+        updateHash(targetPath, item.id);
         return true;
       }
       return false;
@@ -134,7 +187,7 @@ const Navbar = () => {
           <button
             key={lang}
             type="button"
-            onClick={() => setLanguage(lang)}
+            onClick={() => handleLanguageChange(lang)}
             className={cn(
               "rounded-full px-2 py-1 transition-colors",
               language === lang ? "bg-blue-500/40 text-white" : "hover:text-white"
@@ -161,6 +214,8 @@ const Navbar = () => {
                     src={brandAssets.default}
                     alt={t("navbar.logoAlt")}
                     priority
+                    width={brandAssets.width}
+                    height={brandAssets.height}
                     className="h-10 w-auto drop-shadow-lg"
                   />
                 </button>
@@ -182,15 +237,21 @@ const Navbar = () => {
           >
             <div className="container mx-auto px-6 py-6">
               <div className="flex flex-col space-y-4">
-                {navItems.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => navigateTo(item)}
-                    className="rounded-xl border border-blue-400/25 bg-blue-500/10 px-4 py-3 text-left text-blue-100 shadow-[0_12px_35px_rgba(29,78,216,0.35)] transition-all duration-300 hover:bg-blue-500/20"
-                  >
-                    {t(item.labelKey)}
-                  </button>
-                ))}
+                {navItems.map((item) => {
+                  const targetPath = getPathForLanguage(language, item.slug);
+                  const isActive = location.pathname === targetPath;
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => navigateTo(item)}
+                      aria-current={isActive ? "page" : undefined}
+                      className="rounded-xl border border-blue-400/25 bg-blue-500/10 px-4 py-3 text-left text-blue-100 shadow-[0_12px_35px_rgba(29,78,216,0.35)] transition-all duration-300 hover:bg-blue-500/20"
+                    >
+                      {t(item.labelKey)}
+                    </button>
+                  );
+                })}
                 {renderLanguageToggle()}
               </div>
             </div>
@@ -232,7 +293,7 @@ const Navbar = () => {
         <button
           key={lang}
           type="button"
-          onClick={() => setLanguage(lang)}
+          onClick={() => handleLanguageChange(lang)}
           className={cn(
             "rounded-full px-3 py-1 transition-all",
             language === lang ? "bg-blue-500/40 text-white shadow-inner" : "hover:text-white"
@@ -314,21 +375,29 @@ const Navbar = () => {
                     src={brandAssets.default}
                     alt={t("navbar.logoAlt")}
                     priority
+                    width={brandAssets.width}
+                    height={brandAssets.height}
                     className="h-16 w-auto drop-shadow-[0_6px_28px_rgba(96,165,250,0.65)] transition-all duration-300"
                   />
                 </motion.button>
 
                 <div className="flex items-center gap-4">
-                  {navItems.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => navigateTo(item)}
-                      className="group relative flex items-center gap-2 rounded-full border border-blue-400/25 bg-blue-500/10 px-5 py-2 text-sm font-medium tracking-tight text-blue-50 backdrop-blur-xl transition-all duration-500 hover:border-blue-200/60 hover:text-white hover:shadow-[0_20px_45px_rgba(29,78,216,0.4)]"
-                    >
-                      {t(item.labelKey)}
-                      <span className="absolute inset-x-2 bottom-1 h-px origin-left scale-x-0 bg-gradient-to-r from-blue-200 via-blue-400 to-blue-600 transition-transform duration-500 group-hover:scale-x-100" />
-                    </button>
-                  ))}
+                  {navItems.map((item) => {
+                    const targetPath = getPathForLanguage(language, item.slug);
+                    const isActive = location.pathname === targetPath;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        aria-current={isActive ? "page" : undefined}
+                        onClick={() => navigateTo(item)}
+                        className="group relative flex items-center gap-2 rounded-full border border-blue-400/25 bg-blue-500/10 px-5 py-2 text-sm font-medium tracking-tight text-blue-50 backdrop-blur-xl transition-all duration-500 hover:border-blue-200/60 hover:text-white hover:shadow-[0_20px_45px_rgba(29,78,216,0.4)]"
+                      >
+                        {t(item.labelKey)}
+                        <span className="absolute inset-x-2 bottom-1 h-px origin-left scale-x-0 bg-gradient-to-r from-blue-200 via-blue-400 to-blue-600 transition-transform duration-500 group-hover:scale-x-100" />
+                      </button>
+                    );
+                  })}
                   {renderLanguageToggle("ml-2")}
                 </div>
               </motion.div>

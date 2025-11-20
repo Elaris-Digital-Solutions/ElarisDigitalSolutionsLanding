@@ -30,7 +30,7 @@ const projectConfigs = [
 	},
 	{
 		slug: "karMa",
-		image: "/assets/kar-ma.png",
+		image: "/assets/kar-ma.webp",
 		Icon: Rocket,
 		url: "https://kar-ma.netlify.app/",
 	},

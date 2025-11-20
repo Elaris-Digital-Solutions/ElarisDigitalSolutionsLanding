@@ -12,7 +12,7 @@ const projectConfigs = [
   },
   {
     slug: 'karMa',
-    image: '/assets/kar-ma.png',
+    image: '/assets/kar-ma.webp',
     stack: ['React', 'Tailwind', 'Vite'],
     url: 'https://kar-ma.netlify.app/'
   },
@@ -24,13 +24,13 @@ const projectConfigs = [
   },
   {
     slug: 'diegoJoyero',
-    image: '/assets/diego-joyero.png',
+    image: '/assets/diego-joyero.webp',
     stack: ['React', 'Tailwind', 'Netlify'],
     url: 'https://diego-joyero.netlify.app/'
   },
   {
     slug: 'salcedoJewels',
-    image: '/assets/salcedo.png',
+    image: '/assets/salcedo.webp',
     stack: ['Next.js', 'React', 'Stripe', 'Vercel'],
     url: 'https://salcedo-jewels.vercel.app/'
   }
@@ -153,6 +153,7 @@ const ProjectsCarousel: React.FC = () => {
             <button
               onClick={prevProject}
               className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 hover:bg-blue-600 hover:text-white transition-colors"
+              aria-label={t("portfolio.controls.previous", { project: projects[currentProject].name })}
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
@@ -160,6 +161,7 @@ const ProjectsCarousel: React.FC = () => {
             <button
               onClick={nextProject}
               className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 hover:bg-blue-600 hover:text-white transition-colors"
+              aria-label={t("portfolio.controls.next", { project: projects[currentProject].name })}
             >
               <ChevronRight className="w-6 h-6" />
             </button>

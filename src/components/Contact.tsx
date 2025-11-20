@@ -173,6 +173,7 @@ export default function Contact() {
                   className="w-full border-0"
                   style={{ height: mapHeight ? `${mapHeight}px` : undefined, minHeight: mapHeight ? undefined : '16rem' }}
                   loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
             </div>

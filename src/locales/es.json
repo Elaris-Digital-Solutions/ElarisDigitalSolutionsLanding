@@ -11,73 +11,73 @@
     }
   },
   "navbar": {
-    "logoAlt": "Elaris Logo",
+    "logoAlt": "Logotipo de Elaris Digital Solutions",
     "items": {
       "services": "Servicios",
       "portfolio": "Portafolio",
-      "process": "Procesos",
+      "process": "Proceso",
       "clients": "Clientes",
       "contact": "Contacto"
     }
   },
   "hero": {
     "title": "Elaris Digital Solutions",
-    "description": "Experience a new dimension of interaction — fluid, tactile, and alive. Designed for creators who see beauty in motion.",
+    "description": "Diseñamos experiencias con integración de IA que se sienten humanas, fluidas y listas para convertir clientes en LATAM, Estados Unidos y Europa.",
     "badgeLabel": "Studio",
     "badgeText": "Software Solutions",
     "ctas": {
-      "primary": "Portfolio",
-      "secondary": "About Us"
+      "primary": "Portafolio",
+      "secondary": "Sobre nosotros"
     },
     "consolePhrases": [
-      "Desarrollando soluciones digitales de vanguardia...",
-      "Construyendo aplicaciones web modernas y responsivas...",
-      "Creando experiencias de usuario fluidas...",
-      "Implementando arquitecturas en la nube escalables...",
-      "Diseñando interfaces intuitivas...",
-      "Optimizando rendimiento y accesibilidad...",
-      "Entregando software innovador..."
+      "Lanzando pilotos de automatización con IA para industrias reguladas...",
+      "Diseñando servicios de desarrollo web con impacto SEO medible...",
+      "Construyendo landing pages SEO que califican leads corporativos...",
+      "Conectando soluciones de automatización con CRMs y ERPs...",
+      "Entrenando chatbots con IA para equipos multilingües...",
+      "Entregando desarrollo de software a medida con retorno claro...",
+      "Combinando análisis de datos para negocios con diseño de producto premium..."
     ]
   },
   "tech": {
     "titleNormal": "Tecnologías que ",
     "titleAccent": "Dominamos",
-    "description": "Utilizamos las tecnologías más avanzadas y confiables del mercado para construir soluciones robustas, escalables y futuro-compatibles.",
-    "note": "Y muchas tecnologías más que se adaptan a las necesidades específicas de cada proyecto"
+    "description": "Trabajamos con stacks confiables y herramientas de IA emergentes para desplegar plataformas seguras y escalables para equipos B2B internacionales.",
+    "note": "Nos integramos con el ecosistema del cliente, desde datos on-premise hasta servicios cloud nativos."
   },
   "services": {
     "headingNormal": "Nuestros ",
     "headingAccent": "Servicios",
-    "description": "Soluciones digitales integrales diseñadas para impulsar tu transformación tecnológica",
+    "description": "Servicios de desarrollo web, programas de IA y consultoría digital para acelerar la modernización empresarial",
     "items": {
       "web": {
         "title": "Desarrollo Web",
-        "description": "Aplicaciones web modernas, responsivas y optimizadas para SEO que convierten visitantes en clientes.",
+        "description": "Landing pages SEO, sitios corporativos y hubs de comercio que convierten visitantes en clientes.",
         "features": [
-          "Diseño UI/UX profesional",
-          "Progressive Web Apps",
-          "E-commerce avanzado",
-          "CMS personalizado"
+          "Diseño UI/UX profesional para marcas globales",
+          "Landing pages SEO y centros de contenido",
+          "Desarrollo de e-commerce con pagos seguros",
+          "CMS a medida con analítica de marketing"
         ]
       },
       "software": {
         "title": "Desarrollo de Software",
-        "description": "Software a medida que automatiza procesos y optimiza operaciones empresariales.",
+        "description": "Desarrollo de software a medida que automatiza procesos, conecta datos y escala con la operación.",
         "features": [
-          "Arquitectura escalable",
-          "APIs robustas",
-          "Integraciones empresariales",
-          "DevOps & CI/CD"
+          "Arquitectura escalable y resiliente",
+          "APIs robustas y automatización de flujos",
+          "Integraciones empresariales y análisis de datos",
+          "DevOps, CI/CD y observabilidad"
         ]
       },
       "ai": {
         "title": "Soluciones de IA",
-        "description": "Implementación estratégica de Inteligencia Artificial para impulsar la innovación en tu negocio.",
+        "description": "Programas de automatización con IA, copilotos y chatbots con IA que elevan la experiencia del cliente y del equipo.",
         "features": [
-          "Machine Learning",
-          "Procesamiento de lenguaje natural",
-          "Computer Vision",
-          "Automatización inteligente"
+          "Machine learning y analítica predictiva",
+          "Experiencias de lenguaje natural y chatbots",
+          "Computer vision y comprensión documental",
+          "Gobernanza de IA e implementación responsable"
         ]
       }
     }
@@ -85,35 +85,39 @@
   "portfolio": {
     "headingNormal": "Nuestro ",
     "headingAccent": "Portafolio",
-    "description": "Casos reales donde combinamos diseño, tecnología y automatización para crear experiencias memorables.",
+    "description": "Casos reales donde diseño, tecnología y automatización se alinean con metas B2B en LATAM, Estados Unidos y Europa.",
+    "controls": {
+      "previous": "Proyecto anterior: {project}",
+      "next": "Siguiente proyecto: {project}"
+    },
     "projects": {
       "nuestroBarrio": {
         "title": "Nuestro Barrio, Nuestra Historia",
-        "description": "Plataforma social que conecta comunidades y preserva historias locales.",
+        "description": "Plataforma social que conecta comunidades, preserva historias locales y entrega tableros de análisis de datos para organizaciones cívicas.",
         "category": "Plataforma Social",
         "metrics": "Impacto social positivo"
       },
       "karMa": {
         "title": "Kar & Ma",
-        "description": "Landing corporativa con rebranding y formulario SEO integrado",
+        "description": "Relanzamiento de landing corporativa con nuevo sistema visual, landing pages SEO y scoring automático de leads.",
         "category": "Landing Page",
-        "metrics": "Presencia Digital, mejor portafolio, más ventas"
+        "metrics": "Presencia digital, mejor portafolio, más ventas"
       },
       "papeleraLatinoamericana": {
         "title": "Papelera Latinoamericana S.A.C.",
-        "description": "Landing institucional para Papelera Latinoamericana S.A.C. con catálogo y contacto digital.",
+        "description": "Sitio institucional con catálogo multilingüe, automatización vía WhatsApp y SEO regional.",
         "category": "Landing Page",
         "metrics": "Catálogo digital, contacto rápido"
       },
       "diegoJoyero": {
         "title": "Diego Joyero",
-        "description": "Landing page profesional para joyería con diseño elegante y moderno.",
+        "description": "Experiencia premium para joyería que combina storytelling, chatbots con IA para citas y preparación de comercio de lujo.",
         "category": "Landing Page",
         "metrics": "Más clientes, mejor catálogo, más ventas"
       },
       "salcedoJewels": {
         "title": "Salcedo Jewels",
-        "description": "E-commerce de joyería de lujo con catálogo interactivo y pagos en línea.",
+        "description": "Desarrollo de e-commerce de lujo con catálogo interactivo, checkout seguro y datos listos para CRM.",
         "category": "E-commerce",
         "metrics": "Lanzamiento 2024, ventas internacionales"
       }
@@ -122,61 +126,61 @@
   "process": {
     "headingNormal": "Nuestro ",
     "headingAccent": "Proceso",
-    "description": "Un flujo probado desde la idea hasta la producción, combinando metodología ágil y modelos de IA.",
+    "description": "Un flujo probado desde el discovery hasta la producción que combina agilidad, automatización y gobernanza para equipos B2B.",
     "steps": {
       "analysis": {
         "title": "01. Análisis",
         "heading": "Evaluación de Necesidades",
-        "description": "Analizamos a fondo tus necesidades y objetivos empresariales para identificar las mejores oportunidades de implementación de IA."
+        "description": "Identificamos objetivos, riesgos normativos y las mejores oportunidades de integración de IA."
       },
       "design": {
         "title": "02. Diseño",
         "heading": "Arquitectura de Solución",
-        "description": "Diseñamos una arquitectura personalizada que integra los modelos de IA más adecuados para tu caso de uso específico."
+        "description": "Mapeamos journeys, fuentes de datos y automatizaciones para alinear equipos y KPIs."
       },
       "development": {
         "title": "03. Desarrollo",
-        "heading": "Implementación & Entrenamiento",
-        "description": "Desarrollamos e implementamos la solución, entrenando los modelos con tus datos específicos para maximizar la precisión y relevancia."
+        "heading": "Implementación y Entrenamiento",
+        "description": "Construimos la plataforma, integramos sistemas y entrenamos modelos con datos auditables."
       },
       "testing": {
         "title": "04. Pruebas",
-        "heading": "Validación & Optimización",
-        "description": "Realizamos pruebas exhaustivas y ajustes finos para asegurar el rendimiento óptimo de la solución en tu entorno real."
+        "heading": "Validación y Optimización",
+        "description": "Probamos rendimiento, accesibilidad y respuestas de IA para asegurar consistencia."
       },
       "deployment": {
         "title": "05. Despliegue",
-        "heading": "Implementación & Monitoreo",
-        "description": "Desplegamos la solución en producción y establecemos sistemas de monitoreo continuo para garantizar su rendimiento."
+        "heading": "Lanzamiento y Monitoreo",
+        "description": "Orquestamos releases, configuramos observabilidad y preparamos a los equipos."
       },
       "support": {
         "title": "06. Soporte",
         "heading": "Mejora Continua",
-        "description": "Proporcionamos soporte continuo y actualizaciones periódicas para mantener tu solución de IA al día con las últimas tecnologías."
+        "description": "Iteramos, optimizamos automatizaciones y compartimos insights proactivos."
       }
     }
   },
   "testimonials": {
     "headingNormal": "Confían en ",
     "headingAccent": "Nosotros",
-    "description": "Empresas y organizaciones que han confiado en nosotros para soluciones digitales y proyectos con IA.",
+    "description": "Organizaciones que confían en nosotros para soluciones digitales, automatización con IA y upgrades de comercio.",
     "items": {
       "daniela": {
-        "quote": "El trabajo que realizaron superó ampliamente mis expectativas. Su enfoque, su metodología y su capacidad de transformar mis ideas en experiencias digitales fueron clave. Estoy realmente agradecida con ellos.",
+        "quote": "El trabajo superó mis expectativas. Su método y capacidad para convertir mis ideas en experiencias digitales fue clave. Estoy realmente agradecida.",
         "name": "Daniela Bussalleu",
-        "designation": "Bióloga  y Comunicadora",
+        "designation": "Bióloga y Comunicadora",
         "src": "/assets/daniela-bussalleu.webp"
       },
       "milagros": {
-        "quote": "La web quedó intuitiva, el e-commerce fluye muy bien y la base de datos es fácil de entender y administrar. Excelente trabajo para Salcedo Jewels.",
+        "quote": "La web es intuitiva, el e-commerce fluye perfecto y la base de datos es sencilla de gestionar. Trabajo impecable para Salcedo Jewels.",
         "name": "Milagros Salcedo",
         "designation": "CEO de Salcedo Jewels S.A.C.",
         "src": "/assets/milagros-salcedo.webp"
       },
       "martina": {
-        "quote": "Shining Yam is a hidden gem! The impeccable service and overall attention to detail created a memorable experience. I highly recommend it!",
+        "quote": "Shining Yam es una joya. El servicio y la atención al detalle hicieron la experiencia inolvidable. ¡Totalmente recomendado!",
         "name": "Martina Edelweist",
-        "designation": "Satisfied Customer",
+        "designation": "Cliente satisfecha",
         "src": "https://images.unsplash.com/photo-1524267213992-b76e8577d046?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D"
       }
     }
@@ -184,7 +188,7 @@
   "about": {
     "badge": "Sobre nosotros",
     "title": "Inteligencia colectiva para crear soluciones extraordinarias",
-    "description": "Combinamos estrategia, diseño y desarrollo para transformar de manera responsable los procesos de nuestros clientes. La diversidad de habilidades en el equipo es la clave para materializar experiencias digitales con impacto humano.",
+    "description": "Combinamos estrategia, diseño y desarrollo para transformar procesos de forma responsable y entregar resultados medibles a marcas B2B modernas.",
     "caption": "Equipo Elaris",
     "alt": {
       "memberPrefix": "Retrato de",
@@ -198,16 +202,16 @@
   "contact": {
     "titleNormal": "Comencemos una ",
     "titleAccent": "Conversación",
-    "description": "¿Buscas soluciones digitales que impulsen tu negocio? Ofrecemos desarrollo web, automatización, consultoría digital y proyectos de Inteligencia Artificial. Cuéntanos tu desafío y te ayudamos a innovar.",
+    "description": "¿Necesitas consultoría digital, automatización con IA o servicios de desarrollo web? Cuéntanos tu reto y diseñamos un roadmap con foco en datos.",
     "form": {
       "fullNameLabel": "Nombre Completo *",
       "emailLabel": "Email Corporativo *",
       "reasonLabel": "Motivo *",
       "messageLabel": "Mensaje *",
       "fullNamePlaceholder": "John Doe",
-      "emailPlaceholder": "jhondoe@corp.com",
-      "reasonPlaceholder": "Desarrollo web, automatización, consultoría digital, IA...",
-      "messagePlaceholder": "¿Qué necesitas? Ej: Automatizar procesos, crear una web, consultoría digital, proyecto de IA...",
+      "emailPlaceholder": "johndoe@corp.com",
+      "reasonPlaceholder": "Automatización, landing SEO, consultoría digital, IA...",
+      "messagePlaceholder": "Comparte KPIs, mercados, integraciones o requerimientos de compliance...",
       "whatsappTemplate": "Nuevo contacto desde la web:\nNombre: {fullName}\nEmail: {email}\nMotivo: {reason}\nMensaje: {message}"
     },
     "info": {
@@ -220,18 +224,18 @@
         "Santiago de Surco 15023"
       ]
     },
-    "mapTitle": "mapa"
+    "mapTitle": "Mapa de la oficina de Elaris en Lima"
   },
   "footer": {
-    "description": "Transformamos negocios con soluciones digitales innovadoras e Inteligencia Artificial.",
+    "description": "Impulsamos a equipos ambiciosos con automatización, servicios de desarrollo web y consultoría digital para empresas globales.",
     "sections": {
       "services": {
         "title": "Servicios",
         "items": [
           "Desarrollo Web",
-          "Desarrollo de Software",
-          "Soluciones de IA",
-          "Consultoría"
+          "Software a medida",
+          "Automatización con IA",
+          "Consultoría digital"
         ]
       },
       "navigation": {
@@ -258,7 +262,7 @@
     }
   },
   "floatingWhatsapp": {
-    "defaultMessage": "Hola, me gustaría conocer más sobre sus soluciones digitales.",
+    "defaultMessage": "Hola, me gustaría conversar sobre automatización con IA o desarrollo de e-commerce con Elaris.",
     "ariaLabel": "Contactar por WhatsApp"
   },
   "notFound": {

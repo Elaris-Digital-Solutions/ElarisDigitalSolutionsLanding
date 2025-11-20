@@ -10,6 +10,7 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FloatingWhatsappButton from "@/components/ui/floating-whatsapp-button";
 import { useI18n } from "@/lib/i18n";
+import SeoHead from "@/components/SeoHead";
 
 const Index = () => {
   const { t } = useI18n();
@@ -18,6 +19,7 @@ const Index = () => {
       id="app-scroll-container"
       className="relative min-h-screen overflow-x-hidden overflow-y-auto"
     >
+      <SeoHead page="home" />
       <Navbar />
       <Hero />
         <main className="site-sections">

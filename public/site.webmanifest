@@ -1,0 +1,27 @@
+{
+  "name": "Elaris Digital Solutions",
+  "short_name": "Elaris",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030e2c",
+  "theme_color": "#0b1d3f",
+  "lang": "en",
+  "description": "AI integration, SEO-optimized web development, and custom software for ambitious teams across the Americas and Europe.",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon.webp",
+      "sizes": "512x512",
+      "type": "image/webp"
+    }
+  ]
+}
