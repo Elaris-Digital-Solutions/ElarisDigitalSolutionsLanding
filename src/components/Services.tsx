@@ -154,39 +154,51 @@ export default function Services() {
   // Calculate alignment offset inside the section for sticky panel
   const alignVisualToCard = useCallback((index: number) => {
     if (typeof window === "undefined" || isMobile) return;
-    const card = itemRefs.current[index];
-    const visual = visualRef.current;
-    const section = sectionRef.current;
-    if (!card || !visual || !section) return;
 
-    // Get card position relative to the section
-    const cardRect = card.getBoundingClientRect();
-    const sectionRect = section.getBoundingClientRect();
-    // Compensar el offset sticky del panel visual (top-28/top-32)
-    // md:top-28 = 112px, lg:top-32 = 128px. Usar el valor actual del visualRef
-    // Usar offset fijo según breakpoint para sticky
-    let stickyOffset = 0;
-    const width = window.innerWidth;
-    if (width >= 1024) {
-      stickyOffset = 310; // lg:top-32
-    } else if (width >= 768) {
-      stickyOffset = 112; // md:top-28
-    }
-    // Alinear el panel visual al tope de la tarjeta activa, compensando el sticky
-    const relativeY = cardRect.top - sectionRect.top;
-    const target = relativeY - stickyOffset;
-    // Constrain target so que no se salga del section
-    const visualHeight = visual.offsetHeight;
-    const max = section.offsetHeight - visualHeight;
-    const clamped = Math.max(0, Math.min(target, max));
-    setVisualY(clamped);
+    requestAnimationFrame(() => {
+      const card = itemRefs.current[index];
+      const visual = visualRef.current;
+      const section = sectionRef.current;
+      if (!card || !visual || !section) return;
+
+      // Get card position relative to the section
+      const cardRect = card.getBoundingClientRect();
+      const sectionRect = section.getBoundingClientRect();
+
+      let stickyOffset = 0;
+      const width = window.innerWidth;
+      if (width >= 1024) {
+        stickyOffset = 310; // lg:top-32
+      } else if (width >= 768) {
+        stickyOffset = 112; // md:top-28
+      }
+
+      const relativeY = cardRect.top - sectionRect.top;
+      const target = relativeY - stickyOffset;
+
+      const visualHeight = visual.offsetHeight;
+      const max = section.offsetHeight - visualHeight;
+      const clamped = Math.max(0, Math.min(target, max));
+      setVisualY(clamped);
+    });
   }, [isMobile]);
 
   // Recalculate on resize for responsiveness
   useEffect(() => {
     if (typeof window === "undefined" || isMobile) return;
-    const onResize = () => alignVisualToCard(current);
-    window.addEventListener("resize", onResize);
+
+    let resizeTicking = false;
+    const onResize = () => {
+      if (!resizeTicking) {
+        requestAnimationFrame(() => {
+          alignVisualToCard(current);
+          resizeTicking = false;
+        });
+        resizeTicking = true;
+      }
+    };
+
+    window.addEventListener("resize", onResize, { passive: true });
     return () => window.removeEventListener("resize", onResize);
   }, [alignVisualToCard, current, isMobile]);
 

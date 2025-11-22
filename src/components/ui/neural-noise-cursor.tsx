@@ -58,7 +58,7 @@ function NeuralNoise({
       vec2 res = vec2(0.0);
       float scale = 8.0;
 
-      for (int j = 0; j < 15; j++) {
+      for (int j = 0; j < 10; j++) {
         uv = rotate(uv, 1.0);
         sine_acc = rotate(sine_acc, 1.0);
         vec2 layer = uv * scale + float(j) + sine_acc - t;

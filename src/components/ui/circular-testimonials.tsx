@@ -291,6 +291,7 @@ const CircularTestimonials: React.FC<CircularTestimonialsProps> = ({
           object-fit: cover;
           border-radius: 1.5rem;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+          will-change: transform, opacity;
         }
         .testimonial-content {
           display: flex;

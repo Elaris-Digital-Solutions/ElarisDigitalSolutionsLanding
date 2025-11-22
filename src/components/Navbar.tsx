@@ -116,18 +116,24 @@ const Navbar = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    let ticking = false;
     const handleScroll = () => {
-      if (!isDesktop) {
-        setIsCollapsed(false);
-        return;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (!isDesktop) {
+            setIsCollapsed(false);
+          } else {
+            const collapseThreshold = window.innerHeight * 0.25;
+            setIsCollapsed(window.scrollY > collapseThreshold);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
-
-      const collapseThreshold = window.innerHeight * 0.25;
-      setIsCollapsed(window.scrollY > collapseThreshold);
     };
 
     handleScroll();
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isDesktop]);
 
@@ -231,9 +237,8 @@ const Navbar = () => {
           </nav>
 
           <div
-            className={`relative overflow-hidden border-t border-white/10 transition-all duration-500 ${
-              isMobileMenuOpen ? "max-h-96" : "max-h-0"
-            }`}
+            className={`relative overflow-hidden border-t border-white/10 transition-all duration-500 ${isMobileMenuOpen ? "max-h-96" : "max-h-0"
+              }`}
           >
             <div className="container mx-auto px-6 py-6">
               <div className="flex flex-col space-y-4">
@@ -317,22 +322,22 @@ const Navbar = () => {
           style={
             isCollapsed
               ? {
-                  pointerEvents: "auto",
-                  background:
-                    "linear-gradient(135deg, rgba(37,99,235,0.55), rgba(30,64,175,0.6), rgba(15,23,42,0.55))",
-                  border: "1px solid rgba(96, 165, 250, 0.45)",
-                  boxShadow: "0 30px 90px rgba(30, 64, 175, 0.45)",
-                  backdropFilter: "blur(18px)",
-                  WebkitBackdropFilter: "blur(18px)",
-                }
+                pointerEvents: "auto",
+                background:
+                  "linear-gradient(135deg, rgba(37,99,235,0.55), rgba(30,64,175,0.6), rgba(15,23,42,0.55))",
+                border: "1px solid rgba(96, 165, 250, 0.45)",
+                boxShadow: "0 30px 90px rgba(30, 64, 175, 0.45)",
+                backdropFilter: "blur(18px)",
+                WebkitBackdropFilter: "blur(18px)",
+              }
               : {
-                  pointerEvents: "auto",
-                  background: "transparent",
-                  border: "none",
-                  boxShadow: "none",
-                  backdropFilter: "none",
-                  WebkitBackdropFilter: "none",
-                }
+                pointerEvents: "auto",
+                background: "transparent",
+                border: "none",
+                boxShadow: "none",
+                backdropFilter: "none",
+                WebkitBackdropFilter: "none",
+              }
           }
         >
           <AnimatePresence mode="wait">

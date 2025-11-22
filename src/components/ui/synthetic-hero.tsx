@@ -24,7 +24,7 @@ interface HeroProps {
 const SyntheticHero = ({
   title = "An experiment in light, motion, and the quiet chaos between.",
   description =
-    "Experience a new dimension of interaction — fluid, tactile, and alive. Designed for creators who see beauty in motion.",
+  "Experience a new dimension of interaction — fluid, tactile, and alive. Designed for creators who see beauty in motion.",
   badgeText = "React Three Fiber",
   badgeLabel = "Experience",
   ctaButtons = [
@@ -157,7 +157,7 @@ const SyntheticHero = ({
         <NeuralNoise
           opacity={0.8}
           pointerStrength={1.2}
-          timeScale={0.8}
+          timeScale={0.5}
           className="absolute inset-0"
         />
       </div>
