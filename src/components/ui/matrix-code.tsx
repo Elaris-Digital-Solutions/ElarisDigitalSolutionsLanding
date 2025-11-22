@@ -61,14 +61,21 @@ const MatrixRain: React.FC<MatrixRainProps> = ({
     let animationFrame: number | null = null;
     let lastDraw = performance.now();
 
+    const targetFPS = 30;
+    const frameInterval = 1000 / targetFPS;
+
     const draw = (now: number) => {
       const delta = now - lastDraw;
-      const interval = 33 / speed;
-      if (delta < interval) {
+
+      if (delta < frameInterval) {
         animationFrame = requestAnimationFrame(draw);
         return;
       }
-      lastDraw = now;
+
+      // Adjust for speed but keep within frame budget
+      // If speed is high, we might skip some logic updates, but here we just draw
+
+      lastDraw = now - (delta % frameInterval);
 
       ctx.fillStyle = `rgba(${backgroundRGB}, ${fadeOpacity})`;
       ctx.fillRect(0, 0, canvas.width, canvas.height);

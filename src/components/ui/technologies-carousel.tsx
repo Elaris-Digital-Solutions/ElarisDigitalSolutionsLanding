@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React from 'react';
 import { Marquee } from "@/components/ui/marquee";
 import SmartImage from "@/components/ui/smart-image";
 
@@ -15,39 +15,19 @@ const techData = [
   { src: "/assets/MongoDB.svg", alt: "MongoDB", label: "MongoDB" },
 ];
 
-function LazyTechLogo({ src, alt, label, imgOnly }: { src: string; alt: string; label: string; imgOnly?: boolean }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    let observer: IntersectionObserver | null = new window.IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer?.disconnect();
-        }
-      },
-      { rootMargin: "100px" }
-    );
-    observer.observe(el);
-    return () => observer?.disconnect();
-  }, []);
+function TechLogo({ src, alt, label, imgOnly }: { src: string; alt: string; label: string; imgOnly?: boolean }) {
   return (
-    <div ref={ref} className="flex items-center gap-3 min-w-[120px] min-h-[44px]">
-      {visible ? (
-        imgOnly ? (
-          <img src={src} alt={alt} className="h-10 w-10" loading="lazy" />
-        ) : (
-          <SmartImage src={src} alt={alt} className="h-10 w-10" loading="lazy" />
-        )
+    <div className="flex items-center gap-3 min-w-[120px] min-h-[44px]">
+      {imgOnly ? (
+        <img src={src} alt={alt} className="h-10 w-10" loading="lazy" width={40} height={40} />
       ) : (
-        <div className="h-10 w-10 bg-gray-200 rounded animate-pulse" />
+        <SmartImage src={src} alt={alt} className="h-10 w-10" loading="lazy" />
       )}
       <span className="font-semibold text-gray-800">{label}</span>
     </div>
   );
 }
+
 export default function TechnologiesCarousel() {
   return (
     <section className="py-12 sm:py-16 lg:py-20">
@@ -72,7 +52,7 @@ export default function TechnologiesCarousel() {
               className="flex items-center justify-center mx-10 lg:mx-16"
             >
               <div className="transition-all duration-300 hover:scale-110 hover:-translate-y-2">
-                <LazyTechLogo {...tech} />
+                <TechLogo {...tech} />
               </div>
             </div>
           ))}

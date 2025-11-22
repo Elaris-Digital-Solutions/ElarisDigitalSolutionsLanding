@@ -189,38 +189,7 @@ export default function About() {
   const displayFocus = isMobile ? mobileSlide?.focus ?? groupFocus : effectiveMember?.focus ?? groupFocus;
   const showCaption = isMobile && mobileSlide?.type === "member" && !!mobileSlide.caption;
 
-  // Preload all images used in this section (warm network cache) but keep img elements lazy
-  useEffect(() => {
-    if (typeof document === "undefined") return;
 
-    const imgs = [groupImage, ...team.map((t) => t.image)];
-
-    imgs.forEach((src) => {
-      if (typeof src !== "string" || !src) return;
-      const attr = `about-preload-${src}`;
-      if (!document.querySelector(`link[data-about-preload="${attr}"]`)) {
-        try {
-          const link = document.createElement("link");
-          link.rel = "preload";
-          link.as = "image";
-          link.href = src;
-          link.setAttribute("data-about-preload", attr);
-          document.head.appendChild(link);
-        } catch (e) {
-          // ignore
-        }
-      }
-
-      // Warm browser cache
-      try {
-        const img = new Image();
-        img.decoding = "async";
-        img.src = src;
-      } catch (e) {
-        // ignore
-      }
-    });
-  }, []);
 
   return (
     <section id="nosotros" className="relative isolate overflow-hidden bg-gradient-to-br from-slate-50 via-sky-50 to-white py-24 sm:py-28">
